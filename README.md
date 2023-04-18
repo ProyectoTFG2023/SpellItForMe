@@ -1,0 +1,1 @@
+(18/04/2023) [Commit #1] Inicialización del proyecto con organización en paquetes y la carga de una serie de dependencias básicas para el funcionamiento de la aplicación
