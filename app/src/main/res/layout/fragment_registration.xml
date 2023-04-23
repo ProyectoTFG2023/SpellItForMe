@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.RegistrationFragment">
+
+    <TextView
+        android:id="@+id/tvRegisterGuide"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="40dp"
+        android:text="@string/tvRegisterGuide"
+        android:textSize="26sp"
+        app:layout_constraintBottom_toTopOf="@+id/tilytRegisterMail"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/tilytRegisterMail"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="65dp"
+        android:layout_marginEnd="65dp"
+        android:layout_marginBottom="435dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/tietRegisterMail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/tietRegisterMailHint" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/tilytRegisterUsername"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="35dp"
+        app:layout_constraintEnd_toEndOf="@+id/tilytRegisterMail"
+        app:layout_constraintStart_toStartOf="@+id/tilytRegisterMail"
+        app:layout_constraintTop_toBottomOf="@+id/tilytRegisterMail">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/tietRegisterUsername"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/tietRegisterUsernameHint" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/tilytRegisterPassword"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="35dp"
+        app:layout_constraintEnd_toEndOf="@+id/tilytRegisterUsername"
+        app:layout_constraintStart_toStartOf="@+id/tilytRegisterUsername"
+        app:layout_constraintTop_toBottomOf="@+id/tilytRegisterUsername">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/tietRegisterPassword"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/tietRegisterPasswordHint" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/tilytRegisterRepeatPassword"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="35dp"
+        app:layout_constraintEnd_toEndOf="@+id/tilytRegisterPassword"
+        app:layout_constraintStart_toStartOf="@+id/tilytRegisterPassword"
+        app:layout_constraintTop_toBottomOf="@+id/tilytRegisterPassword">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/tietRegisterRepeatPassword"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/tietRegisterRepeatPasswordHint" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <CheckBox
+        android:id="@+id/ckbRegisterAcceptTerms"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:text="@string/ckbRegisterAcceptTerms"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tilytRegisterRepeatPassword" />
+
+    <Button
+        android:id="@+id/btRegisterRegister"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:enabled="false"
+        android:text="@string/btRegisterRegister"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ckbRegisterAcceptTerms" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -9,10 +9,14 @@
         android:id="@+id/LoginFragment"
         android:name="danielabez.spellitforme.ui.LoginFragment"
         android:label="@string/login_fragment_label"
-        tools:layout="@layout/fragment_login"/>
+        tools:layout="@layout/fragment_login">
+        <action
+            android:id="@+id/action_LoginFragment_to_RegistrationFragment"
+            app:destination="@id/RegistrationFragment" />
+    </fragment>
     <fragment
-        android:id="@+id/SecondFragment"
-        android:name="danielabez.spellitforme.ui.SecondFragment"
-        android:label="@string/second_fragment_label"
-        tools:layout="@layout/fragment_second"/>
+        android:id="@+id/RegistrationFragment"
+        android:name="danielabez.spellitforme.ui.RegistrationFragment"
+        android:label="@string/registration_fragment_label"
+        tools:layout="@layout/fragment_registration" />
 </navigation>

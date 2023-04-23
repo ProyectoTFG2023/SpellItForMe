@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
 import danielabez.spellitforme.databinding.FragmentLoginBinding
 import danielabez.spellitforme.db.dao.RegisteredUserDao
 import danielabez.spellitforme.model.RegisteredUser
@@ -21,7 +22,6 @@ class LoginFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-
         _binding = FragmentLoginBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -31,15 +31,20 @@ class LoginFragment : Fragment() {
 
         registeredUserViewModel.foundRegisteredUser.observe(viewLifecycleOwner, Observer<RegisteredUser>{ foundRegisteredUser ->
             if(foundRegisteredUser != null){
-                binding.textviewFirst.setText(foundRegisteredUser.username + " " + foundRegisteredUser.password)
+
             }
             else{
-                binding.textviewFirst.setText("Not found")
+
             }
         })
 
-        binding.buttonFirst.setOnClickListener(){
-            registeredUserViewModel.checkRegisteredUser("paquit", "paquitoPwd")
+        binding.btLoginLog.setOnClickListener(){
+            registeredUserViewModel.checkRegisteredUser("paquito", "paquitoPwd")
+        }
+
+        binding.tvLoginRegisterNow.setOnClickListener(){
+            val action = LoginFragmentDirections.actionLoginFragmentToRegistrationFragment()
+            findNavController().navigate(action)
         }
     }
 
