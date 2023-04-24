@@ -5,3 +5,5 @@
 (21/04/2023) [Commit #3] Establecido el funcionamiento básico de la base de datos y la comprobación de si un usuario registrado se encuentra registrado
 
 (23/04/2023) [Commit #4] Creadas las pantallas de inicio de sesión y de registro, conectadas mediante el navegador de fragmentos
+
+(24/04/2023) [Commit #5] Funcionalidad en la pantalla de inicio de sesión añadida con sus comprobaciones correspondientes
