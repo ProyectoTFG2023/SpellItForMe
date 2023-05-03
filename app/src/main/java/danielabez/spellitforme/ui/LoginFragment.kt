@@ -32,8 +32,8 @@ class LoginFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        registeredUserViewModel.foundRegisteredUser.observe(viewLifecycleOwner, Observer<RegisteredUser>{ foundRegisteredUser ->
-            if(foundRegisteredUser != null){
+        registeredUserViewModel.checkRegisteredUser.observe(viewLifecycleOwner, Observer<RegisteredUser>{ checkRegisteredUser ->
+            if(checkRegisteredUser != null){
                 val action = LoginFragmentDirections.actionLoginFragmentToHomeFragment()
                 findNavController().navigate(action)
             }
@@ -62,7 +62,7 @@ class LoginFragment : Fragment() {
     */
     private fun verifyLogin() {
         if (!binding.tietLoginUsername.text.isNullOrEmpty() && !binding.tietLoginPassword.text.isNullOrEmpty()) {
-            registeredUserViewModel.checkRegisteredUser(
+            registeredUserViewModel.checkRegisteredUserByUsernameAndPassword(
                 binding.tietLoginUsername.text.toString(),
                 binding.tietLoginPassword.text.toString()
             )

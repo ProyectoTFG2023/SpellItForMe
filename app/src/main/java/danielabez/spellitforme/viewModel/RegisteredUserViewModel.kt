@@ -5,16 +5,20 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
-import danielabez.spellitforme.db.dao.RegisteredUserDao
 import danielabez.spellitforme.model.RegisteredUser
 import danielabez.spellitforme.repository.RegisteredUserRepository
-import kotlinx.coroutines.Deferred
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class RegisteredUserViewModel(app: Application) : AndroidViewModel(app) {
     private val repository: RegisteredUserRepository
-    val foundRegisteredUser : MutableLiveData<RegisteredUser> by lazy {
+    val checkRegisteredUser : MutableLiveData<RegisteredUser> by lazy {
+        MutableLiveData<RegisteredUser>()
+    }
+    val checkMailInUse : MutableLiveData<RegisteredUser> by lazy {
+        MutableLiveData<RegisteredUser>()
+    }
+    val checkUsernameInUse : MutableLiveData<RegisteredUser> by lazy {
         MutableLiveData<RegisteredUser>()
     }
 
@@ -31,11 +35,27 @@ class RegisteredUserViewModel(app: Application) : AndroidViewModel(app) {
         repository.deleteRegisteredUser(registeredUser)
     }
 
-    fun checkRegisteredUser(pUsername: String, pPassword: String) : LiveData<RegisteredUser> {
+    fun checkRegisteredUserByUsernameAndPassword(pUsername: String, pPassword: String) : LiveData<RegisteredUser> {
         viewModelScope.launch (Dispatchers.IO){
-            val checkResult = repository.checkRegisteredUser(pUsername, pPassword)
-            foundRegisteredUser.postValue(checkResult)
+            val checkResult = repository.getRegisteredUserByUsernameAndPassword(pUsername, pPassword)
+            checkRegisteredUser.postValue(checkResult)
         }
-        return foundRegisteredUser
+        return checkRegisteredUser
+    }
+
+    fun isMailInUse(pMail: String) : LiveData<RegisteredUser> {
+        viewModelScope.launch (Dispatchers.IO){
+            val checkResult = repository.getRegisteredUserByMail(pMail)
+            checkMailInUse.postValue(checkResult)
+        }
+        return checkMailInUse
+    }
+
+    fun isNameInUse(pUsername: String) : LiveData<RegisteredUser> {
+        viewModelScope.launch (Dispatchers.IO){
+            val checkResult = repository.getRegisteredUserByUsername(pUsername)
+            checkUsernameInUse.postValue(checkResult)
+        }
+        return checkUsernameInUse
     }
 }

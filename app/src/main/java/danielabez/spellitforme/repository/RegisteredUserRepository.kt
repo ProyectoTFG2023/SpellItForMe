@@ -27,7 +27,9 @@ object RegisteredUserRepository {
     */
     fun deleteRegisteredUser(registeredUser: RegisteredUser) = registeredUserModel.deleteRegisteredUser(registeredUser)
 
-    fun getRegisteredUser(pUsername: String) = registeredUserModel.getRegisteredUser(pUsername)
+    fun getRegisteredUserByUsername(pUsername: String) = registeredUserModel.getRegisteredUserByUsername(pUsername)
 
-    fun checkRegisteredUser(pUsername: String, pPassword: String) = registeredUserModel.checkRegisteredUser(pUsername, pPassword)
+    fun getRegisteredUserByMail(pMail: String) = registeredUserModel.getRegisteredUserByMail(pMail)
+
+    fun getRegisteredUserByUsernameAndPassword(pUsername: String, pPassword: String) = registeredUserModel.getRegisteredUserByUsernameAndPassword(pUsername, pPassword)
 }
