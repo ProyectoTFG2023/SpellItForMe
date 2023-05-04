@@ -5,7 +5,7 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 import kotlinx.android.parcel.Parcelize
 
-@Entity(tableName = "registered_users")
+@Entity(tableName = "registered_user")
 @Parcelize
 data class RegisteredUser (
     //Declaramos los atributos que tendrá la tabla, así como propiedades adicionales de cada uno de ellos, cuando sea necesario

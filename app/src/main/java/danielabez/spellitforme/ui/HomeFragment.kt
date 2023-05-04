@@ -10,11 +10,13 @@ import danielabez.spellitforme.R
 import danielabez.spellitforme.databinding.FragmentHomeBinding
 import danielabez.spellitforme.databinding.FragmentRegistrationBinding
 import danielabez.spellitforme.viewModel.GearViewModel
+import danielabez.spellitforme.viewModel.SkillViewModel
 
 class HomeFragment : Fragment() {
     private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding!!
     private val gearViewModel: GearViewModel by activityViewModels()
+    private val skillViewModel: SkillViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -26,6 +28,10 @@ class HomeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        binding.btTest.setOnClickListener(){
+            binding.textView.setText(skillViewModel.getAllSkills().toString())
+        }
     }
 
     override fun onDestroyView() {

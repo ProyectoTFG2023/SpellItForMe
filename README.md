@@ -7,3 +7,9 @@
 (23/04/2023) [Commit #4] Creadas las pantallas de inicio de sesión y de registro, conectadas mediante el navegador de fragmentos
 
 (24/04/2023) [Commit #5] Funcionalidad en la pantalla de inicio de sesión añadida con sus comprobaciones correspondientes
+
+(03/05/2023) [Commit #6] Añadida nueva clase representativa de los objetos almacenados en la aplicación
+
+(04/05/2023) [Commit #7] Añadida una nueva clase para llevar el control de las habilidades que tendran las múltiples piezas de equipamiento, realizados ciertos retoques en 
+el registro, apunto de ser finalizado, y añadido un nuevo fragmento que servirá para realizar la búsqueda del equipamiento deseado entre las entradas registradas en la base
+de datos

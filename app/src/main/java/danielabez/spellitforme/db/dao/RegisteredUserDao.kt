@@ -14,12 +14,12 @@ interface RegisteredUserDao {
     @Delete
     fun deleteRegisteredUser(registeredUser: RegisteredUser)
 
-    @Query("SELECT * FROM registered_users WHERE username = :pUsername")
+    @Query("SELECT * FROM registered_user WHERE username = :pUsername")
     fun getRegisteredUserByUsername(pUsername: String) : RegisteredUser
 
-    @Query("SELECT * FROM registered_users WHERE mail = :pMail")
+    @Query("SELECT * FROM registered_user WHERE mail = :pMail")
     fun getRegisteredUserByMail(pMail: String) : RegisteredUser
 
-    @Query("SELECT * FROM registered_users WHERE username = :pUsername AND password = :pPassword")
+    @Query("SELECT * FROM registered_user WHERE username = :pUsername AND password = :pPassword")
     fun getRegisteredUserByUsernameAndPassword(pUsername: String, pPassword: String) : RegisteredUser
 }

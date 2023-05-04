@@ -32,23 +32,11 @@ class RegistrationFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         registeredUserViewModel.checkMailInUse.observe(viewLifecycleOwner, Observer<RegisteredUser>{ checkUserByMail ->
-            if(checkUserByMail != null){
-                isMailFree = false
-                //mailInUseWarning()
-            }
-            else{
-                isMailFree = true
-            }
+            isMailFree = checkUserByMail == null
         })
 
         registeredUserViewModel.checkUsernameInUse.observe(viewLifecycleOwner, Observer<RegisteredUser>{ checkUserByUsername ->
-            if(checkUserByUsername != null){
-                isUsernameFree = false
-                //usernameInUseWarning()
-            }
-            else{
-                isUsernameFree = true
-            }
+            isUsernameFree = checkUserByUsername == null
         })
 
         initializeCheckbox()
@@ -86,6 +74,20 @@ class RegistrationFragment : Fragment() {
         if(!binding.tietRegisterMail.text.toString().isNullOrEmpty()){
             registeredUserViewModel.isMailInUse(binding.tietRegisterMail.text.toString())
             registeredUserViewModel.isNameInUse(binding.tietRegisterMail.text.toString())
+            if(isMailFree){
+                if(isUsernameFree){
+                    if(binding.tietRegisterPassword.text.toString().equals(binding.tietRegisterRepeatPassword.text.toString())){
+                        //TODO: realizar el registro aquí, puesto que ya se han comprobado todos los parámetros
+                    }
+                    else{
+                        //TODO: warning de contraseñas no idénticas
+                    }
+                }else{
+                    //TODO: warning de nombre utilizado
+                }
+            } else{
+                //TODO: warning de email utilizado
+            }
         }
     }
 }

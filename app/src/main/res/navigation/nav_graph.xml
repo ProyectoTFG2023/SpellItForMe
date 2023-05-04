@@ -26,5 +26,14 @@
         android:id="@+id/HomeFragment"
         android:name="danielabez.spellitforme.ui.HomeFragment"
         android:label="fragment_home"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_HomeFragment_to_GearSearchFragment"
+            app:destination="@id/GearSearchFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/GearSearchFragment"
+        android:name="danielabez.spellitforme.GearSearchFragment"
+        android:label="fragment_gear_search"
+        tools:layout="@layout/fragment_gear_search" />
 </navigation>
