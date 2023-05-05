@@ -15,10 +15,13 @@
     <!-- HomeFragment -->
     <string name="registration_fragment_label">Register Fragment</string>
     <string name="tvRegisterGuide"><b>Enter the following data:</b></string>
+    <string name="tvRegisterEmailInUseWarning">That email is already in use</string>
     <string name="tietRegisterMailHint">Enter your email</string>
+    <string name="tvRegisterUsernameInUseWarning">That username is already in use</string>
     <string name="tietRegisterUsernameHint">Enter a new username</string>
     <string name="tietRegisterPasswordHint">Enter your password</string>
     <string name="tietRegisterRepeatPasswordHint">Confirm your password</string>
+    <string name="tvRegisterNonMatchingPasswordsWarning">The passwords do not match, check and try again</string>
     <string name="ckbRegisterAcceptTerms">I accept the terms of service</string>
     <string name="btRegisterRegister">Register</string>
     <!-- TODO: Remove or change this placeholder text -->

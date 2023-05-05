@@ -1,6 +1,7 @@
 package danielabez.spellitforme.viewModel
 
 import android.app.Application
+import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -38,6 +39,7 @@ class RegisteredUserViewModel(app: Application) : AndroidViewModel(app) {
     fun checkRegisteredUserByUsernameAndPassword(pUsername: String, pPassword: String) : LiveData<RegisteredUser> {
         viewModelScope.launch (Dispatchers.IO){
             val checkResult = repository.getRegisteredUserByUsernameAndPassword(pUsername, pPassword)
+            Log.d("SpellItForMe_Debug_VIEWMODEL", checkResult.toString())
             checkRegisteredUser.postValue(checkResult)
         }
         return checkRegisteredUser
@@ -51,7 +53,7 @@ class RegisteredUserViewModel(app: Application) : AndroidViewModel(app) {
         return checkMailInUse
     }
 
-    fun isNameInUse(pUsername: String) : LiveData<RegisteredUser> {
+    fun isUsernameInUse(pUsername: String) : LiveData<RegisteredUser> {
         viewModelScope.launch (Dispatchers.IO){
             val checkResult = repository.getRegisteredUserByUsername(pUsername)
             checkUsernameInUse.postValue(checkResult)

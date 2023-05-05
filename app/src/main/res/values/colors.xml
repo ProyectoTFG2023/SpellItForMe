@@ -9,5 +9,8 @@
     <color name="white">#FFFFFFFF</color>
 
     <!-- LoginFragment -->
-    <color name="linkRegistration">#4A70CC</color>
+    <color name="loginLinkRegistration">#4A70CC</color>
+
+    <!-- RegisterFragment -->
+    <color name="registrationFieldValueAlreadyInUse">#D53939</color>
 </resources>

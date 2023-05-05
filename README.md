@@ -13,3 +13,6 @@
 (04/05/2023) [Commit #7] Añadida una nueva clase para llevar el control de las habilidades que tendran las múltiples piezas de equipamiento, realizados ciertos retoques en 
 el registro, apunto de ser finalizado, y añadido un nuevo fragmento que servirá para realizar la búsqueda del equipamiento deseado entre las entradas registradas en la base
 de datos
+
+(05/05/2023) [Commit #8] Finalizada la funcionalidad del registro, realizando las comprobaciones oportunas en cada uno de los datos introducidos, así como el añadido de feedback
+dinámico al usuario para informarle en caso de que sea necesario modificar los datos que haya escrito. Únicamente faltan ajustar ciertos matices y añadir algún elemento visual adicional

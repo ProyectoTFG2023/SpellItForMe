@@ -10,12 +10,23 @@
         android:id="@+id/tvRegisterGuide"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="40dp"
+        android:layout_marginBottom="45dp"
         android:text="@string/tvRegisterGuide"
         android:textSize="26sp"
         app:layout_constraintBottom_toTopOf="@+id/tilytRegisterMail"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/tvRegisterEmailInUseWarning"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="5dp"
+        android:text="@string/tvRegisterEmailInUseWarning"
+        android:textColor="@color/registrationFieldValueAlreadyInUse"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toTopOf="@+id/tilytRegisterMail"
+        app:layout_constraintStart_toStartOf="@+id/tilytRegisterMail" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/tilytRegisterMail"
@@ -23,11 +34,13 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="65dp"
         android:layout_marginEnd="65dp"
-        android:layout_marginBottom="435dp"
+        android:layout_marginBottom="415dp"
+        app:boxBackgroundMode="filled"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        app:passwordToggleEnabled="false">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/tietRegisterMail"
@@ -35,6 +48,17 @@
             android:layout_height="wrap_content"
             android:hint="@string/tietRegisterMailHint" />
     </com.google.android.material.textfield.TextInputLayout>
+
+    <TextView
+        android:id="@+id/tvRegisterUsernameInUseWarning"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="5dp"
+        android:text="@string/tvRegisterUsernameInUseWarning"
+        android:textColor="@color/registrationFieldValueAlreadyInUse"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toTopOf="@+id/tilytRegisterUsername"
+        app:layout_constraintStart_toStartOf="@+id/tilytRegisterUsername" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/tilytRegisterUsername"
@@ -57,9 +81,11 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="35dp"
+        app:endIconMode="password_toggle"
         app:layout_constraintEnd_toEndOf="@+id/tilytRegisterUsername"
         app:layout_constraintStart_toStartOf="@+id/tilytRegisterUsername"
-        app:layout_constraintTop_toBottomOf="@+id/tilytRegisterUsername">
+        app:layout_constraintTop_toBottomOf="@+id/tilytRegisterUsername"
+        app:passwordToggleEnabled="false">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/tietRegisterPassword"
@@ -73,9 +99,14 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="35dp"
+        app:counterEnabled="false"
+        app:endIconMode="password_toggle"
+        app:errorEnabled="false"
+        app:errorTextAppearance="@style/TextAppearance.AppCompat.Body1"
         app:layout_constraintEnd_toEndOf="@+id/tilytRegisterPassword"
         app:layout_constraintStart_toStartOf="@+id/tilytRegisterPassword"
-        app:layout_constraintTop_toBottomOf="@+id/tilytRegisterPassword">
+        app:layout_constraintTop_toBottomOf="@+id/tilytRegisterPassword"
+        app:passwordToggleEnabled="false">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/tietRegisterRepeatPassword"
@@ -84,11 +115,23 @@
             android:hint="@string/tietRegisterRepeatPasswordHint" />
     </com.google.android.material.textfield.TextInputLayout>
 
+    <TextView
+        android:id="@+id/tvRegisterNonMatchingPasswordsWarning"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp"
+        android:text="@string/tvRegisterNonMatchingPasswordsWarning"
+        android:textColor="@color/registrationFieldValueAlreadyInUse"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toTopOf="@+id/ckbRegisterAcceptTerms"
+        app:layout_constraintEnd_toEndOf="@+id/tilytRegisterRepeatPassword"
+        app:layout_constraintStart_toStartOf="@+id/tilytRegisterRepeatPassword" />
+
     <CheckBox
         android:id="@+id/ckbRegisterAcceptTerms"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="55dp"
         android:text="@string/ckbRegisterAcceptTerms"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
