@@ -16,3 +16,6 @@ de datos
 
 (05/05/2023) [Commit #8] Finalizada la funcionalidad del registro, realizando las comprobaciones oportunas en cada uno de los datos introducidos, así como el añadido de feedback
 dinámico al usuario para informarle en caso de que sea necesario modificar los datos que haya escrito. Únicamente faltan ajustar ciertos matices y añadir algún elemento visual adicional
+
+(08/05/2023) [Commit #9] Realizado el RecyclerView para la búsqueda de las distintas piezas de equipamiento, así como progreso realizado para el arreglo de un error de bloqueo presente en
+la pantalla principal de la aplicación

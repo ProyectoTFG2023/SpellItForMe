@@ -39,7 +39,6 @@ class RegisteredUserViewModel(app: Application) : AndroidViewModel(app) {
     fun checkRegisteredUserByUsernameAndPassword(pUsername: String, pPassword: String) : LiveData<RegisteredUser> {
         viewModelScope.launch (Dispatchers.IO){
             val checkResult = repository.getRegisteredUserByUsernameAndPassword(pUsername, pPassword)
-            Log.d("SpellItForMe_Debug_VIEWMODEL", checkResult.toString())
             checkRegisteredUser.postValue(checkResult)
         }
         return checkRegisteredUser
@@ -59,5 +58,9 @@ class RegisteredUserViewModel(app: Application) : AndroidViewModel(app) {
             checkUsernameInUse.postValue(checkResult)
         }
         return checkUsernameInUse
+    }
+
+    fun emptyCheckRegisteredUser(){
+        checkUsernameInUse.postValue(null)
     }
 }

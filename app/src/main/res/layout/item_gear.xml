@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/cvGear"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:cardCornerRadius="16dp"
+    app:cardElevation="4dp"
+    app:cardUseCompatPadding="true">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/clGear"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/ivGear"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="25dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@android:drawable/checkbox_off_background" />
+
+        <TextView
+            android:id="@+id/tvGearName"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginEnd="15dp"
+            android:textAlignment="center"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/ivGear"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="Item Name" />
+
+        <TextView
+            android:id="@+id/tvGearPhysDefense"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="15dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/tvGearFireDefense"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="@+id/tvGearName"
+            app:layout_constraintTop_toBottomOf="@+id/tvGearName"
+            tools:text="PhysDefense" />
+
+        <TextView
+            android:id="@+id/tvGearFireDefense"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="@+id/tvGearPhysDefense"
+            app:layout_constraintEnd_toStartOf="@+id/tvGearIceDefense"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/tvGearPhysDefense"
+            app:layout_constraintTop_toTopOf="@+id/tvGearPhysDefense"
+            tools:text="FireDefense" />
+
+        <TextView
+            android:id="@+id/tvGearIceDefense"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="@+id/tvGearPhysDefense"
+            app:layout_constraintEnd_toStartOf="@+id/tvGearThunderDefense"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/tvGearFireDefense"
+            app:layout_constraintTop_toTopOf="@+id/tvGearPhysDefense"
+            tools:text="IceDefense" />
+
+        <TextView
+            android:id="@+id/tvGearThunderDefense"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="@+id/tvGearPhysDefense"
+            app:layout_constraintEnd_toEndOf="@+id/tvGearName"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/tvGearIceDefense"
+            app:layout_constraintTop_toTopOf="@+id/tvGearPhysDefense"
+            tools:text="ThDefense" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.cardview.widget.CardView>

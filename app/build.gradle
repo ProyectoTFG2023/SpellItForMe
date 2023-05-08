@@ -65,4 +65,7 @@ dependencies {
     implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.5.1'
     implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.5.1'
     implementation 'androidx.lifecycle:lifecycle-common-java8:2.5.1'
+
+    //Implementación para poder modificar la acción del botón de retroceso del dispositivo móvil
+    implementation "androidx.activity:activity-ktx:1.6.0-rc01"
 }

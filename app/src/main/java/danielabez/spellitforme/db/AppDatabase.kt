@@ -59,19 +59,19 @@ abstract class AppDatabase: RoomDatabase() {
             */
             suspend fun initializeDatabase(registeredUserDao: RegisteredUserDao, skillDao: SkillDao, gearDao: GearDao){
                 lateinit var registeredUser: RegisteredUser
-                registeredUser = RegisteredUser("correo@gmail.com", "paquito", "paquitoPwd")
+                registeredUser = RegisteredUser("correo@gmail.com", "admin", "admin")
                 registeredUserDao.addRegisteredUser(registeredUser)
 
                 lateinit var gear: Gear
-                gear = Gear("Iron Helmet", "Headgear", 100L, 20L)
+                gear = Gear("Iron Helmet", "Headgear", "Common", 100L, 20L, 20L, 0L)
                 gearDao.addGear(gear)
-                gear = Gear("Sack Vest", "Torso", 10L, 50L)
+                gear = Gear("Sack Vest", "Torso", "Common", 10L, 50L, 50L, 50L)
                 gearDao.addGear(gear)
-                gear = Gear("Bronze Bracelet", "Handwear", 0L, 60L)
+                gear = Gear("Bronze Bracelet", "Handwear", "Uncommon", 0L, 60L, 60L, 60L)
                 gearDao.addGear(gear)
-                gear = Gear("Tattered Rope", "Belt", 0L, 0L)
+                gear = Gear("Tattered Rope", "Belt", "Common", 0L, 0L, 0L, 0L)
                 gearDao.addGear(gear)
-                gear = Gear("Sand Sandals", "Footwear", 50L, 20L)
+                gear = Gear("Sand Sandals", "Footwear", "Rare", 50L, 20L, 0L, 50L)
                 gearDao.addGear(gear)
 
                 lateinit var skill: Skill

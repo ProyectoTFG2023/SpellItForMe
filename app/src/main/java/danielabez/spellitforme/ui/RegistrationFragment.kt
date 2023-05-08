@@ -55,7 +55,8 @@ class RegistrationFragment : Fragment() {
             override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
             }
             override fun afterTextChanged(p0: Editable?) {
-                if (!binding.tietRegisterMail.text.toString().isNullOrEmpty()) {
+                if (!binding.tietRegisterMail.text.toString().isNullOrEmpty() &&
+                    (binding.tietRegisterMail.text.toString().contains("@") && binding.tietRegisterMail.text.toString().contains("."))) {
                     Log.d("SpellItForMe_Debug", "Valor escrito en el campo del correo -> " + binding.tietRegisterMail.text.toString())
                     registeredUserViewModel.isMailInUse(binding.tietRegisterMail.text.toString())
                     Log.d("SpellItForMe_Debug", "Se encuentra libre el correo? -> " + isMailFree)

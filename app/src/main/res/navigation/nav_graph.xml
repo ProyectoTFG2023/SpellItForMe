@@ -33,7 +33,7 @@
     </fragment>
     <fragment
         android:id="@+id/GearSearchFragment"
-        android:name="danielabez.spellitforme.GearSearchFragment"
+        android:name="danielabez.spellitforme.ui.GearSearchFragment"
         android:label="fragment_gear_search"
         tools:layout="@layout/fragment_gear_search" />
 </navigation>
