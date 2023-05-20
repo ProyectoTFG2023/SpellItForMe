@@ -2,11 +2,9 @@ package danielabez.spellitforme.viewModel
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import danielabez.spellitforme.model.Gear
-import danielabez.spellitforme.model.RegisteredUser
 import danielabez.spellitforme.repository.GearRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -20,40 +18,44 @@ class GearViewModel(app: Application) : AndroidViewModel(app) {
     init {
         GearRepository(getApplication<Application>().applicationContext)
         repository = GearRepository
-        getAllHeadgear()
     }
 
     fun addGear(gear: Gear) = viewModelScope.launch (Dispatchers.IO){
         repository.addGear(gear)
     }
 
-    fun getAllHeadgear() {
-        viewModelScope.launch (Dispatchers.IO){
-            gearListLiveData.postValue(repository.getAllHeadgear())
+    fun getAllGear(){
+        viewModelScope.launch (Dispatchers.IO) {
+            gearListLiveData.postValue(repository.getAllGear())
         }
     }
 
-    fun getAllTorso() {
+    fun getAllGearByType(pType: String) {
         viewModelScope.launch (Dispatchers.IO){
-            gearListLiveData.postValue(repository.getAllTorso())
+            //Log.d("SpellItForMe_Debug", repository.getAllGearByType(pType).toString())
+            gearListLiveData.postValue(repository.getAllGearByType(pType))
         }
     }
 
-    fun getAllHandwear() {
+    fun getAllGearByTypeLike(pType: String, pWrittenString: String) {
         viewModelScope.launch (Dispatchers.IO){
-            gearListLiveData.postValue(repository.getAllHandwear())
+            //Log.d("SpellItForMe_Debug", repository.getAllGearByTypeLike(pType, pWrittenString).toString())
+            gearListLiveData.postValue(repository.getAllGearByTypeLike(pType, pWrittenString))
         }
     }
 
-    fun getAllBelts() {
+    fun getAllGearByTypeAndRarity(pType: String, pRarity: String){
         viewModelScope.launch (Dispatchers.IO){
-            gearListLiveData.postValue(repository.getAllBelts())
+            //Log.d("SpellItForMe_Debug", repository.getAllGearByTypeAndRarity(pType, pRarity).toString())
+            gearListLiveData.postValue(repository.getAllGearByTypeAndRarity(pType, pRarity))
         }
     }
 
-    fun getAllFootwear() {
+    fun getAllGearByTypeAndRarityLike(pType: String, pRarity: String, pWrittenString: String){
         viewModelScope.launch (Dispatchers.IO){
-            gearListLiveData.postValue(repository.getAllFootwear())
+            //Log.d("SpellItForMe_Debug", repository.getAllGearByTypeAndRarityLike(pType, pRarity, pWrittenString).toString())
+            gearListLiveData.postValue(repository.getAllGearByTypeAndRarityLike(pType, pRarity, pWrittenString))
         }
     }
+
 }

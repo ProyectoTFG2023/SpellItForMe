@@ -18,15 +18,13 @@ object GearRepository {
 
     fun addGear(gear: Gear) = gearModel.addGear(gear)
 
-    fun getAllHeadgear() = gearModel.getAllHeadgear()
+    fun getAllGear() = gearModel.getAllGear()
 
-    fun getAllTorso() = gearModel.getAllTorso()
+    fun getAllGearByType(pType: String) = gearModel.getAllGearByType(pType)
 
-    fun getAllHandwear() = gearModel.getAllHandwear()
+    fun getAllGearByTypeLike(pType: String, pWrittenString: String) = gearModel.getAllGearByTypeLike(pType, pWrittenString)
 
-    fun getAllBelts() = gearModel.getAllBelts()
+    fun getAllGearByTypeAndRarity(pType: String, pRarity: String) = gearModel.getAllGearByTypeAndRarity(pType, pRarity)
 
-    fun getAllFootwear() = gearModel.getAllFootwear()
-
-    fun getAllAccessories() = gearModel.getAllAccessories()
+    fun getAllGearByTypeAndRarityLike(pType: String, pRarity: String, pWrittenString: String) = gearModel.getAllGearByTypeAndRarityLike(pType, pRarity, pWrittenString)
 }

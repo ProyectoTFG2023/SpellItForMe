@@ -68,4 +68,7 @@ dependencies {
 
     //Implementación para poder modificar la acción del botón de retroceso del dispositivo móvil
     implementation "androidx.activity:activity-ktx:1.6.0-rc01"
+
+    //Implementación de GSON para almacenar ciertos tipos de datos en Room
+    implementation 'com.google.code.gson:gson:2.8.7'
 }

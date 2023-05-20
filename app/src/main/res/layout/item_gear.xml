@@ -16,13 +16,12 @@
 
         <ImageView
             android:id="@+id/ivGear"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
             android:layout_marginStart="10dp"
-            android:layout_marginTop="25dp"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@android:drawable/checkbox_off_background" />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/tvGearName"
@@ -30,58 +29,333 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="15dp"
             android:layout_marginTop="15dp"
-            android:layout_marginEnd="15dp"
+            android:layout_marginEnd="10dp"
             android:textAlignment="center"
-            app:layout_constraintEnd_toEndOf="parent"
+            android:textSize="17sp"
+            app:layout_constraintEnd_toStartOf="@+id/ivSlots"
             app:layout_constraintStart_toEndOf="@+id/ivGear"
             app:layout_constraintTop_toTopOf="parent"
             tools:text="Item Name" />
 
+        <ImageView
+            android:id="@+id/ivSlots"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_marginEnd="2dp"
+            android:visibility="gone"
+            app:layout_constraintEnd_toStartOf="@+id/tvNumberOfSlots"
+            app:layout_constraintTop_toTopOf="@+id/tvNumberOfSlots"
+            app:srcCompat="@mipmap/ic_gem_slot_foreground" />
+
         <TextView
-            android:id="@+id/tvGearPhysDefense"
+            android:id="@+id/tvNumberOfSlots"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:layout_marginBottom="15dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginEnd="8dp"
+            android:visibility="gone"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="x1" />
+
+        <LinearLayout
+            android:id="@+id/llytDefenseAttributes"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="7dp"
+            android:layout_marginEnd="5dp"
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/ivGear"
+            app:layout_constraintTop_toBottomOf="@+id/tvGearName">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/clytPhysDefense"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/clytInnerPhysDefense"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <ImageView
+                        android:id="@+id/ivPhysDefense"
+                        android:layout_width="23dp"
+                        android:layout_height="23dp"
+                        android:layout_marginStart="5dp"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginBottom="5dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:srcCompat="@mipmap/ic_phys_defense_foreground" />
+
+                    <TextView
+                        android:id="@+id/tvGearPhysDefense"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="5dp"
+                        android:layout_marginEnd="5dp"
+                        app:layout_constraintBottom_toBottomOf="@id/ivPhysDefense"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@+id/ivPhysDefense"
+                        app:layout_constraintTop_toTopOf="@id/ivPhysDefense"
+                        tools:text="PhysDef" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/clytFireDefense"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:visibility="visible">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/clytInnerFireDefense"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <ImageView
+                        android:id="@+id/ivFireDefense"
+                        android:layout_width="23dp"
+                        android:layout_height="23dp"
+                        android:layout_marginStart="5dp"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginBottom="5dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:srcCompat="@mipmap/ic_fire_attribute_foreground" />
+
+                    <TextView
+                        android:id="@+id/tvGearFireDefense"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="5dp"
+                        android:layout_marginEnd="5dp"
+                        app:layout_constraintBottom_toBottomOf="@id/ivFireDefense"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@id/ivFireDefense"
+                        app:layout_constraintTop_toTopOf="@id/ivFireDefense"
+                        tools:text="FireDef" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/clytIceDefense"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:visibility="visible">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/clytInnerIceDefense"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <ImageView
+                        android:id="@+id/ivIceDefense"
+                        android:layout_width="23dp"
+                        android:layout_height="23dp"
+                        android:layout_marginStart="5dp"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginBottom="5dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:srcCompat="@mipmap/ic_ice_attribute_foreground" />
+
+                    <TextView
+                        android:id="@+id/tvGearIceDefense"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="5dp"
+                        android:layout_marginEnd="5dp"
+                        app:layout_constraintBottom_toBottomOf="@id/ivIceDefense"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@+id/ivIceDefense"
+                        app:layout_constraintTop_toTopOf="@+id/ivIceDefense"
+                        tools:text="IceDef" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/clytThunderDefense"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:visibility="visible">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/clytInnerThunderDefense"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <ImageView
+                        android:id="@+id/ivThunderDefense"
+                        android:layout_width="23dp"
+                        android:layout_height="23dp"
+                        android:layout_marginStart="5dp"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginBottom="5dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:srcCompat="@mipmap/ic_thunder_attribute_foreground" />
+
+                    <TextView
+                        android:id="@+id/tvGearThunderDefense"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="5dp"
+                        android:layout_marginEnd="5dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@+id/ivThunderDefense"
+                        app:layout_constraintTop_toTopOf="@+id/ivThunderDefense"
+                        tools:text="ThunDef" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/llytGearBottomMarginDummy"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="7dp"
+            android:layout_marginBottom="7dp"
+            android:layout_weight="1"
+            android:orientation="horizontal"
+            android:visibility="visible"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/tvGearFireDefense"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="@+id/tvGearName"
-            app:layout_constraintTop_toBottomOf="@+id/tvGearName"
-            tools:text="PhysDefense" />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/llytDefenseAttributes"></LinearLayout>
 
-        <TextView
-            android:id="@+id/tvGearFireDefense"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:id="@+id/llytGearSkills"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            app:layout_constraintBottom_toBottomOf="@+id/tvGearPhysDefense"
-            app:layout_constraintEnd_toStartOf="@+id/tvGearIceDefense"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/tvGearPhysDefense"
-            app:layout_constraintTop_toTopOf="@+id/tvGearPhysDefense"
-            tools:text="FireDefense" />
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="7dp"
+            android:layout_marginEnd="5dp"
+            android:layout_marginBottom="7dp"
+            android:orientation="horizontal"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/ivGear"
+            app:layout_constraintTop_toBottomOf="@+id/llytDefenseAttributes">
 
-        <TextView
-            android:id="@+id/tvGearIceDefense"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:layout_constraintBottom_toBottomOf="@+id/tvGearPhysDefense"
-            app:layout_constraintEnd_toStartOf="@+id/tvGearThunderDefense"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/tvGearFireDefense"
-            app:layout_constraintTop_toTopOf="@+id/tvGearPhysDefense"
-            tools:text="IceDefense" />
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/clytGearSkillOne"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1">
 
-        <TextView
-            android:id="@+id/tvGearThunderDefense"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:layout_constraintBottom_toBottomOf="@+id/tvGearPhysDefense"
-            app:layout_constraintEnd_toEndOf="@+id/tvGearName"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/tvGearIceDefense"
-            app:layout_constraintTop_toTopOf="@+id/tvGearPhysDefense"
-            tools:text="ThDefense" />
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/clytGearInnerSkillOne"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <ImageView
+                        android:id="@+id/ivGearSkillOne"
+                        android:layout_width="23dp"
+                        android:layout_height="23dp"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginBottom="5dp"
+                        android:foregroundGravity="center_horizontal"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:srcCompat="@mipmap/ic_phys_defense_foreground" />
+
+                    <TextView
+                        android:id="@+id/tvGearSkillOne"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="7dp"
+                        android:gravity="center_horizontal"
+                        app:layout_constraintBottom_toBottomOf="@+id/ivGearSkillOne"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@+id/ivGearSkillOne"
+                        app:layout_constraintTop_toTopOf="@+id/ivGearSkillOne"
+                        tools:text="Skill One" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/clytGearSkillTwo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:visibility="gone">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/clytGearInnerSkillTwo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <ImageView
+                        android:id="@+id/ivGearSkillTwo"
+                        android:layout_width="23dp"
+                        android:layout_height="23dp"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginBottom="5dp"
+                        android:foregroundGravity="center_horizontal"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:srcCompat="@mipmap/ic_phys_defense_foreground" />
+
+                    <TextView
+                        android:id="@+id/tvGearSkillTwo"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="7dp"
+                        android:foregroundGravity="center_horizontal"
+                        app:layout_constraintBottom_toBottomOf="@+id/ivGearSkillTwo"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@+id/ivGearSkillTwo"
+                        app:layout_constraintTop_toTopOf="@+id/ivGearSkillTwo"
+                        tools:text="Skill Two" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </LinearLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.cardview.widget.CardView>

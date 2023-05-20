@@ -26,4 +26,23 @@
     <string name="btRegisterRegister">Register</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <!-- WeaponSearchFragment -->
+    <string name="svWeaponNameFilterHint">Filter by entering a weapon\'s name...</string>
+    <string-array name="spSearchTypeFilter">
+        <item>All</item>
+        <item>Sword</item>
+        <item>Spear</item>
+    </string-array>
+    <string-array name="spSearchRarityFilter">
+        <item>All</item>
+        <item>Common</item>
+        <item>Uncommon</item>
+        <item>Rare</item>
+        <item>Mythical</item>
+        <item>Legendary</item>
+    </string-array>
+
+    <!-- GearSearchFragment -->
+    <string name="svGearNameFilterHint">Filter by entering an item\'s name...</string>
 </resources>

@@ -1,14 +1,24 @@
 package danielabez.spellitforme.adapter
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import danielabez.spellitforme.R
 import danielabez.spellitforme.databinding.ItemGearBinding
 import danielabez.spellitforme.model.Gear
-import danielabez.spellitforme.viewHolder.GearViewHolder
 
-class GearAdapter : RecyclerView.Adapter<GearViewHolder>() {
+class GearAdapter : RecyclerView.Adapter<GearAdapter.GearViewHolder>() {
     var gearList: List<Gear>? = null
+
+    //TODO: PENDIENTE DE AÑADIR FUNCIONALIDAD
+    inner class GearViewHolder(val binding: ItemGearBinding): RecyclerView.ViewHolder(binding.root) {
+        init {
+            binding.root.setOnClickListener(){
+                val chosenGear = gearList?.get(this.adapterPosition)
+            }
+        }
+    }
 
     /*
     * Este método permite al RecyclerView crear un nuevo ViewHolder cuando lo necesite. Tenemos que indicarle el layout que necesitará para "inflarlo", es decir,
@@ -17,11 +27,11 @@ class GearAdapter : RecyclerView.Adapter<GearViewHolder>() {
     */
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): GearViewHolder {
         val binding = ItemGearBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-        return GearViewHolder(binding, gearList)
+        return GearViewHolder(binding)
     }
 
     /*
-    * Método al que llama el RecyclerView cada vez que necesita dubujar un elemento. Le pasamos un ViewHolder que tendremos que completar con los datos de la tarea,
+    * Método al que llama el RecyclerView cada vez que necesita dibujar un elemento. Le pasamos un ViewHolder que tendremos que completar con los datos de la tarea,
     * indicada por el int que indica la posición de dicha tarea en la lista que esté contenida
     */
     override fun onBindViewHolder(holder: GearViewHolder, position: Int) {
@@ -34,17 +44,48 @@ class GearAdapter : RecyclerView.Adapter<GearViewHolder>() {
                 binding.tvGearIceDefense.text = iceDefense.toString()
                 binding.tvGearThunderDefense.text = thunderDefense.toString()
 
+                if(slots > 0){
+                    binding.ivSlots.visibility = View.VISIBLE
+                    binding.tvNumberOfSlots.visibility = View.VISIBLE
+                    binding.tvNumberOfSlots.text = "x$slots"
+                }
+
+                //TODO: Hacer más iconos a cambiar
+                if(skills.isNotEmpty()){
+                    binding.llytGearBottomMarginDummy.visibility = View.GONE
+                    binding.llytGearSkills.visibility = View.VISIBLE
+                    binding.tvGearSkillOne.text = skills[0].name
+                    //binding.clytGearSkillOne.visibility = View.VISIBLE
+                    binding.ivGearSkillOne.setImageResource(
+                        when(skills[0].type){
+                            "PhysDefense" -> R.mipmap.ic_phys_defense_up_skill_foreground
+                            else -> R.mipmap.ic_phys_attack_skill_foreground
+                        }
+                    )
+
+                    if(skills.size == 2){
+                        binding.clytGearSkillTwo.visibility = View.VISIBLE
+                        binding.tvGearSkillTwo.text = skills[1].name
+                        binding.ivGearSkillTwo.setImageResource(
+                            when(skills[1].type){
+                                "PhysDefense" -> R.mipmap.ic_phys_defense_up_skill_foreground
+                                else -> R.mipmap.ic_phys_attack_skill_foreground
+                            }
+                        )
+                    }
+                }
+
+                //TODO: CAMBIAR PARA QUE SALGAN ICONOS DISTINTOS SEGÚN EL TIPO DE EQUIPAMIENTO
                 //Mostraremos un icono según el tipo de equipamiento y la rareza que tenga
-                //TODO: PENDIENTE DE HACER
-                /*
-                binding.ivItemEstado.setImageResource(
-                    when (estado) {
-                        0 -> R.drawable.ic_tarea_abierta
-                        1 -> R.drawable.ic_tarea_en_progreso
-                        else -> R.drawable.ic_tarea_terminada
+                binding.ivGear.setImageResource(
+                    when (rarity) {
+                        "a_Common" -> R.mipmap.ic_helmet_common_foreground
+                        "b_Uncommon" -> R.mipmap.ic_helmet_uncommon_foreground
+                        "c_Rare" -> R.mipmap.ic_helmet_rare_foreground
+                        "d_Mythical" -> R.mipmap.ic_helmet_mythical_foreground
+                        else -> R.mipmap.ic_helmet_legendary_foreground
                     }
                 )
-                */
             }
         }
     }

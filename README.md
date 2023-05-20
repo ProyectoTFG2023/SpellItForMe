@@ -19,3 +19,10 @@ dinámico al usuario para informarle en caso de que sea necesario modificar los 
 
 (08/05/2023) [Commit #9] Realizado el RecyclerView para la búsqueda de las distintas piezas de equipamiento, así como progreso realizado para el arreglo de un error de bloqueo presente en
 la pantalla principal de la aplicación
+
+(17/05/2023) [Commit #10] Añadidos todos los elementos visuales requeridos para aportar toda la información necesaria al usuario, así como su correcto funcionamiento, nuevos
+iconos representativos y arreglos de los iconos previamente realizados
+
+(20/05/2023) [Commit #11] Añadida la búsqueda de armas, con su correspondiente plantilla de visualización de elementos visuales. Mejoras visuales en la búsqueda de piezas
+de equipamiento, así como la ordenación para una muestra más cómoda de la información en ambas búsquedas. Además, se ha modificado la estructura de los fragmentos tratados
+en la aplicación para asemejarse a la versión final que tendrá la aplicación, editando todos los argumentos y la navegación entre ellos de la forma deseada

@@ -28,12 +28,33 @@
         android:label="fragment_home"
         tools:layout="@layout/fragment_home" >
         <action
-            android:id="@+id/action_HomeFragment_to_GearSearchFragment"
-            app:destination="@id/GearSearchFragment" />
+            android:id="@+id/action_HomeFragment_to_equipmentSetFragment"
+            app:destination="@id/EquipmentSetFragment" />
     </fragment>
     <fragment
         android:id="@+id/GearSearchFragment"
         android:name="danielabez.spellitforme.ui.GearSearchFragment"
         android:label="fragment_gear_search"
-        tools:layout="@layout/fragment_gear_search" />
+        tools:layout="@layout/fragment_gear_search" >
+        <argument
+            android:name="gearType"
+            app:argType="string" />
+    </fragment>
+    <fragment
+        android:id="@+id/WeaponSearchFragment"
+        android:name="danielabez.spellitforme.ui.WeaponSearchFragment"
+        android:label="fragment_weapon_search"
+        tools:layout="@layout/fragment_weapon_search" />
+    <fragment
+        android:id="@+id/EquipmentSetFragment"
+        android:name="danielabez.spellitforme.ui.EquipmentSetFragment"
+        android:label="fragment_equipment_set"
+        tools:layout="@layout/fragment_equipment_set" >
+        <action
+            android:id="@+id/action_equipmentSetFragment_to_GearSearchFragment"
+            app:destination="@id/GearSearchFragment" />
+        <action
+            android:id="@+id/action_equipmentSetFragment_to_weaponSearchFragment"
+            app:destination="@id/WeaponSearchFragment" />
+    </fragment>
 </navigation>

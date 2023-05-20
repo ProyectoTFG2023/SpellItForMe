@@ -22,14 +22,12 @@ class HomeFragment : Fragment() {
     private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding!!
     private val registeredUserViewModel : RegisteredUserViewModel by activityViewModels()
-    private val gearViewModel: GearViewModel by activityViewModels()
-    private val skillViewModel: SkillViewModel by activityViewModels()
     //TODO: NO FUNCIONAL, PENDIENTE DE REVISIÓN
     //Con la siguiente variable, controlaremos el funcionamiento del botón de vuelta atrás de Android, y podremos decidir la función que realizará
     private val onBackPressedCallback : OnBackPressedCallback = object : OnBackPressedCallback(true){
         override fun handleOnBackPressed() {
-            //confirmSignOff()
-            //Log.d("SpellItForMe_Debug", " -> " + registeredUserViewModel.checkRegisteredUser.value.toString())
+            confirmSignOff()
+            Log.d("SpellItForMe_Debug", " -> " + registeredUserViewModel.checkRegisteredUser.value.toString())
         }
     }
 
@@ -48,10 +46,8 @@ class HomeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-
-        binding.btTest.setOnClickListener(){
-            val action = HomeFragmentDirections.actionHomeFragmentToGearSearchFragment()
+        binding.button.setOnClickListener(){
+            val action = HomeFragmentDirections.actionHomeFragmentToEquipmentSetFragment()
             findNavController().navigate(action)
         }
     }

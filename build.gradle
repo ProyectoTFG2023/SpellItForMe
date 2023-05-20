@@ -1,4 +1,8 @@
 buildscript {
+    repositories {
+        //Utilizado para acceder a Gson, que es requerido para almacenar datos complejos en la base de datos
+        google()
+    }
     dependencies {
         //Dependencia requerida para el intercambio de argumentos entre los múltiples fragmentos de la aplicación
         classpath "androidx.navigation:navigation-safe-args-gradle-plugin:2.5.3"
