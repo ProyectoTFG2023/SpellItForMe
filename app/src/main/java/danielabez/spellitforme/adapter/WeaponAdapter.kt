@@ -9,15 +9,18 @@ import danielabez.spellitforme.databinding.ItemGearBinding
 import danielabez.spellitforme.databinding.ItemWeaponBinding
 import danielabez.spellitforme.model.Gear
 import danielabez.spellitforme.model.Weapon
+import danielabez.spellitforme.tools.IconHelper
+import danielabez.spellitforme.viewModel.WeaponViewModel
 
 class WeaponAdapter : RecyclerView.Adapter<WeaponAdapter.WeaponViewHolder>() {
     var weaponList: List<Weapon>? = null
+    var onWeaponClickListener: OnWeaponClickListener? = null
 
-    //TODO: PENDIENTE DE AÑADIR FUNCIONALIDAD
     inner class WeaponViewHolder(val binding: ItemWeaponBinding): RecyclerView.ViewHolder(binding.root) {
         init {
             binding.root.setOnClickListener(){
                 val chosenWeapon = weaponList?.get(this.adapterPosition)
+                onWeaponClickListener?.onWeaponClick(chosenWeapon)
             }
         }
     }
@@ -44,19 +47,18 @@ class WeaponAdapter : RecyclerView.Adapter<WeaponAdapter.WeaponViewHolder>() {
                 binding.tvWeaponPhysAttack.text = physAttack.toString()
                 binding.tvCritrate.text = "$critRate%"
 
-                if(fireAttack != null){
-                    binding.tvWeaponElementalAttack.text = fireAttack.toString()
-                    binding.ivElementalAttack.setImageResource(R.mipmap.ic_fire_attribute_foreground)
-                }else if(iceAttack != null){
-                    binding.tvWeaponElementalAttack.text = iceAttack.toString()
-                    binding.ivElementalAttack.setImageResource(R.mipmap.ic_ice_attribute_foreground)
-                }else if (thunderAttack != null){
-                    binding.tvWeaponElementalAttack.text = thunderAttack.toString()
-                    binding.ivElementalAttack.setImageResource(R.mipmap.ic_thunder_attribute_foreground)
-                }
-
                 if(fireAttack != null || iceAttack != null || thunderAttack != null){
                     binding.clytElementalAttackAttribute.visibility = View.VISIBLE
+                    if(fireAttack != null){
+                        binding.tvWeaponElementalAttack.text = fireAttack.toString()
+                        binding.ivElementalAttack.setImageResource(R.mipmap.ic_fire_attribute_foreground)
+                    }else if(iceAttack != null){
+                        binding.tvWeaponElementalAttack.text = iceAttack.toString()
+                        binding.ivElementalAttack.setImageResource(R.mipmap.ic_ice_attribute_foreground)
+                    }else if (thunderAttack != null){
+                        binding.tvWeaponElementalAttack.text = thunderAttack.toString()
+                        binding.ivElementalAttack.setImageResource(R.mipmap.ic_thunder_attribute_foreground)
+                    }
                 } else{
                     binding.clytElementalAttackAttribute.visibility = View.GONE
                 }
@@ -67,42 +69,21 @@ class WeaponAdapter : RecyclerView.Adapter<WeaponAdapter.WeaponViewHolder>() {
                     binding.tvNumberOfSlots.text = "x$slots"
                 }
 
-                //TODO: Hacer más iconos a cambiar
                 if(skills.isNotEmpty()){
                     binding.llytWeaponBottomMarginDummy.visibility = View.GONE
                     binding.llytWeaponSkills.visibility = View.VISIBLE
                     binding.tvWeaponSkillOne.text = skills[0].name
-                    //binding.clytGearSkillOne.visibility = View.VISIBLE
-                    binding.ivWeaponSkillOne.setImageResource(
-                        when(skills[0].type){
-                            "PhysDefense" -> R.mipmap.ic_phys_defense_up_skill_foreground
-                            else -> R.mipmap.ic_phys_attack_skill_foreground
-                        }
-                    )
+                    IconHelper.setSkillIcon(binding.ivWeaponSkillOne, skills[0].type)
 
                     if(skills.size == 2){
                         binding.clytWeaponSkillTwo.visibility = View.VISIBLE
                         binding.tvWeaponSkillTwo.text = skills[1].name
-                        binding.ivWeaponSkillTwo.setImageResource(
-                            when(skills[1].type){
-                                "PhysDefense" -> R.mipmap.ic_phys_defense_up_skill_foreground
-                                else -> R.mipmap.ic_phys_attack_skill_foreground
-                            }
-                        )
+                        IconHelper.setSkillIcon(binding.ivWeaponSkillTwo, skills[1].type)
                     }
                 }
 
-                //TODO: CAMBIAR PARA QUE SALGAN ICONOS DISTINTOS SEGÚN EL TIPO DE EQUIPAMIENTO
                 //Mostraremos un icono según el tipo de equipamiento y la rareza que tenga
-                binding.ivWeapon.setImageResource(
-                    when (rarity) {
-                        "a_Common" -> R.mipmap.ic_helmet_common_foreground
-                        "b_Uncommon" -> R.mipmap.ic_helmet_uncommon_foreground
-                        "c_Rare" -> R.mipmap.ic_helmet_rare_foreground
-                        "d_Mythical" -> R.mipmap.ic_helmet_mythical_foreground
-                        else -> R.mipmap.ic_helmet_legendary_foreground
-                    }
-                )
+                IconHelper.setWeaponIcon(binding.ivWeapon, type, rarity)
             }
         }
     }
@@ -118,5 +99,9 @@ class WeaponAdapter : RecyclerView.Adapter<WeaponAdapter.WeaponViewHolder>() {
     fun updateList(newList: List<Weapon>){
         weaponList = newList
         notifyDataSetChanged()
+    }
+
+    interface OnWeaponClickListener{
+        fun onWeaponClick(weapon: Weapon?)
     }
 }

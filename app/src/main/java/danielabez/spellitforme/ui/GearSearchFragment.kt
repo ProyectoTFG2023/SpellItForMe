@@ -1,7 +1,5 @@
 package danielabez.spellitforme.ui
 
-import android.graphics.Color
-import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -9,17 +7,15 @@ import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.SearchView
-import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import danielabez.spellitforme.R
 import danielabez.spellitforme.adapter.GearAdapter
-import danielabez.spellitforme.adapter.WeaponAdapter
 import danielabez.spellitforme.databinding.FragmentGearSearchBinding
-import danielabez.spellitforme.databinding.FragmentLoginBinding
 import danielabez.spellitforme.model.Gear
 import danielabez.spellitforme.viewModel.GearViewModel
 
@@ -45,6 +41,14 @@ class GearSearchFragment : Fragment() {
         gearViewModel.gearListLiveData.observe(viewLifecycleOwner, Observer<List<Gear>>{ list ->
             gearAdapter.updateList(list)
         })
+
+        gearAdapter.onGearClickListener = object : GearAdapter.OnGearClickListener {
+            override fun onGearClick(gear: Gear?) {
+                gearViewModel.updateChosenGear(gear!!)
+                findNavController().popBackStack()
+            }
+        }
+
         initializeSearchView()
         initializeRaritySpinner()
     }
@@ -128,6 +132,4 @@ class GearSearchFragment : Fragment() {
             }
         }
     }
-
-
 }

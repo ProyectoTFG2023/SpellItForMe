@@ -6,6 +6,7 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
+import danielabez.spellitforme.model.Accessory
 import danielabez.spellitforme.model.RegisteredUser
 import danielabez.spellitforme.repository.RegisteredUserRepository
 import kotlinx.coroutines.Dispatchers
@@ -62,5 +63,11 @@ class RegisteredUserViewModel(app: Application) : AndroidViewModel(app) {
 
     fun emptyCheckRegisteredUser(){
         checkUsernameInUse.postValue(null)
+    }
+
+    fun getUserWithAllGeneralAndOwnedAccesories(liveData: MutableLiveData<List<Accessory>>) {
+        viewModelScope.launch (Dispatchers.IO){
+            liveData.postValue(repository.getUserWithAccessories(checkRegisteredUser.value?.id!!).first().accesories)
+        }
     }
 }

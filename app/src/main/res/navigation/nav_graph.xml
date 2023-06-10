@@ -30,6 +30,9 @@
         <action
             android:id="@+id/action_HomeFragment_to_equipmentSetFragment"
             app:destination="@id/EquipmentSetFragment" />
+        <action
+            android:id="@+id/action_HomeFragment_to_CharacterCreationFragment"
+            app:destination="@id/CharacterCreationFragment" />
     </fragment>
     <fragment
         android:id="@+id/GearSearchFragment"
@@ -56,5 +59,53 @@
         <action
             android:id="@+id/action_equipmentSetFragment_to_weaponSearchFragment"
             app:destination="@id/WeaponSearchFragment" />
+        <action
+            android:id="@+id/action_EquipmentSetFragment_to_SkillSearchFragment"
+            app:destination="@id/SkillSearchFragment" />
+        <argument
+            android:name="isANewSet"
+            app:argType="boolean" />
+        <argument
+            android:name="character"
+            app:argType="danielabez.spellitforme.model.CharacterSet"
+            app:nullable="true" />
+        <action
+            android:id="@+id/action_EquipmentSetFragment_to_AccessorySearchFragment"
+            app:destination="@id/AccessorySearchFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/CharacterCreationFragment"
+        android:name="danielabez.spellitforme.ui.CharacterCreationFragment"
+        android:label="fragment_character_creation"
+        tools:layout="@layout/fragment_character_creation" >
+        <action
+            android:id="@+id/action_CharacterCreationFragment_to_EquipmentSetFragment"
+            app:destination="@id/EquipmentSetFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/SkillSearchFragment"
+        android:name="danielabez.spellitforme.ui.SkillSearchFragment"
+        android:label="fragment_skill_search"
+        tools:layout="@layout/fragment_skill_search" >
+        <argument
+            android:name="positionToBeSetOn"
+            app:argType="integer" />
+    </fragment>
+    <fragment
+        android:id="@+id/AccessorySearchFragment"
+        android:name="danielabez.spellitforme.ui.AccessorySearchFragment"
+        android:label="fragment_accessory_search"
+        tools:layout="@layout/fragment_accessory_search" >
+        <action
+            android:id="@+id/action_AccessorySearchFragment_to_AccessoryCreationFragment"
+            app:destination="@id/AccessoryCreationFragment" />
+        <argument
+            android:name="positionToBeSetOn"
+            app:argType="integer" />
+    </fragment>
+    <fragment
+        android:id="@+id/AccessoryCreationFragment"
+        android:name="danielabez.spellitforme.ui.AccessoryCreationFragment"
+        android:label="fragment_accessory_creation"
+        tools:layout="@layout/fragment_accessory_creation" />
 </navigation>

@@ -1,0 +1,432 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/cvGearOnSet"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:cardCornerRadius="16dp"
+    app:cardElevation="4dp"
+    app:cardUseCompatPadding="true">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/clAccessoryOnSet"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/tvAccessoryOnSetName"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="5dp"
+            android:textAlignment="center"
+            android:textSize="17sp"
+            app:layout_constraintEnd_toStartOf="@+id/clytAccessoryOnSetSlots"
+            app:layout_constraintStart_toEndOf="@+id/ivAccessoryOnSet"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="Accessory Name" />
+
+        <ImageView
+            android:id="@+id/ivAccessoryOnSet"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginBottom="4dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/ivAccessoryOnSetRemove"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            android:visibility="gone"
+            app:layout_constraintEnd_toEndOf="@+id/ivAccessoryOnSet"
+            app:layout_constraintStart_toStartOf="@+id/ivAccessoryOnSet"
+            app:layout_constraintTop_toBottomOf="@+id/ivAccessoryOnSet"
+            app:srcCompat="@android:drawable/ic_menu_delete" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/clytAccessoryOnSetSlots"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="10dp"
+            android:visibility="gone"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/tvAccessoryOnSetName">
+
+            <ImageView
+                android:id="@+id/ivAccessoryOnSetSlots"
+                android:layout_width="23dp"
+                android:layout_height="23dp"
+                android:visibility="visible"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@mipmap/ic_gem_slot_foreground" />
+
+            <TextView
+                android:id="@+id/tvAccessoryOnSetNumberOfSlots"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="2dp"
+                android:visibility="visible"
+                app:layout_constraintBottom_toBottomOf="@+id/ivAccessoryOnSetSlots"
+                app:layout_constraintStart_toEndOf="@+id/ivAccessoryOnSetSlots"
+                app:layout_constraintTop_toTopOf="@+id/ivAccessoryOnSetSlots"
+                tools:text="x1" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <LinearLayout
+            android:id="@+id/llytAccessoryOnSetAttributes"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="7dp"
+            android:layout_marginEnd="10dp"
+            android:orientation="horizontal"
+            android:visibility="gone"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/tvAccessoryOnSetName"
+            app:layout_constraintTop_toBottomOf="@+id/tvAccessoryOnSetName">
+
+            <LinearLayout
+                android:id="@+id/llytAccessoryOnSetDefenseAttributes"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:id="@+id/llytFirstInnerAccessoryOnSetDefenseAttributes"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:orientation="horizontal">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/clytAccessoryOnSetPhysDefense"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginEnd="1dp"
+                        android:layout_weight="1">
+
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:id="@+id/clytAccessoryOnSetInnerPhysDefense"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent">
+
+                            <ImageView
+                                android:id="@+id/ivAccessoryOnSetPhysDefense"
+                                android:layout_width="23dp"
+                                android:layout_height="23dp"
+                                android:layout_marginStart="5dp"
+                                android:layout_marginTop="5dp"
+                                android:layout_marginBottom="5dp"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent"
+                                app:srcCompat="@mipmap/ic_phys_defense_foreground" />
+
+                            <TextView
+                                android:id="@+id/tvAccessoryOnSetPhysDefense"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="5dp"
+                                android:layout_marginEnd="5dp"
+                                app:layout_constraintBottom_toBottomOf="@id/ivAccessoryOnSetPhysDefense"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toEndOf="@+id/ivAccessoryOnSetPhysDefense"
+                                app:layout_constraintTop_toTopOf="@id/ivAccessoryOnSetPhysDefense"
+                                tools:text="PhysDef" />
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/clytAccessoryOnSetFireDefense"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_weight="1"
+                        android:visibility="visible">
+
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:id="@+id/clytAccessoryOnSetInnerFireDefense"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent">
+
+                            <ImageView
+                                android:id="@+id/ivAccessoryOnSetFireDefense"
+                                android:layout_width="23dp"
+                                android:layout_height="23dp"
+                                android:layout_marginStart="5dp"
+                                android:layout_marginTop="5dp"
+                                android:layout_marginBottom="5dp"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent"
+                                app:srcCompat="@mipmap/ic_fire_attribute_foreground" />
+
+                            <TextView
+                                android:id="@+id/tvAccessoryOnSetFireDefense"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="5dp"
+                                android:layout_marginEnd="5dp"
+                                app:layout_constraintBottom_toBottomOf="@id/ivAccessoryOnSetFireDefense"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toEndOf="@id/ivAccessoryOnSetFireDefense"
+                                app:layout_constraintTop_toTopOf="@id/ivAccessoryOnSetFireDefense"
+                                tools:text="FireDef" />
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:id="@+id/llytSecondInnerAccessoryOnSetDefenseAttributes"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="1dp"
+                    android:layout_weight="1"
+                    android:orientation="horizontal">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/clytAccessoryOnSetIceDefense"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginEnd="1dp"
+                        android:layout_weight="1"
+                        android:visibility="visible">
+
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:id="@+id/clytAccessoryOnSetInnerIceDefense"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent">
+
+                            <ImageView
+                                android:id="@+id/ivAccessoryOnSetIceDefense"
+                                android:layout_width="23dp"
+                                android:layout_height="23dp"
+                                android:layout_marginStart="5dp"
+                                android:layout_marginTop="5dp"
+                                android:layout_marginBottom="5dp"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent"
+                                app:srcCompat="@mipmap/ic_ice_attribute_foreground" />
+
+                            <TextView
+                                android:id="@+id/tvAccessoryOnSetIceDefense"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="5dp"
+                                android:layout_marginEnd="5dp"
+                                app:layout_constraintBottom_toBottomOf="@id/ivAccessoryOnSetIceDefense"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toEndOf="@+id/ivAccessoryOnSetIceDefense"
+                                app:layout_constraintTop_toTopOf="@+id/ivAccessoryOnSetIceDefense"
+                                tools:text="IceDef" />
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/clytAccessoryOnSetThunderDefense"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_weight="1"
+                        android:visibility="visible">
+
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:id="@+id/clytAccessoryOnSetInnerThunderDefense"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent">
+
+                            <ImageView
+                                android:id="@+id/ivAccessoryOnSetThunderDefense"
+                                android:layout_width="23dp"
+                                android:layout_height="23dp"
+                                android:layout_marginStart="5dp"
+                                android:layout_marginTop="5dp"
+                                android:layout_marginBottom="5dp"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent"
+                                app:srcCompat="@mipmap/ic_thunder_attribute_foreground" />
+
+                            <TextView
+                                android:id="@+id/tvAccessoryOnSetThunderDefense"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="5dp"
+                                android:layout_marginEnd="5dp"
+                                app:layout_constraintBottom_toBottomOf="@+id/ivAccessoryOnSetThunderDefense"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toEndOf="@+id/ivAccessoryOnSetThunderDefense"
+                                app:layout_constraintTop_toTopOf="@+id/ivAccessoryOnSetThunderDefense"
+                                tools:text="ThunDef" />
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/llytAccessoryOnSetSkills"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_margin="5dp"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/ivAccessoryOnSet"
+                app:layout_constraintTop_toBottomOf="@+id/llytAccessoryOnSetDefenseAttributes">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/clytAccessoryOnSetSkillOne"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_margin="6dp"
+                    android:layout_weight="1">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/clytAccessoryOnSetInnerSkillOne"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent">
+
+                        <ImageView
+                            android:id="@+id/ivAccessoryOnSetSkillOne"
+                            android:layout_width="23dp"
+                            android:layout_height="23dp"
+                            android:layout_marginTop="5dp"
+                            android:layout_marginBottom="5dp"
+                            android:foregroundGravity="center_horizontal"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:srcCompat="@mipmap/ic_phys_defense_foreground" />
+
+                        <TextView
+                            android:id="@+id/tvAccessoryOnSetSkillOne"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="7dp"
+                            android:gravity="center_horizontal"
+                            app:layout_constraintBottom_toBottomOf="@+id/ivAccessoryOnSetSkillOne"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toEndOf="@+id/ivAccessoryOnSetSkillOne"
+                            app:layout_constraintTop_toTopOf="@+id/ivAccessoryOnSetSkillOne"
+                            tools:text="Skill One" />
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/clytAccessoryOnSetSkillTwo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_margin="6dp"
+                    android:layout_weight="1"
+                    android:visibility="gone">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/clytAccessoryOnSetInnerSkillTwo"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent">
+
+                        <ImageView
+                            android:id="@+id/ivAccessoryOnSetSkillTwo"
+                            android:layout_width="23dp"
+                            android:layout_height="23dp"
+                            android:layout_marginTop="5dp"
+                            android:layout_marginBottom="5dp"
+                            android:foregroundGravity="center_horizontal"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:srcCompat="@mipmap/ic_phys_defense_foreground" />
+
+                        <TextView
+                            android:id="@+id/tvAccessoryOnSetSkillTwo"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="7dp"
+                            android:foregroundGravity="center_horizontal"
+                            app:layout_constraintBottom_toBottomOf="@+id/ivAccessoryOnSetSkillTwo"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toEndOf="@+id/ivAccessoryOnSetSkillTwo"
+                            app:layout_constraintTop_toTopOf="@+id/ivAccessoryOnSetSkillTwo"
+                            tools:text="Skill Two" />
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/llytAccessoryOnSetNoDataBottomMarginDummy"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="7dp"
+            android:layout_marginBottom="8dp"
+            android:layout_weight="1"
+            android:orientation="horizontal"
+            android:visibility="visible"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/ivAccessoryOnSet" />
+
+        <LinearLayout
+            android:id="@+id/llytAccessoryOnSetBottomMarginDummy"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="7dp"
+            android:layout_marginBottom="8dp"
+            android:layout_weight="1"
+            android:orientation="horizontal"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/llytAccessoryOnSetAttributes" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.cardview.widget.CardView>

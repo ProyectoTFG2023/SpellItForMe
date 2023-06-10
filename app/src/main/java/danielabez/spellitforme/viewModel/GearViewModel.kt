@@ -15,6 +15,10 @@ class GearViewModel(app: Application) : AndroidViewModel(app) {
         MutableLiveData<List<Gear>>()
     }
 
+    val chosenGear : MutableLiveData<Gear> by lazy {
+        MutableLiveData<Gear>()
+    }
+
     init {
         GearRepository(getApplication<Application>().applicationContext)
         repository = GearRepository
@@ -32,30 +36,29 @@ class GearViewModel(app: Application) : AndroidViewModel(app) {
 
     fun getAllGearByType(pType: String) {
         viewModelScope.launch (Dispatchers.IO){
-            //Log.d("SpellItForMe_Debug", repository.getAllGearByType(pType).toString())
             gearListLiveData.postValue(repository.getAllGearByType(pType))
         }
     }
 
     fun getAllGearByTypeLike(pType: String, pWrittenString: String) {
         viewModelScope.launch (Dispatchers.IO){
-            //Log.d("SpellItForMe_Debug", repository.getAllGearByTypeLike(pType, pWrittenString).toString())
             gearListLiveData.postValue(repository.getAllGearByTypeLike(pType, pWrittenString))
         }
     }
 
     fun getAllGearByTypeAndRarity(pType: String, pRarity: String){
         viewModelScope.launch (Dispatchers.IO){
-            //Log.d("SpellItForMe_Debug", repository.getAllGearByTypeAndRarity(pType, pRarity).toString())
             gearListLiveData.postValue(repository.getAllGearByTypeAndRarity(pType, pRarity))
         }
     }
 
     fun getAllGearByTypeAndRarityLike(pType: String, pRarity: String, pWrittenString: String){
         viewModelScope.launch (Dispatchers.IO){
-            //Log.d("SpellItForMe_Debug", repository.getAllGearByTypeAndRarityLike(pType, pRarity, pWrittenString).toString())
             gearListLiveData.postValue(repository.getAllGearByTypeAndRarityLike(pType, pRarity, pWrittenString))
         }
     }
 
+    fun updateChosenGear(gear: Gear) {
+        chosenGear.postValue(gear)
+    }
 }

@@ -8,11 +8,16 @@ import danielabez.spellitforme.model.Weapon
 import danielabez.spellitforme.repository.WeaponRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import java.nio.file.WatchEvent
 
 class WeaponViewModel(app: Application) : AndroidViewModel(app) {
     private val repository: WeaponRepository
     val weaponListLiveData : MutableLiveData<List<Weapon>> by lazy {
         MutableLiveData<List<Weapon>>()
+    }
+
+    val chosenWeapon: MutableLiveData<Weapon> by lazy {
+        MutableLiveData<Weapon>()
     }
 
     init {
@@ -70,5 +75,9 @@ class WeaponViewModel(app: Application) : AndroidViewModel(app) {
         viewModelScope.launch (Dispatchers.IO){
             weaponListLiveData.postValue(repository.getAllWeaponsByTypeAndRarityLike(pType, pRarity, pWrittenString))
         }
+    }
+
+    fun updateChosenWeapon(weapon: Weapon){
+        chosenWeapon.postValue(weapon)
     }
 }

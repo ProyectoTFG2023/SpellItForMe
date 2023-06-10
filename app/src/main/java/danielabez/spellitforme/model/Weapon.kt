@@ -27,23 +27,32 @@ data class Weapon (
     constructor(name: String, type: String, rarity: String, physAttack: Long, critRate: Int):
             this(null, name, type, rarity, physAttack, null, null, null, critRate, listOf(), 0)
 
+    constructor(name: String, type: String, rarity: String, physAttack: Long, fireAttack: Long?, iceAttack: Long?, thunderAttack: Long?, critRate: Int):
+            this(null, name, type, rarity, physAttack, fireAttack, iceAttack, thunderAttack, critRate, listOf(), 0)
+
+    constructor(name: String, type: String, rarity: String, physAttack: Long, critRate: Int, skills: List<Skill>):
+            this(null, name, type, rarity, physAttack, null, null, null, critRate, skills, 0)
+
+    constructor(name: String, type: String, rarity: String, physAttack: Long, fireAttack: Long?, iceAttack: Long?, thunderAttack: Long?, critRate: Int, skills: List<Skill>):
+            this(null, name, type, rarity, physAttack, fireAttack, iceAttack, thunderAttack, critRate, skills, 0)
+
+    constructor(name: String, type: String, rarity: String, physAttack: Long, critRate: Int, slots: Int):
+            this(null, name, type, rarity, physAttack, null, null, null, critRate, listOf(), slots)
+
+    constructor(name: String, type: String, rarity: String, physAttack: Long, fireAttack: Long?, iceAttack: Long?, thunderAttack: Long?, critRate: Int, slots: Int):
+            this(null, name, type, rarity, physAttack, fireAttack, iceAttack, thunderAttack, critRate, listOf(), slots)
+
+    constructor(name: String, type: String, rarity: String, physAttack: Long, critRate: Int, skills: List<Skill>, slots: Int):
+            this(null, name, type, rarity, physAttack, null, null, null, critRate, skills, slots)
+
+    constructor(name: String, type: String, rarity: String, physAttack: Long, fireAttack: Long?, iceAttack: Long?, thunderAttack: Long?, critRate: Int, skills: List<Skill>, slots: Int):
+            this(null, name, type, rarity, physAttack, fireAttack, iceAttack, thunderAttack, critRate, skills, slots)
+
     override fun equals(objeto: Any?): Boolean {
         return (objeto is Weapon) && (this.id == objeto?.id)
     }
 
     override fun toString(): String {
-        return "" + name + " " + type + " " + physAttack + " " + fireAttack + " " + iceAttack + " " + thunderAttack
-    }
-
-    fun modifyFireAttack(pFireAttack: Long?){
-        fireAttack = pFireAttack
-    }
-
-    fun modifyIceAttack(pIceAttack: Long?){
-        iceAttack = pIceAttack
-    }
-
-    fun modifyThunderAttack(pThunderAttack: Long?){
-        thunderAttack = pThunderAttack
+        return "$name $type $physAttack $fireAttack $iceAttack $thunderAttack"
     }
 }

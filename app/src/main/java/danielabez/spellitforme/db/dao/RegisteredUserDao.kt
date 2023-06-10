@@ -4,7 +4,10 @@ import androidx.room.Dao
 import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.Query
+import androidx.room.Transaction
+import danielabez.spellitforme.model.Accessory
 import danielabez.spellitforme.model.RegisteredUser
+import danielabez.spellitforme.model.relations.RegisteredUserWithAccessories
 
 @Dao
 interface RegisteredUserDao {
@@ -22,4 +25,8 @@ interface RegisteredUserDao {
 
     @Query("SELECT * FROM registered_user WHERE username = :pUsername AND password = :pPassword")
     fun getRegisteredUserByUsernameAndPassword(pUsername: String, pPassword: String) : RegisteredUser
+
+    @Transaction
+    @Query("SELECT * FROM registered_user WHERE id = :pUserId")
+    fun getRegisteredUserWithAccesories(pUserId: Long?) : List<RegisteredUserWithAccessories>
 }

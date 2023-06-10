@@ -19,9 +19,17 @@ object SkillRepository {
 
     fun addSkill(skill: Skill) = skillModel.addSkill(skill)
 
-    fun getAllSkills() : List<Skill> = skillModel.getAllSkills()
 
-    fun getSkillById(pId: Long) : Skill = skillModel.getSkillById(pId)
 
-    fun getSkillByName(pName: String) : Skill = skillModel.getSkillByName(pName)
+    fun getAllSkills() = skillModel.getAllSkills()
+
+    fun getAllSkillsByNameLike(pWrittenString: String) = skillModel.getAllSkillsByNameLike(pWrittenString)
+
+    fun getAllSkillsByType(pType: String) = skillModel.getAllSkillsByType(pType)
+
+    fun getAllSkillsByTypeLike(pType: String) = skillModel.getAllSkillsByTypeLike(pType)
+
+    fun getAllSkillsByTypeAndNameLike(pType: String, pWrittenString: String) = skillModel.getAllSkillsByTypeAndNameLike(pType, pWrittenString)
+
+    fun getAllSkillsByTypeLikeAndNameLike(pType: String, pWrittenString: String) = skillModel.getAllSkillsByTypeLikeAndNameLike(pType, pWrittenString)
 }

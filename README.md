@@ -26,3 +26,6 @@ iconos representativos y arreglos de los iconos previamente realizados
 (20/05/2023) [Commit #11] Añadida la búsqueda de armas, con su correspondiente plantilla de visualización de elementos visuales. Mejoras visuales en la búsqueda de piezas
 de equipamiento, así como la ordenación para una muestra más cómoda de la información en ambas búsquedas. Además, se ha modificado la estructura de los fragmentos tratados
 en la aplicación para asemejarse a la versión final que tendrá la aplicación, editando todos los argumentos y la navegación entre ellos de la forma deseada
+
+(11/06/2023) [Commit #12] Incluida la pantalla principal de editado de sets de equipamiento de la aplicación a un 99% de funcionalidad, con actualizado en tiempo real y recálculo
+de atributos respecto a los cambios que realice el usuario en cada uno de los clicks permitidos en la misma pantalla

@@ -20,14 +20,25 @@
 
     </SearchView>
 
+    <TextView
+        android:id="@+id/tvGearSearchRarityFilterInfo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="18dp"
+        android:text="@string/tvGearSearchRarityFilterInfo"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="@+id/spGearSearchRarityFilter"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/spGearSearchRarityFilter" />
+
     <Spinner
         android:id="@+id/spGearSearchRarityFilter"
         android:layout_width="0dp"
         android:layout_height="50dp"
-        android:layout_marginStart="100dp"
+        android:layout_marginStart="15dp"
         android:layout_marginTop="10dp"
         app:layout_constraintEnd_toEndOf="@+id/svGearNameFilter"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/tvGearSearchRarityFilterInfo"
         app:layout_constraintTop_toBottomOf="@+id/svGearNameFilter" />
 
     <androidx.recyclerview.widget.RecyclerView

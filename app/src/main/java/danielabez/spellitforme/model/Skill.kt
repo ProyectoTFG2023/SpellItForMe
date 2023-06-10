@@ -14,17 +14,20 @@ data class Skill (
     var name: String,
     var type: String,
     var description: String,
+    var specificDescription: List<String>,
+    var rankValueModifiers : List<Float>,
     var maxRank: Int
 ): Parcelable {
-    constructor() : this(null, "", "", "", 0)
+    constructor() : this(null, "", "", "", listOf(), listOf(), 0)
 
-    constructor(name: String, description: String, type: String, maxRank: Int) : this(null, name, description, type, maxRank)
+    constructor(name: String, type: String, description: String, specificDescription: List<String>, rankValueModifiers: List<Float>, maxRank: Int) :
+            this(null, name, type, description, specificDescription, rankValueModifiers, maxRank)
 
     override fun equals(objeto: Any?): Boolean {
         return (objeto is Skill) && (this.id == objeto?.id)
     }
 
     override fun toString(): String {
-        return "" + name + ": " + description + ", up to level " + maxRank
+        return "$name: $description, up to level $maxRank"
     }
 }

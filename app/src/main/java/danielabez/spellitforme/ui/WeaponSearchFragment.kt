@@ -13,6 +13,7 @@ import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import danielabez.spellitforme.R
@@ -44,9 +45,17 @@ class WeaponSearchFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         initializeRecyclerView()
+        weaponAdapter.onWeaponClickListener = object : WeaponAdapter.OnWeaponClickListener {
+            override fun onWeaponClick(weapon: Weapon?) {
+                weaponViewModel.updateChosenWeapon(weapon!!)
+                findNavController().popBackStack()
+            }
+        }
+
         weaponViewModel.weaponListLiveData.observe(viewLifecycleOwner, Observer<List<Weapon>>{ list ->
             weaponAdapter.updateList(list)
         })
+
         initializeSearchView()
         initializeTypeSpinner()
         initializeRaritySpinner()

@@ -1,16 +1,69 @@
 package danielabez.spellitforme.ui
 
+import android.app.AlertDialog
+import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
+import danielabez.spellitforme.R
+import danielabez.spellitforme.adapter.AccessoryAdapter
+import danielabez.spellitforme.adapter.AccessoryOnSetAdapter
+import danielabez.spellitforme.adapter.GearOnSetAdapter
+import danielabez.spellitforme.adapter.SkillOnSetAdapter
+import danielabez.spellitforme.adapter.SlotOnSetAdapter
+import danielabez.spellitforme.adapter.WeaponOnSetAdapter
 import danielabez.spellitforme.databinding.FragmentEquipmentSetBinding
+import danielabez.spellitforme.model.Accessory
+import danielabez.spellitforme.model.CharacterSet
+import danielabez.spellitforme.model.CharacterStats
+import danielabez.spellitforme.model.Gear
+import danielabez.spellitforme.model.Skill
+import danielabez.spellitforme.model.SkillOnSet
+import danielabez.spellitforme.model.Weapon
+import danielabez.spellitforme.tools.IconHelper
+import danielabez.spellitforme.viewModel.AccessoryViewModel
+import danielabez.spellitforme.viewModel.GearViewModel
+import danielabez.spellitforme.viewModel.SkillViewModel
+import danielabez.spellitforme.viewModel.WeaponViewModel
 
 class EquipmentSetFragment : Fragment() {
     private var _binding: FragmentEquipmentSetBinding? = null
     private val binding get() = _binding!!
+    private val weaponViewModel : WeaponViewModel by activityViewModels()
+    private val gearViewModel : GearViewModel by activityViewModels()
+    private val accessoryViewModel : AccessoryViewModel by activityViewModels()
+    private val skillViewModel : SkillViewModel by activityViewModels()
+    var weaponOnSetAdapter = WeaponOnSetAdapter()
+    var gearOnSetAdapter = GearOnSetAdapter()
+    var accessoryOnSetAdapter = AccessoryOnSetAdapter()
+    var slotOnSetAdapter = SlotOnSetAdapter()
+    var skillOnSetAdapter = SkillOnSetAdapter()
+
+    private var currentSlots : MutableList<Skill?> = mutableListOf()
+
+    private val currentWeapon : MutableLiveData<Weapon?> by lazy {
+        MutableLiveData<Weapon?>()
+    }
+    private val currentGearList : MutableLiveData<List<Gear?>> by lazy {
+        MutableLiveData<List<Gear?>>()
+    }
+    private val currentAccessoryList : MutableLiveData<List<Accessory?>> by lazy {
+        MutableLiveData<List<Accessory?>>()
+    }
+    private val currentSlottedSkills : MutableLiveData<List<Skill?>> by lazy {
+        MutableLiveData<List<Skill?>>()
+    }
+
+    //TODO("Llevar el control de si se entra en modo edición o en modo de creación de un nuevo set")
+    private var currentCharacterSet : CharacterSet = CharacterSet("Joe", "Rogue", CharacterStats(90L, 80L, 80L, 80L, 120L))
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -27,34 +80,466 @@ class EquipmentSetFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.btTest1.setOnClickListener(){
-            val action = EquipmentSetFragmentDirections.actionEquipmentSetFragmentToGearSearchFragment("Headgear")
-            findNavController().navigate(action)
+        weaponViewModel.chosenWeapon.postValue(null)
+        gearViewModel.chosenGear.postValue(null)
+        accessoryViewModel.chosenAccessory.postValue(null)
+        skillViewModel.chosenSkill.postValue(null)
+
+        //Inicialización de los RecyclerViews y el comportamiento de los eventos de clicks en los elementos de los mismos
+        initializeRecyclerViews()
+
+        weaponOnSetAdapter.onWeaponOnSetClickListener = object : WeaponOnSetAdapter.OnWeaponOnSetClickListener {
+            override fun onWeaponOnSetImageClick() {
+                val action = EquipmentSetFragmentDirections.actionEquipmentSetFragmentToWeaponSearchFragment()
+                findNavController().navigate(action)
+            }
+
+            override fun onWeaponOnSetRemoveClick(weaponPosition: Int) {
+                currentWeapon.postValue(null)
+                Log.d("Test_Borrado_Arma", "Se ha borrado el arma, y la actualmente equipada es : ${currentWeapon.value}")
+            }
         }
-        binding.btTest2.setOnClickListener(){
-            val action = EquipmentSetFragmentDirections.actionEquipmentSetFragmentToGearSearchFragment("Torso")
-            findNavController().navigate(action)
+
+        gearOnSetAdapter.onGearOnSetClickListener = object : GearOnSetAdapter.OnGearOnSetClickListener  {
+            override fun onGearOnSetImageClick(gear: Gear?, gearPosition: Int) {
+                if(gear != null){
+                    val action = EquipmentSetFragmentDirections.actionEquipmentSetFragmentToGearSearchFragment(gear.type)
+                    findNavController().navigate(action)
+                }
+                else{
+                    val switcharoo = when(gearPosition){
+                        0 -> "Headgear"
+                        1 -> "Torso"
+                        2 -> "Handwear"
+                        3 -> "Belt"
+                        else -> "Footwear"
+                    }
+
+                    val action = EquipmentSetFragmentDirections.actionEquipmentSetFragmentToGearSearchFragment(switcharoo)
+                    findNavController().navigate(action)
+                }
+            }
+
+            override fun onGearOnSetRemoveClick(gearPosition: Int) {
+                currentCharacterSet.equipmentPieces[gearPosition] = null
+                currentGearList.postValue(currentCharacterSet.equipmentPieces)
+                obtainCurrentSlots()
+                Log.d("Test_Borrado_Equipamiento", "Se ha borrado una pieza de equipamiento, el actual es: ${currentGearList.value.toString()}")
+            }
         }
-        binding.btTest3.setOnClickListener(){
-            val action = EquipmentSetFragmentDirections.actionEquipmentSetFragmentToGearSearchFragment("Handwear")
-            findNavController().navigate(action)
+
+        accessoryOnSetAdapter.onAccessoryOnSetClickListener = object : AccessoryOnSetAdapter.OnAccessoryOnSetClickListener{
+            override fun onAccessoryOnSetImageClick(accessory: Accessory?, accessoryPosition: Int) {
+                val action = EquipmentSetFragmentDirections.actionEquipmentSetFragmentToAccessorySearchFragment(accessoryPosition)
+                findNavController().navigate(action)
+            }
+
+            override fun onAccessoryOnSetRemoveClick(accessoryPosition: Int) {
+                currentCharacterSet.equippedAccessories[accessoryPosition] = null
+                currentAccessoryList.postValue(currentCharacterSet.equippedAccessories)
+            }
         }
-        binding.btTest4.setOnClickListener(){
-            val action = EquipmentSetFragmentDirections.actionEquipmentSetFragmentToGearSearchFragment("Belt")
-            findNavController().navigate(action)
+
+        slotOnSetAdapter.onSlotOnSetClickListener = object : SlotOnSetAdapter.OnSlotOnSetClickListener {
+            override fun onSlotOnSetClick(position: Int) {
+                val action = EquipmentSetFragmentDirections.actionEquipmentSetFragmentToSkillSearchFragment(position)
+                findNavController().navigate(action)
+            }
+
+            override fun onSlotOnSetRemoveClick(position: Int) {
+                currentSlots[position] = null
+                currentSlottedSkills.postValue(currentSlots)
+                Log.d("Test_Borrado_Huecos", "Se ha borrado una habilidad de uno de los huecos, ahora mismo son de la siguiente manera: ${currentSlottedSkills.value.toString()}")
+            }
         }
-        binding.btTest5.setOnClickListener(){
-            val action = EquipmentSetFragmentDirections.actionEquipmentSetFragmentToGearSearchFragment("Footwear")
-            findNavController().navigate(action)
+
+        skillOnSetAdapter.onSkillOnSetClickListener = object : SkillOnSetAdapter.OnSkillOnSetClickListener {
+            override fun onSkillOnSetImageClick(skillOnSet: SkillOnSet?) {
+                showSkillInfo(skillOnSet!!)
+            }
         }
-        binding.btTest6.setOnClickListener(){
-            val action = EquipmentSetFragmentDirections.actionEquipmentSetFragmentToWeaponSearchFragment()
-            findNavController().navigate(action)
-        }
+
+
+        //Declaración de observadores para mostrar los cambios en tiempo real realizados sobre el equipamiento
+        weaponViewModel.chosenWeapon.observe(viewLifecycleOwner, Observer<Weapon?>{ weapon ->
+            if(weapon != null){
+                currentCharacterSet.equippedWeapon = weapon
+                currentWeapon.postValue(currentCharacterSet.equippedWeapon)
+            }
+        })
+
+        gearViewModel.chosenGear.observe(viewLifecycleOwner, Observer<Gear?>{ gear ->
+            if(gear != null){
+                when(gear.type){
+                    "Headgear" -> currentCharacterSet.equipmentPieces[0] = gear
+                    "Torso" -> currentCharacterSet.equipmentPieces[1] = gear
+                    "Handwear" -> currentCharacterSet.equipmentPieces[2] = gear
+                    "Belt" -> currentCharacterSet.equipmentPieces[3] = gear
+                    else -> currentCharacterSet.equipmentPieces[4] = gear
+                }
+                currentGearList.postValue(currentCharacterSet.equipmentPieces)
+            }
+        })
+
+        accessoryViewModel.chosenAccessory.observe(viewLifecycleOwner, Observer<Accessory>{accessory ->
+            if(accessory != null){
+                currentCharacterSet.equippedAccessories[accessoryViewModel.chosenPosition.value!!] = accessory
+                currentAccessoryList.postValue(currentCharacterSet.equippedAccessories)
+            }
+        })
+
+        skillViewModel.chosenSkill.observe(viewLifecycleOwner, Observer<Skill?> { skill ->
+            if(skill != null){
+                currentSlots[skillViewModel.chosenPosition.value!!] = skill
+                currentSlottedSkills.postValue(currentSlots)
+            }
+        })
+
+        currentWeapon.observe(viewLifecycleOwner, Observer<Weapon?>{weapon ->
+            weaponOnSetAdapter.updateWeaponList(listOf(weapon))
+            recalculateData()
+        })
+
+        currentGearList.observe(viewLifecycleOwner, Observer<List<Gear?>>{ list ->
+            gearOnSetAdapter.updateList(list)
+            recalculateData()
+        })
+
+        currentAccessoryList.observe(viewLifecycleOwner, Observer<List<Accessory?>>{ list ->
+            accessoryOnSetAdapter.updateList(list)
+            recalculateData()
+        })
+
+        currentSlottedSkills.observe(viewLifecycleOwner, Observer<List<Skill?>>{ list ->
+            currentSlots = list as MutableList<Skill?>
+            slotOnSetAdapter.updateList(list)
+            recalculateData()
+        })
+
+        binding.tvEquipmentCharacterInfoName.text = currentCharacterSet.name
+        binding.tvEquipmentCharacterInfoRole.text = currentCharacterSet.role
+        IconHelper.setRoleIcon(binding.ivEquipmentCharacterRole, currentCharacterSet.role) //TODO: Realizare sta movida
+
+        //TODO: Control de pj nuevo o antiguo
+        //Mensajes enviados a los adaptadores para mostrar las listas vacías del equipamiento, dado que se usa un set de equipamiento nuevo
+        weaponOnSetAdapter.updateWeaponList(listOf(currentCharacterSet.equippedWeapon))
+        gearOnSetAdapter.updateList(currentCharacterSet.equipmentPieces)
+        accessoryOnSetAdapter.updateList(currentCharacterSet.equippedAccessories)
+        slotOnSetAdapter.updateList(listOf())
+        skillOnSetAdapter.updateList(listOf())
+        calculateAttributes()
+        calculateOffensiveStats()
+        calculateDefensiveStats()
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    private fun initializeRecyclerViews(){
+        with(binding.rvEquipmentWeapon){
+            layoutManager = LinearLayoutManager(activity)
+            adapter = weaponOnSetAdapter
+        }
+
+        with(binding.rvEquipmentGear){
+            layoutManager = LinearLayoutManager(activity)
+            adapter = gearOnSetAdapter
+        }
+
+        with(binding.rvEquipmentAccessories){
+            layoutManager = LinearLayoutManager(activity)
+            adapter = accessoryOnSetAdapter
+        }
+
+        with(binding.rvEquipmentSlots){
+            layoutManager = LinearLayoutManager(activity)
+            adapter = slotOnSetAdapter
+        }
+
+        with(binding.rvActualSkills){
+            layoutManager = LinearLayoutManager(activity)
+            adapter = skillOnSetAdapter
+        }
+    }
+
+    private fun recalculateData()  {
+        calculateAttributes()
+        calculateOffensiveStats()
+        calculateDefensiveStats()
+        obtainCurrentSlots()
+        obtainCurrentSkills()
+        applySkills()
+    }
+
+    private fun calculateAttributes(){
+        binding.tvEquipmentHealth.text = currentCharacterSet.stats.health.toString()
+        binding.tvEquipmentSpiritum.text = currentCharacterSet.stats.spiritum.toString()
+        binding.tvEquipmentStrength.text = currentCharacterSet.stats.strength.toString()
+        binding.tvEquipmentAttunement.text = currentCharacterSet.stats.attunement.toString()
+        binding.tvEquipmentCunning.text = currentCharacterSet.stats.cunning.toString()
+        Log.d("Testeo_Recalculo_Atributos", "Atributos recalculados")
+    }
+
+    private fun calculateOffensiveStats(){
+        if(currentWeapon.value != null){
+            binding.tvEquipmentPhysicalAttack.text = currentWeapon.value!!.physAttack.toString()
+
+            if(currentWeapon.value!!.fireAttack != null){
+                binding.clytEquipmentElementalAttack.visibility = View.VISIBLE
+                binding.ivEquipmentElementalAttack.setImageResource(R.mipmap.ic_fire_attribute_foreground)
+                binding.tvEquipmentElementalAttack.text = currentWeapon.value!!.fireAttack.toString()
+            }else if (currentWeapon.value!!.iceAttack != null){
+                binding.clytEquipmentElementalAttack.visibility = View.VISIBLE
+                binding.tvEquipmentElementalAttack.text = currentWeapon.value!!.iceAttack.toString()
+                binding.ivEquipmentElementalAttack.setImageResource(R.mipmap.ic_ice_attribute_foreground)
+            }else if((currentWeapon.value!!.thunderAttack != null)){
+                binding.clytEquipmentElementalAttack.visibility = View.VISIBLE
+                binding.tvEquipmentElementalAttack.text = currentWeapon.value!!.thunderAttack.toString()
+                binding.ivEquipmentElementalAttack.setImageResource(R.mipmap.ic_thunder_attribute_foreground)
+            }else{
+                binding.clytEquipmentElementalAttack.visibility = View.GONE
+            }
+
+            binding.tvEquipmentCriticalChance.text = "${currentWeapon.value!!.critRate}%"
+        }
+        else{
+            binding.tvEquipmentPhysicalAttack.text = "None"
+            binding.tvEquipmentCriticalChance.text = "None"
+            binding.tvEquipmentElementalAttack.text = "None"
+            binding.clytEquipmentElementalAttack.visibility = View.GONE
+        }
+        Log.d("Testeo_Recalculo_Ofensivo", "Stats ofensivas recalculadas")
+    }
+
+    private fun calculateDefensiveStats(){
+        var physDef = 0L; var fireDef = 0L; var iceDef = 0L; var thunderDef = 0L
+
+        for(i in 0 until currentCharacterSet.equipmentPieces.size){
+            if(currentCharacterSet.equipmentPieces[i] != null){
+                physDef += currentCharacterSet.equipmentPieces[i]?.physDefense!!
+                fireDef += currentCharacterSet.equipmentPieces[i]?.fireDefense!!
+                iceDef += currentCharacterSet.equipmentPieces[i]?.iceDefense!!
+                thunderDef += currentCharacterSet.equipmentPieces[i]?.thunderDefense!!
+                }
+            }
+
+        binding.tvEquipmentPhysicalDefense.text = physDef.toString()
+        binding.tvEquipmentFireDefense.text = fireDef.toString()
+        binding.tvEquipmentIceDefense.text = iceDef.toString()
+        binding.tvEquipmentThunderDefense.text = thunderDef.toString()
+        Log.d("Testeo_Recalculo_Defensivo", "Stats defensivas recalculadas")
+    }
+
+    //TODO: Falta obtener slots de accesorios y armas
+    private fun obtainCurrentSlots(){
+        var numberOfSlots = 0
+        var newSlotList : MutableList<Skill?> = mutableListOf()
+
+        if(currentCharacterSet.equippedWeapon != null){
+            numberOfSlots += currentCharacterSet.equippedWeapon!!.slots
+        }
+
+        for(i in 0 until currentCharacterSet.equipmentPieces.size){
+            if(currentCharacterSet.equipmentPieces[i] != null && currentCharacterSet.equipmentPieces[i]?.slots != null){
+                numberOfSlots += currentCharacterSet.equipmentPieces[i]?.slots!!
+            }
+        }
+
+        for (j in 0 until currentCharacterSet.equippedAccessories.size){
+            if(currentCharacterSet.equippedAccessories[j] != null && currentCharacterSet.equippedAccessories[j]?.accesoryGear?.slots != null){
+                numberOfSlots += currentCharacterSet.equippedAccessories[j]?.accesoryGear?.slots!!
+            }
+        }
+
+        if(numberOfSlots > 0){
+            var currentSlotsWithSkills = currentSlottedSkills.value
+            if(currentSlotsWithSkills != null){
+                if(currentSlotsWithSkills.size < numberOfSlots){
+                    for(i in 0 until currentSlotsWithSkills.size){
+                        newSlotList.add(currentSlotsWithSkills[i])
+                    }
+                    for(j in 0 until (numberOfSlots-newSlotList.size)){
+                        newSlotList.add(null)
+                    }
+                } else if(currentSlotsWithSkills.size > numberOfSlots){
+                    for(k in 0 until numberOfSlots){
+                        newSlotList.add(currentSlotsWithSkills[k])
+                    }
+                } else {
+                    newSlotList = currentSlotsWithSkills as MutableList<Skill?>
+                }
+            } else {
+                for(l in 0 until numberOfSlots){
+                    newSlotList.add(null)
+                }
+            }
+            currentSlots = newSlotList
+            slotOnSetAdapter.updateList(newSlotList)
+        }else{
+            currentSlots = mutableListOf()
+            slotOnSetAdapter.updateList(currentSlots)
+        }
+        Log.d("Testeo_Recalculo_Huecos", "Huecos recalculados, son los siguientes: ${slotOnSetAdapter.getList().toString()}")
+    }
+
+    //TODO: Falta comprobar los huecos de arma y accesorios
+    private fun obtainCurrentSkills(){
+        var skillMap = mutableMapOf<Skill, Int>()
+        var currentGear = currentCharacterSet.equipmentPieces
+        var currentSlotsWithSkills = slotOnSetAdapter.getList()
+
+        for(i in 0 until (currentGear.size)){
+            if(currentGear[i] != null && currentGear[i]?.skills != null){
+                for(j in 0 until (currentGear[i]?.skills!!.size)){
+                    skillMap.merge(currentGear[i]?.skills!![j], 1, Int::plus)
+                }
+            }
+        }
+
+        if (!currentSlotsWithSkills.isNullOrEmpty()){
+            for(searchedSkill in currentSlotsWithSkills){
+                if(searchedSkill != null){
+                    skillMap.merge(searchedSkill, 1, Int::plus)
+                }
+            }
+        }
+
+        if(skillMap.isNotEmpty()){
+            var skillList = mutableListOf<SkillOnSet>()
+            skillMap.forEach{ skillWithRank ->
+                var iterationSkill = SkillOnSet(skillWithRank.key, skillWithRank.value)
+                skillList.add(iterationSkill)
+            }
+            skillOnSetAdapter.updateList(skillList)
+        } else {
+            skillOnSetAdapter.updateList(listOf())
+        }
+        Log.d("Testeo_Recalculo_Habilidades", "Habilidades recalculadas, actualmente son las siguientes: ${skillOnSetAdapter.skillList.toString()}")
+    }
+
+    private fun showSkillInfo(skillOnSet: SkillOnSet){
+        var infoBody = ""
+        for(i in 0 until skillOnSet.skill.maxRank){
+             if((i+1) == skillOnSet.currentRank){
+                infoBody+= "Lvl. ${i+1}: [${skillOnSet.skill.specificDescription[i]}]"
+            }
+            else {
+                infoBody+= "Lvl. ${i+1}: ${skillOnSet.skill.specificDescription[i]}"
+            }
+
+            if(i+1 != skillOnSet.skill.maxRank){
+                infoBody+= "\n"
+            }
+        }
+
+        AlertDialog.Builder(activity as Context)
+            .setTitle(skillOnSet.skill.name)
+            .setMessage(infoBody)
+            .setIcon(IconHelper.setSkillIconInfo(skillOnSet.skill.type))
+            .setPositiveButton(getString(R.string.skillInfoCloseAction)) { v, _ ->
+                v.dismiss()
+            }
+            .create()
+            .show()
+    }
+
+    private fun applySkills(){
+        var auxAtk = 0F
+        var auxFireAtk = 0F
+        var auxIceAtk = 0F
+        var auxThunderAtk = 0F
+        var auxCrit = 0F
+        var auxPhysDef = 0F
+        var auxFireDef = 0F
+        var auxIceDef = 0F
+        var auxThunderDef = 0F
+        var rankToApply = 0
+
+        var currentSkills = skillOnSetAdapter.skillList
+        if(!currentSkills.isNullOrEmpty()){
+            for(i in currentSkills){
+                rankToApply = if (i.currentRank > i.skill.maxRank) (i.skill.maxRank-1) else (i.currentRank-1)
+                when(i.skill.type){
+                    "Attack" -> {
+                        if(binding.tvEquipmentPhysicalAttack.text != "None"){
+                            when(i.skill.name){
+                                "Attack Up" -> {
+                                    auxAtk += (binding.tvEquipmentPhysicalAttack.text.toString().toFloat()) * (i.skill.rankValueModifiers[rankToApply]/100)
+                                }
+                                "Peak Form" -> {
+                                    auxAtk += i.skill.rankValueModifiers[rankToApply]
+                                }
+                            }
+                        }
+                    }
+                    "FireAttack" -> {
+                        if(currentCharacterSet.equippedWeapon != null && currentCharacterSet.equippedWeapon!!.fireAttack != null && binding.tvEquipmentElementalAttack.text != "None"){
+                            auxFireAtk += (binding.tvEquipmentElementalAttack.text.toString().toFloat()) * (i.skill.rankValueModifiers[rankToApply]/100)
+                        }
+                    }
+                    "IceAttack" -> {
+                        if(currentCharacterSet.equippedWeapon != null && currentCharacterSet.equippedWeapon!!.iceAttack != null && binding.tvEquipmentElementalAttack.text != "None"){
+                            auxIceAtk += (binding.tvEquipmentElementalAttack.text.toString().toFloat()) * (i.skill.rankValueModifiers[rankToApply]/100)
+                        }
+                    }
+                    "ThunderAttack" -> {
+                        if(currentCharacterSet.equippedWeapon != null && currentCharacterSet.equippedWeapon!!.thunderAttack != null && binding.tvEquipmentElementalAttack.text != "None"){
+                            auxThunderAtk += (binding.tvEquipmentElementalAttack.text.toString().toFloat()) * (i.skill.rankValueModifiers[rankToApply]/100)
+
+                        }
+                    }
+                    "Critical" -> {
+                        auxCrit += i.skill.rankValueModifiers[rankToApply]
+                    }
+                    "PhysDefense" -> {
+                        auxPhysDef += i.skill.rankValueModifiers[rankToApply]
+                    }
+                    "FireDefense" -> {
+                        auxFireDef += i.skill.rankValueModifiers[rankToApply]
+                    }
+                    "IceDefense" -> {
+                        auxIceDef += i.skill.rankValueModifiers[rankToApply]
+                    }
+                    "ThunderDefense" -> {
+                        auxThunderDef += i.skill.rankValueModifiers[rankToApply]
+                    }
+                }
+            }
+        }
+
+        if(currentWeapon != null){
+            if(binding.tvEquipmentPhysicalAttack.text != "None" && auxAtk > 0){
+                binding.tvEquipmentPhysicalAttack.text = (binding.tvEquipmentPhysicalAttack.text.toString().toFloat() + auxAtk).toString()
+            }
+            if(binding.tvEquipmentElementalAttack.text != "None" && (auxFireAtk > 0 || auxIceAtk > 0 || auxThunderAtk > 0)){
+                if(currentWeapon.value?.fireAttack != null){
+                    binding.tvEquipmentElementalAttack.text = (binding.tvEquipmentElementalAttack.text.toString().toFloat() + auxFireAtk).toString()
+                } else if(currentWeapon.value?.iceAttack != null){
+                    binding.tvEquipmentElementalAttack.text = (binding.tvEquipmentElementalAttack.text.toString().toFloat() + auxIceAtk).toString()
+                } else if(currentWeapon.value?.thunderAttack != null){
+                    binding.tvEquipmentElementalAttack.text = (binding.tvEquipmentElementalAttack.text.toString().toFloat() + auxThunderAtk).toString()
+                }
+            }
+
+            if(binding.tvEquipmentCriticalChance.text != "None" && auxCrit > 0){
+                binding.tvEquipmentCriticalChance.text = "${(binding.tvEquipmentCriticalChance.text.toString().substring(0, binding.tvEquipmentCriticalChance.text.toString().length-1).toFloat() + auxCrit)}%"
+            }
+
+            if(auxPhysDef > 0){
+                binding.tvEquipmentPhysicalDefense.text = (binding.tvEquipmentPhysicalDefense.text.toString().toFloat() + auxPhysDef).toString()
+            }
+            if(auxFireDef > 0){
+                binding.tvEquipmentFireDefense.text = (binding.tvEquipmentFireDefense.text.toString().toFloat() + auxFireDef).toString()
+            }
+            if(auxIceDef > 0){
+                binding.tvEquipmentIceDefense.text = (binding.tvEquipmentIceDefense.text.toString().toFloat() + auxIceDef).toString()
+            }
+            if(auxThunderDef > 0){
+                binding.tvEquipmentThunderDefense.text = (binding.tvEquipmentThunderDefense.text.toString().toFloat() + auxThunderDef).toString()
+            }
+        }
+        Log.d("Testeo_Recalculo_Formulas", "Fórmulas reaplicadas a los atributos")
     }
 }

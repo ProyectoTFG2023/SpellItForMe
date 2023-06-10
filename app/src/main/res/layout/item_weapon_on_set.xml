@@ -1,0 +1,390 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/cvSkillOnSet"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:cardCornerRadius="16dp"
+    app:cardElevation="4dp"
+    app:cardUseCompatPadding="true">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/clSkillOnSet"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/tvWeaponOnSetName"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="10dp"
+            android:textAlignment="center"
+            android:textSize="17sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/ivWeaponOnSet"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="Item Name" />
+
+        <ImageView
+            android:id="@+id/ivWeaponOnSet"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginBottom="4dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/ivWeaponOnSetRemove"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            android:visibility="gone"
+            app:layout_constraintEnd_toEndOf="@+id/ivWeaponOnSet"
+            app:layout_constraintStart_toStartOf="@+id/ivWeaponOnSet"
+            app:layout_constraintTop_toBottomOf="@+id/ivWeaponOnSet"
+            app:srcCompat="@android:drawable/ic_menu_delete" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/clytWeaponOnSetSlots"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="7dp"
+            android:visibility="gone"
+            app:layout_constraintEnd_toEndOf="@+id/ivWeaponOnSet"
+            app:layout_constraintStart_toStartOf="@+id/ivWeaponOnSet"
+            app:layout_constraintTop_toBottomOf="@+id/ivWeaponOnSet">
+
+            <ImageView
+                android:id="@+id/ivWeaponOnSetSlots"
+                android:layout_width="23dp"
+                android:layout_height="23dp"
+                android:visibility="visible"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@mipmap/ic_gem_slot_foreground" />
+
+            <TextView
+                android:id="@+id/tvWeaponOnSetNumberOfSlots"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="2dp"
+                android:visibility="visible"
+                app:layout_constraintBottom_toBottomOf="@+id/ivWeaponOnSetSlots"
+                app:layout_constraintStart_toEndOf="@+id/ivWeaponOnSetSlots"
+                app:layout_constraintTop_toTopOf="@+id/ivWeaponOnSetSlots"
+                tools:text="x1" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <LinearLayout
+            android:id="@+id/llytWeaponOnSetAttributes"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="7dp"
+            android:orientation="horizontal"
+            android:visibility="gone"
+            app:layout_constraintEnd_toEndOf="@+id/tvWeaponOnSetName"
+            app:layout_constraintStart_toStartOf="@+id/tvWeaponOnSetName"
+            app:layout_constraintTop_toBottomOf="@+id/tvWeaponOnSetName">
+
+            <LinearLayout
+                android:id="@+id/llytWeaponOnSetOffensiveAttributes"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:id="@+id/llytInnerWeaponOnSetDamageAttributes"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:orientation="horizontal">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/clytWeaponOnSetPhysDamage"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginEnd="1dp"
+                        android:layout_weight="1">
+
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:id="@+id/clytWeaponOnSetInnerPhysDamage"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent">
+
+                            <ImageView
+                                android:id="@+id/ivWeaponOnSetPhysDamage"
+                                android:layout_width="23dp"
+                                android:layout_height="23dp"
+                                android:layout_marginStart="5dp"
+                                android:layout_marginTop="5dp"
+                                android:layout_marginBottom="5dp"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent"
+                                app:srcCompat="@mipmap/ic_phys_attack_skill_foreground" />
+
+                            <TextView
+                                android:id="@+id/tvWeaponOnSetPhysDamage"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="5dp"
+                                android:layout_marginEnd="5dp"
+                                app:layout_constraintBottom_toBottomOf="@id/ivWeaponOnSetPhysDamage"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toEndOf="@+id/ivWeaponOnSetPhysDamage"
+                                app:layout_constraintTop_toTopOf="@id/ivWeaponOnSetPhysDamage"
+                                tools:text="Phys Damage" />
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/clytWeaponOnSetElementalDamage"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_weight="1"
+                        android:visibility="gone">
+
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:id="@+id/clytWeaponOnSetInnerElementalDamage"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent">
+
+                            <ImageView
+                                android:id="@+id/ivWeaponOnSetElementalDamage"
+                                android:layout_width="23dp"
+                                android:layout_height="23dp"
+                                android:layout_marginStart="5dp"
+                                android:layout_marginTop="5dp"
+                                android:layout_marginBottom="5dp"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent"
+                                app:srcCompat="@mipmap/ic_fire_attribute_foreground" />
+
+                            <TextView
+                                android:id="@+id/tvWeaponOnSetElementalDamage"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="5dp"
+                                android:layout_marginEnd="5dp"
+                                app:layout_constraintBottom_toBottomOf="@id/ivWeaponOnSetElementalDamage"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toEndOf="@id/ivWeaponOnSetElementalDamage"
+                                app:layout_constraintTop_toTopOf="@id/ivWeaponOnSetElementalDamage"
+                                tools:text="Elem Damage" />
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:id="@+id/llytInnerWeaponOnSetCritAttribute"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="1dp"
+                    android:layout_weight="1"
+                    android:orientation="horizontal">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/clytWeaponOnSetCritChance"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginEnd="1dp"
+                        android:layout_weight="1"
+                        android:visibility="visible">
+
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:id="@+id/clytWeaponOnSetInnerCritChance"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent">
+
+                            <ImageView
+                                android:id="@+id/ivWeaponOnSetCritChance"
+                                android:layout_width="23dp"
+                                android:layout_height="23dp"
+                                android:layout_marginStart="5dp"
+                                android:layout_marginTop="5dp"
+                                android:layout_marginBottom="5dp"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent"
+                                app:srcCompat="@mipmap/ic_phys_attack_skill_foreground" />
+
+                            <TextView
+                                android:id="@+id/tvWeaponOnSetCritChance"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="5dp"
+                                android:layout_marginEnd="5dp"
+                                app:layout_constraintBottom_toBottomOf="@id/ivWeaponOnSetCritChance"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toEndOf="@+id/ivWeaponOnSetCritChance"
+                                app:layout_constraintTop_toTopOf="@+id/ivWeaponOnSetCritChance"
+                                tools:text="Crit Chance" />
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/llytWeaponOnSetSkills"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_margin="5dp"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/ivWeaponOnSet"
+                app:layout_constraintTop_toBottomOf="@+id/llytWeaponOnSetOffensiveAttributes">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/clytWeaponOnSetSkillOne"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_margin="6dp"
+                    android:layout_weight="1">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/clytWeaponOnSetInnerSkillOne"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent">
+
+                        <ImageView
+                            android:id="@+id/ivWeaponOnSetSkillOne"
+                            android:layout_width="23dp"
+                            android:layout_height="23dp"
+                            android:layout_marginTop="5dp"
+                            android:layout_marginBottom="5dp"
+                            android:foregroundGravity="center_horizontal"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:srcCompat="@mipmap/ic_phys_defense_foreground" />
+
+                        <TextView
+                            android:id="@+id/tvWeaponOnSetSkillOne"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="7dp"
+                            android:gravity="center_horizontal"
+                            app:layout_constraintBottom_toBottomOf="@+id/ivWeaponOnSetSkillOne"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toEndOf="@+id/ivWeaponOnSetSkillOne"
+                            app:layout_constraintTop_toTopOf="@+id/ivWeaponOnSetSkillOne"
+                            tools:text="Skill One" />
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/clytWeaponOnSetSkillTwo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_margin="6dp"
+                    android:layout_weight="1"
+                    android:visibility="gone">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/clytWeaponOnSetInnerSkillTwo"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent">
+
+                        <ImageView
+                            android:id="@+id/ivWeaponOnSetSkillTwo"
+                            android:layout_width="23dp"
+                            android:layout_height="23dp"
+                            android:layout_marginTop="5dp"
+                            android:layout_marginBottom="5dp"
+                            android:foregroundGravity="center_horizontal"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:srcCompat="@mipmap/ic_phys_defense_foreground" />
+
+                        <TextView
+                            android:id="@+id/tvWeaponOnSetSkillTwo"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="7dp"
+                            android:foregroundGravity="center_horizontal"
+                            app:layout_constraintBottom_toBottomOf="@+id/ivWeaponOnSetSkillTwo"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toEndOf="@+id/ivWeaponOnSetSkillTwo"
+                            app:layout_constraintTop_toTopOf="@+id/ivWeaponOnSetSkillTwo"
+                            tools:text="Skill Two" />
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/llytWeaponOnSetNoDataBottomMarginDummy"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="7dp"
+            android:layout_marginBottom="8dp"
+            android:layout_weight="1"
+            android:orientation="horizontal"
+            android:visibility="visible"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/ivWeaponOnSet" />
+
+        <LinearLayout
+            android:id="@+id/llytWeaponOnSetBottomMarginDummy"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="7dp"
+            android:layout_marginBottom="8dp"
+            android:layout_weight="1"
+            android:orientation="horizontal"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/llytWeaponOnSetAttributes" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.cardview.widget.CardView>

@@ -7,15 +7,17 @@ import androidx.recyclerview.widget.RecyclerView
 import danielabez.spellitforme.R
 import danielabez.spellitforme.databinding.ItemGearBinding
 import danielabez.spellitforme.model.Gear
+import danielabez.spellitforme.tools.IconHelper
 
 class GearAdapter : RecyclerView.Adapter<GearAdapter.GearViewHolder>() {
     var gearList: List<Gear>? = null
+    var onGearClickListener : OnGearClickListener? = null
 
-    //TODO: PENDIENTE DE AÑADIR FUNCIONALIDAD
     inner class GearViewHolder(val binding: ItemGearBinding): RecyclerView.ViewHolder(binding.root) {
         init {
             binding.root.setOnClickListener(){
                 val chosenGear = gearList?.get(this.adapterPosition)
+                onGearClickListener?.onGearClick(chosenGear)
             }
         }
     }
@@ -48,44 +50,31 @@ class GearAdapter : RecyclerView.Adapter<GearAdapter.GearViewHolder>() {
                     binding.ivSlots.visibility = View.VISIBLE
                     binding.tvNumberOfSlots.visibility = View.VISIBLE
                     binding.tvNumberOfSlots.text = "x$slots"
+                } else {
+                    binding.tvNumberOfSlots.visibility = View.GONE
+                    binding.ivSlots.visibility = View.GONE
                 }
 
-                //TODO: Hacer más iconos a cambiar
                 if(skills.isNotEmpty()){
                     binding.llytGearBottomMarginDummy.visibility = View.GONE
                     binding.llytGearSkills.visibility = View.VISIBLE
                     binding.tvGearSkillOne.text = skills[0].name
-                    //binding.clytGearSkillOne.visibility = View.VISIBLE
-                    binding.ivGearSkillOne.setImageResource(
-                        when(skills[0].type){
-                            "PhysDefense" -> R.mipmap.ic_phys_defense_up_skill_foreground
-                            else -> R.mipmap.ic_phys_attack_skill_foreground
-                        }
-                    )
+                    IconHelper.setSkillIcon(binding.ivGearSkillOne, skills[0].type)
 
                     if(skills.size == 2){
                         binding.clytGearSkillTwo.visibility = View.VISIBLE
                         binding.tvGearSkillTwo.text = skills[1].name
-                        binding.ivGearSkillTwo.setImageResource(
-                            when(skills[1].type){
-                                "PhysDefense" -> R.mipmap.ic_phys_defense_up_skill_foreground
-                                else -> R.mipmap.ic_phys_attack_skill_foreground
-                            }
-                        )
+                        IconHelper.setSkillIcon(binding.ivGearSkillTwo, skills[1].type)
+                    } else {
+                        binding.clytGearSkillTwo.visibility = View.GONE
                     }
+                } else {
+                    binding.llytGearSkills.visibility = View.GONE
+                    binding.llytGearBottomMarginDummy.visibility = View.VISIBLE
                 }
 
-                //TODO: CAMBIAR PARA QUE SALGAN ICONOS DISTINTOS SEGÚN EL TIPO DE EQUIPAMIENTO
                 //Mostraremos un icono según el tipo de equipamiento y la rareza que tenga
-                binding.ivGear.setImageResource(
-                    when (rarity) {
-                        "a_Common" -> R.mipmap.ic_helmet_common_foreground
-                        "b_Uncommon" -> R.mipmap.ic_helmet_uncommon_foreground
-                        "c_Rare" -> R.mipmap.ic_helmet_rare_foreground
-                        "d_Mythical" -> R.mipmap.ic_helmet_mythical_foreground
-                        else -> R.mipmap.ic_helmet_legendary_foreground
-                    }
-                )
+                IconHelper.setGearIcon(binding.ivGear, "Headgear", rarity)
             }
         }
     }
@@ -101,5 +90,9 @@ class GearAdapter : RecyclerView.Adapter<GearAdapter.GearViewHolder>() {
     fun updateList(newList: List<Gear>){
         gearList = newList
         notifyDataSetChanged()
+    }
+
+    interface OnGearClickListener{
+        fun onGearClick(gear: Gear?)
     }
 }

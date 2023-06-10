@@ -40,6 +40,6 @@ data class Gear (
         }
 
         override fun toString(): String {
-            return "" + name + " " + type + " " + physDefense + " " + fireDefense + " " + iceDefense + " " + thunderDefense
+            return "$name $type $physDefense $fireDefense $iceDefense $thunderDefense"
         }
     }

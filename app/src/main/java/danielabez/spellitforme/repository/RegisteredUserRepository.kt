@@ -32,4 +32,6 @@ object RegisteredUserRepository {
     fun getRegisteredUserByMail(pMail: String) = registeredUserModel.getRegisteredUserByMail(pMail)
 
     fun getRegisteredUserByUsernameAndPassword(pUsername: String, pPassword: String) = registeredUserModel.getRegisteredUserByUsernameAndPassword(pUsername, pPassword)
+
+    fun getUserWithAccessories(pUserId: Long) = registeredUserModel.getRegisteredUserWithAccesories(pUserId)
 }
