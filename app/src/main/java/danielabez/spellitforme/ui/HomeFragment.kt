@@ -10,6 +10,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import danielabez.spellitforme.R
@@ -46,15 +47,22 @@ class HomeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.button.setOnClickListener(){
-            val action = HomeFragmentDirections.actionHomeFragmentToEquipmentSetFragment(false, null)
-            findNavController().navigate(action)
-        }
+        (activity as AppCompatActivity).supportActionBar?.title = getString(R.string.home_fragment_label, registeredUserViewModel.checkRegisteredUser.value?.username)
+
+         //inicializarRecycler
+        initializeFloatingActionButton()
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    fun initializeFloatingActionButton(){
+        binding.fabHomeCreateNewCharacter.setOnClickListener(){
+            val action = HomeFragmentDirections.actionHomeFragmentToCharacterCreationFragment()
+            findNavController().navigate(action)
+        }
     }
 
     //TODO: NO FUNCIONAL, PENDIENTE DE REVISIÓN
@@ -65,6 +73,7 @@ class HomeFragment : Fragment() {
             .setPositiveButton(android.R.string.ok) { v, _ ->
                 registeredUserViewModel.emptyCheckRegisteredUser()
                 findNavController().popBackStack()
+                v.dismiss()
             }
             .setNegativeButton(android.R.string.cancel) { v, _ ->
                 v.dismiss()

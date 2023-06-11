@@ -1,4 +1,4 @@
-/*
+
 package danielabez.spellitforme.ui
 
 
@@ -6,56 +6,99 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
+import android.widget.Toast
 import androidx.fragment.app.Fragment
-import danielabez.spellitforme.ARG_PARAM1
-import danielabez.spellitforme.ARG_PARAM2
+import androidx.navigation.fragment.findNavController
 import danielabez.spellitforme.R
+import danielabez.spellitforme.databinding.FragmentAccessoryCreationBinding
+import danielabez.spellitforme.databinding.FragmentCharacterCreationBinding
+import danielabez.spellitforme.model.CharacterSet
+import danielabez.spellitforme.model.CharacterStats
+import danielabez.spellitforme.tools.IconHelper
 
-/**
- * A simple [Fragment] subclass.
- * Use the [CharacterCreationFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class CharacterCreationFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
-    }
+    private var _binding: FragmentCharacterCreationBinding? = null
+    private val binding get() = _binding!!
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_character_creation, container, false)
+        _binding = FragmentCharacterCreationBinding.inflate(inflater, container, false)
+        return binding.root
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment CharacterCreationFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            CharacterCreationFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        initializeRoleSpinner()
+        initializeAttributeFields()
+        initializeFloatingActionButton()
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
+
+    private fun initializeRoleSpinner() {
+        ArrayAdapter.createFromResource(
+            requireContext(), R.array.spCharacterCreationRole, android.R.layout.simple_spinner_item
+        ).also { adapter ->
+            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+            binding.spCharacterCreationRole.adapter = adapter
+            binding.spCharacterCreationRole.setSelection(0)
+            binding.spCharacterCreationRole.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
+                override fun onItemSelected(p0: AdapterView<*>?, v: View?, posicion: Int, id: Long) {
+                    IconHelper.setRoleIcon(binding.ivCharacterCreationRole, binding.spCharacterCreationRole.selectedItem.toString())
+                }
+
+                override fun onNothingSelected(p0: AdapterView<*>?) {
+                    //Empty
                 }
             }
+        }
+    }
+
+    private fun initializeAttributeFields(){
+        binding.tietCharacterCreationHealth.setText("100")
+        binding.tietCharacterCreationSpiritum.setText("100")
+        binding.tietCharacterCreationStrength.setText("50")
+        binding.tietCharacterCreationCunning.setText("50")
+        binding.tietCharacterCreationAttunement.setText("50")
+    }
+
+    private fun initializeFloatingActionButton(){
+        binding.fabCharacterCreationToEditor.setOnClickListener(){
+            if(areAllAttributeFieldsFilled() == true){
+                val action = CharacterCreationFragmentDirections.actionCharacterCreationFragmentToEquipmentSetFragment(
+                    true,
+                    CharacterSet(
+                        if(binding.tietCharacterCreationName.text?.isNotEmpty() == true) binding.tietCharacterCreationName.text.toString() else "Somebody",
+                        binding.spCharacterCreationRole.selectedItem.toString(),
+                        CharacterStats(
+                            binding.tietCharacterCreationHealth.text.toString().toLong(),
+                            binding.tietCharacterCreationSpiritum.text.toString().toLong(),
+                            binding.tietCharacterCreationStrength.text.toString().toLong(),
+                            binding.tietCharacterCreationAttunement.text.toString().toLong(),
+                            binding.tietCharacterCreationCunning.text.toString().toLong(),
+                        )
+                    )
+                )
+                findNavController().navigate(action)
+            }else{
+                Toast.makeText(context, getString(R.string.emptyFieldsWarning), Toast.LENGTH_SHORT).show()
+            }
+        }
+    }
+
+    private fun areAllAttributeFieldsFilled() : Boolean? {
+        return (binding.tietCharacterCreationHealth.text?.isNotEmpty() == true
+                && binding.tietCharacterCreationSpiritum.text?.isNotEmpty() == true
+                && binding.tietCharacterCreationStrength.text?.isNotEmpty() == true
+                && binding.tietCharacterCreationCunning.text?.isNotEmpty() == true
+                && binding.tietCharacterCreationAttunement.text?.isNotEmpty() == true)
     }
 }
-
- */

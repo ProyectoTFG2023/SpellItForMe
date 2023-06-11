@@ -3,7 +3,7 @@
     <string name="action_settings">Settings</string>
 
     <!-- LoginFragment -->
-    <string name="login_fragment_label">Login Fragment</string>
+    <string name="login_fragment_label">Login</string>
     <string name="tietLoginUsernameHint">Username or mail</string>
     <string name="tietLoginPasswordHint">Password</string>
     <string name="btLogin">Log In</string>
@@ -12,8 +12,8 @@
     <string name="failedLoginWarningTitle">Login Failure</string>
     <string name="failedLoginWarningMessage">User or password not valid, try it again</string>
 
-    <!-- HomeFragment -->
-    <string name="registration_fragment_label">Register Fragment</string>
+    <!-- RegistrationFragment -->
+    <string name="registration_fragment_label">Register New User</string>
     <string name="tvRegisterGuide"><b>Enter the following data:</b></string>
     <string name="tvRegisterEmailInUseWarning">That email is already in use</string>
     <string name="tietRegisterMailHint">Enter your email</string>
@@ -24,10 +24,31 @@
     <string name="tvRegisterNonMatchingPasswordsWarning">The passwords do not match, check and try again</string>
     <string name="ckbRegisterAcceptTerms">I accept the terms of service</string>
     <string name="btRegisterRegister">Register</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <!-- HomeFragment -->
+    <string name="home_fragment_label">Greetings, %s</string>
+    <string name="tvHomeUserSets">Your Sets</string>
+
+    <!-- CharacterCreationFragment -->
+    <string name="character_creation_fragment_label">New Character Creation</string>
+    <string name="tietCharacterCreationNameHint">Character\s Name</string>
+    <string name="tvCharacterCreationRoleInfo">Character Role</string>
+    <string-array name="spCharacterCreationRole">
+        <item>Warrior</item>
+        <item>Rogue</item>
+        <item>Mage</item>
+    </string-array>
+    <string name="tvCharacterCreationHealthAndSpiritumInfo">Basic Attributes</string>
+    <string name="tietCharacterCreationHealthHint">Health Points</string>
+    <string name="tietCharacterCreationSpiritumHint">Spiritum Points</string>
+    <string name="tvCharacterCreationAttributesInfo">Advanced Attributes</string>
+    <string name="tietCharacterCreationStrengthHint">Strength</string>
+    <string name="tietCharacterCreationCunningHint">Cunning</string>
+    <string name="tietCharacterCreationAttunementHint">Attunement</string>
+    <string name="toastEmptyFieldsWarning">One or more attribute fields are empty</string>
 
     <!-- EquipmentSetFragment -->
+    <string name="equipment_set_fragment_label">Equipment Editor</string>
     <string name="tvEquipmentEquipmentAttributesTitle">Attributes</string>
     <string name="tvEquipmentOffensiveStatsTitle">Attacking Stats</string>
     <string name="tvEquipmentDefensiveStatsTitle">Defenses</string>
@@ -41,11 +62,12 @@
     <!-- ItemGearOnSet -->
     <string name="tvGearOnSetNameDefault">No %s selected</string>
 
-    <!-- Slot -->
+    <!-- ItemSlotOnSet -->
     <string name="tvSlotOnSetNoSkill">No skill selected</string>
     <string name="tvSlotOnSetArrow"> --> </string>
 
     <!-- WeaponSearchFragment -->
+    <string name="weapon_search_fragment_label">Searching Weapons</string>
     <string name="svWeaponNameFilterHint">Filter by a weapon\'s name…</string>
     <string name="tvWeaponSearchInfoType">Type</string>
     <string-array name="spSearchTypeFilter">
@@ -64,15 +86,22 @@
     </string-array>
 
     <!-- GearSearchFragment -->
+    <string name="gear_search_fragment_label">Searching Gear</string>
     <string name="svGearNameFilterHint">Filter by a piece\'s name…</string>
     <string name="tvGearSearchRarityFilterInfo">Rarity</string>
 
     <!-- AccessorySearchFragment -->
+    <string name="accessory_search_fragment_label">Searching Accessories</string>
     <string name="svAccessoryNameFilterHint">Filter by an accessory\'s name…</string>
     <string name="tvAccessorySearchTypeFilterInfo">Type</string>
     <string name="tvAccessorySearchRarityFilterInfo">Rarity</string>
+    <string name="deleteWarningDialogTitle"> Accessory Removal</string>
+    <string name="deleteWarningDialogMessage">Are you sure about deleting %s?</string>
+    <string name="deleteWarningDialogConfirm">Delete</string>
+    <string name="deleteWaringDialogCancel">Cancel</string>
 
     <!-- SkillSearchFragment -->
+    <string name="skill_search_fragment_label">Searching Skills</string>
     <string name="svSkillSearchNameFilterHint">Filter by a skill\'s name…</string>
     <string name="tvSkillSearchTypeFilterInfo">Type</string>
     <string-array name="spSkillSearchTypeFilter">
@@ -85,13 +114,8 @@
         <item>Crafting</item>
     </string-array>
 
-    <!-- AccessorySearchFragment -->
-    <string name="deleteWarningDialogTitle"> Accessory Removal</string>
-    <string name="deleteWarningDialogMessage">Are you sure about deleting %s?</string>
-    <string name="deleteWarningDialogConfirm">Delete</string>
-    <string name="deleteWaringDialogCancel">Cancel</string>
-
     <!-- AccessoryCreationFragment -->
+    <string name="accessory_creation_fragment_label">New Accesory Creation</string>
     <string name="tietAccessoryCreationNameHint">Accessory\'s Name</string>
     <string name="tvAccessoryCreationTypeInfo">Type</string>
     <string-array name="spAccessoryCreationType">

@@ -13,4 +13,7 @@
 
     <!-- RegisterFragment -->
     <color name="registrationFieldValueAlreadyInUse">#D53939</color>
+
+    <!-- SkillOnSetAdapter -->
+    <color name="maxRankSurpassed">#CD1111</color>
 </resources>

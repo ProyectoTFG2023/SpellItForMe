@@ -24,7 +24,6 @@ import danielabez.spellitforme.model.Weapon
 import danielabez.spellitforme.viewModel.AccessoryViewModel
 import danielabez.spellitforme.viewModel.RegisteredUserViewModel
 
-
 class AccessorySearchFragment : Fragment() {
     private var _binding: FragmentAccessorySearchBinding? = null
     private val binding get() = _binding!!

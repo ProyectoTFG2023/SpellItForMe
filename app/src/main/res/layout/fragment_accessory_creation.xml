@@ -105,7 +105,8 @@
             android:id="@+id/tietAccessoryCreationPhysDefense"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/tietAccessoryCreationPhysDefenseHint" />
+            android:hint="@string/tietAccessoryCreationPhysDefenseHint"
+            android:inputType="number" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
@@ -124,7 +125,8 @@
             android:id="@+id/tietAccessoryCreationFireDefense"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/tietAccessoryCreationFireDefenseHint" />
+            android:hint="@string/tietAccessoryCreationFireDefenseHint"
+            android:inputType="number" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
@@ -143,7 +145,8 @@
             android:id="@+id/tietAccessoryCreationIceDefense"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/tietAccessoryCreationIceDefenseHint" />
+            android:hint="@string/tietAccessoryCreationIceDefenseHint"
+            android:inputType="number" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
@@ -162,7 +165,8 @@
             android:id="@+id/tietAccessoryCreationThunderDefense"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/tietAccessoryCreationThunderDefenseHint" />
+            android:hint="@string/tietAccessoryCreationThunderDefenseHint"
+            android:inputType="number" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <View

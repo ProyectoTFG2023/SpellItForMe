@@ -35,17 +35,21 @@ class SkillOnSetAdapter : RecyclerView.Adapter<SkillOnSetAdapter.SkillOnSetViewH
         with(holder){
             with(skillList!![position]){
                 var listOfSquares = listOf(binding.ivSkillOnSetLevelOne, binding.ivSkillOnSetLevelTwo, binding.ivSkillOnSetLevelThree, binding.ivSkillOnSetLevelFour, binding.ivSkillOnSetLevelFive)
+                val isCurrentRankHigherThanMax = (currentRank > skill.maxRank)
                 binding.tvSkillOnSetName.text = skill.name
                 binding.tvSkillOnSetCurrentRank.text = "Lvl. $currentRank/${skill.maxRank}"
                 IconHelper.setSkillIcon(binding.ivSkillOnSetIcon, skill.type)
 
-                //TODO: Cambiar iconos
                 for(i in 0 until skill.maxRank){
                     listOfSquares[i].visibility = View.VISIBLE
-                    if((currentRank-i) > 0){
-                        listOfSquares[i].setImageResource(R.mipmap.ic_helmet_legendary_foreground)
-                    } else {
-                        listOfSquares[i].setImageResource(R.mipmap.ic_helmet_mythical_foreground)
+                    if(isCurrentRankHigherThanMax){
+                        IconHelper.setSkillRankIcon(listOfSquares[i], "Surpassed")
+                    }else{
+                        if((currentRank-i) > 0){
+                            IconHelper.setSkillRankIcon(listOfSquares[i], "Checked")
+                        } else {
+                            IconHelper.setSkillRankIcon(listOfSquares[i], "Empty")
+                        }
                     }
                 }
             }

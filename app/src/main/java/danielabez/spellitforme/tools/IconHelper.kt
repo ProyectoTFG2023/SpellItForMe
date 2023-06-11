@@ -8,7 +8,13 @@ class IconHelper {
     companion object {
         //TODO: Realizar los iconos correspondientes
         fun setRoleIcon(imageView: ImageView, role: String){
-
+            imageView.setImageResource(
+                when(role){
+                    "Warrior" -> R.mipmap.ic_helmet_legendary_foreground
+                    "Rogue" -> R.mipmap.ic_helmet_uncommon_foreground
+                    else -> R.mipmap.ic_helmet_rare_foreground
+                }
+            )
         }
 
         //TODO: Realizar los iconos correspondientes
@@ -116,6 +122,16 @@ class IconHelper {
                     "Harvest" -> R.mipmap.ic_phys_defense_up_skill_foreground
                     else -> R.mipmap.ic_phys_defense_up_skill_foreground //TODO: Crafting icon here
                 })
+        }
+
+        fun setSkillRankIcon(imageView: ImageView, value: String){
+            imageView.setImageResource(
+                when(value){
+                    "Checked" -> R.mipmap.ic_helmet_legendary_foreground
+                    "Empty" -> R.mipmap.ic_helmet_common_foreground
+                    else -> R.mipmap.ic_helmet_mythical_foreground
+                }
+            )
         }
 
         fun setSkillIconInfo(type: String) : Int{

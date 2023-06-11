@@ -29,3 +29,11 @@ en la aplicación para asemejarse a la versión final que tendrá la aplicación
 
 (11/06/2023) [Commit #12] Incluida la pantalla principal de editado de sets de equipamiento de la aplicación a un 99% de funcionalidad, con actualizado en tiempo real y recálculo
 de atributos respecto a los cambios que realice el usuario en cada uno de los clicks permitidos en la misma pantalla
+
+(11/06/2023) [Commit #13] Incluidas las pantallas de búsqueda y creación de accesorios, relacionados directamente con el usuario logeado y, por tanto, invisibles al resto de los usuarios.
+Permite la creación parametrizada a gusto del usuario, así como el borrado de aquellos que ya no desee almacenar. Se ha actualizado también la pantalla principal de edición de equipamiento
+para que incluya los accesorios en los cálculos de datos, huecos de encantamientos y habilidades que posean
+
+(11/06/2023) [Commit #14] Realizada la pantalla de creación de personaje, en el que se especifican los valores de sus múltiples atributos, así como su rol y el nombre del mismo.
+Además se han realizado ciertos arreglos visuales en la pantalla de edición de equipamiento, como la apariencia distinta de las habilidades que se encuentren en un cierto momento
+para representar el exceso de puntos en la misma debido a tener demasiadas piezas con dicha habilidad. 
