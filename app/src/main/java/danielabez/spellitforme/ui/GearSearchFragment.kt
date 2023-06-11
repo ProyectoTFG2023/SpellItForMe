@@ -93,7 +93,7 @@ class GearSearchFragment : Fragment() {
     }
 
     private fun initializeRaritySpinner(){
-        ArrayAdapter.createFromResource(requireContext(), R.array.spSearchRarityFilter, android.R.layout.simple_spinner_item
+        ArrayAdapter.createFromResource(requireContext(), R.array.spGearSearchRarityFilter, android.R.layout.simple_spinner_item
         ).also { adapter ->
             adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
             binding.spGearSearchRarityFilter.adapter = adapter

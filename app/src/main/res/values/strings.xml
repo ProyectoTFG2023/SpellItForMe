@@ -54,7 +54,7 @@
         <item>Spear</item>
     </string-array>
     <string name="tvWeaponSearchInfoRarity">Rarity</string>
-    <string-array name="spSearchRarityFilter">
+    <string-array name="spGearSearchRarityFilter">
         <item>All</item>
         <item>Common</item>
         <item>Uncommon</item>
@@ -83,5 +83,63 @@
         <item>Resistance</item>
         <item>Harvest</item>
         <item>Crafting</item>
+    </string-array>
+
+    <!-- AccessorySearchFragment -->
+    <string name="deleteWarningDialogTitle"> Accessory Removal</string>
+    <string name="deleteWarningDialogMessage">Are you sure about deleting %s?</string>
+    <string name="deleteWarningDialogConfirm">Delete</string>
+    <string name="deleteWaringDialogCancel">Cancel</string>
+
+    <!-- AccessoryCreationFragment -->
+    <string name="tietAccessoryCreationNameHint">Accessory\'s Name</string>
+    <string name="tvAccessoryCreationTypeInfo">Type</string>
+    <string-array name="spAccessoryCreationType">
+        <item>Necklace</item>
+        <item>Ring</item>
+    </string-array>
+    <string name="tvAccessoryCreationRarityInfo">Rarity</string>
+    <string-array name="spAccessoryCreationRarity">
+        <item>Common</item>
+        <item>Uncommon</item>
+        <item>Rare</item>
+        <item>Mythical</item>
+        <item>Legendary</item>
+    </string-array>
+    <string name="tvAccessoryCreationDefenseInfo">Defenses</string>
+    <string name="tietAccessoryCreationPhysDefenseHint">Physical Defense</string>
+    <string name="tietAccessoryCreationFireDefenseHint">Fire Defense</string>
+    <string name="tietAccessoryCreationIceDefenseHint">Ice Defense</string>
+    <string name="tietAccessoryCreationThunderDefenseHint">Thunder Defense</string>
+    <string name="tvAccessoryCreationSlotsInfo">Slots</string>
+    <string name="tvAccessoryCreationSlotsInfoNumber">Number of slots</string>
+    <string-array name="spAccessoryCreationNumberOfSlots">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+    </string-array>
+    <string name="tvAccessoryCreationSkillInfo">Skills</string>
+    <string name="tvAccessoryCreationSkillInfoNumber">Number of skills</string>
+    <string-array name="spAccessoryCreationNumberOfSkills">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+    </string-array>
+    <string name="tvAccessoryCreationSkillInfoFirst">First Skill</string>
+    <string name="tvAccessoryCreationSkillInfoSecond">Second Skill</string>
+    <string-array name="spAccessoryCreationSkills">
+        <item>Atk Up</item>
+        <item>Peak Form</item>
+        <item>Fire Atk Up</item>
+        <item>Ice Atk Up</item>
+        <item>Thunder Atk Up</item>
+        <item>Critical Up</item>
+        <item>Phys Def Up</item>
+        <item>Fire Def Up</item>
+        <item>Ice Def Up</item>
+        <item>Thunder Def Up</item>
+        <item>Stun Resistance</item>
+        <item>Geologist\'s Touch</item>
+        <item>Herbalist\'s Wit</item>
     </string-array>
 </resources>

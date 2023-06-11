@@ -62,10 +62,12 @@ class RegisteredUserViewModel(app: Application) : AndroidViewModel(app) {
     }
 
     fun emptyCheckRegisteredUser(){
-        checkUsernameInUse.postValue(null)
+        viewModelScope.launch (Dispatchers.IO) {
+            checkUsernameInUse.postValue(null)
+        }
     }
 
-    fun getUserWithAllGeneralAndOwnedAccesories(liveData: MutableLiveData<List<Accessory>>) {
+    fun getUserWithAllOwnedAccesories(liveData: MutableLiveData<List<Accessory>>) {
         viewModelScope.launch (Dispatchers.IO){
             liveData.postValue(repository.getUserWithAccessories(checkRegisteredUser.value?.id!!).first().accesories)
         }

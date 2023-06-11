@@ -17,5 +17,7 @@ object AccessoryRepository {
 
     fun addAccessory(accessory: Accessory) = accessoryModel.addAccessory(accessory)
 
+    fun deleteAccessory(accessory: Accessory) = accessoryModel.deleteAccessory(accessory)
+
     fun getAllGeneralAccessories() = accessoryModel.getAllGeneralAccessories()
 }

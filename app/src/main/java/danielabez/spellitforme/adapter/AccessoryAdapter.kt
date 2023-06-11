@@ -21,6 +21,10 @@ class AccessoryAdapter : RecyclerView.Adapter<AccessoryAdapter.AccessoryViewHold
                 val chosenAccessory = accessoryList?.get(this.adapterPosition)
                 onAccessoryClickListener?.onAccessoryClick(chosenAccessory)
             }
+            binding.ivAccessoryRemove.setOnClickListener(){
+                val chosenAccessory = accessoryList?.get(this.adapterPosition)
+                onAccessoryClickListener?.onAccessoryClickRemove(chosenAccessory)
+            }
         }
     }
 
@@ -96,5 +100,6 @@ class AccessoryAdapter : RecyclerView.Adapter<AccessoryAdapter.AccessoryViewHold
 
     interface OnAccessoryClickListener{
         fun onAccessoryClick(accessory: Accessory?)
+        fun onAccessoryClickRemove(accessory: Accessory?)
     }
 }

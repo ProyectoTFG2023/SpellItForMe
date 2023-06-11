@@ -19,6 +19,7 @@
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:layout_marginStart="10dp"
+            android:layout_marginBottom="30dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -28,7 +29,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="15dp"
-            android:layout_marginTop="15dp"
+            android:layout_marginTop="24dp"
             android:layout_marginEnd="5dp"
             android:textAlignment="center"
             android:textSize="17sp"
@@ -36,6 +37,17 @@
             app:layout_constraintStart_toEndOf="@+id/ivAccessory"
             app:layout_constraintTop_toTopOf="parent"
             tools:text="Accessory Name" />
+
+        <ImageView
+            android:id="@+id/ivAccessoryRemove"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginTop="6dp"
+            android:visibility="visible"
+            app:layout_constraintEnd_toEndOf="@+id/ivAccessory"
+            app:layout_constraintStart_toStartOf="@+id/ivAccessory"
+            app:layout_constraintTop_toBottomOf="@+id/ivAccessory"
+            app:srcCompat="@android:drawable/ic_menu_delete" />
 
         <ImageView
             android:id="@+id/ivAccessorySlots"
@@ -253,7 +265,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/llytAccessoryDefenseAttributes" />
+            app:layout_constraintTop_toBottomOf="@+id/ivAccessoryRemove" />
 
         <LinearLayout
             android:id="@+id/llytAccessorySkills"
@@ -303,6 +315,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="7dp"
                         android:gravity="center_horizontal"
+                        android:textSize="12sp"
                         app:layout_constraintBottom_toBottomOf="@+id/ivAccessorySkillOne"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toEndOf="@+id/ivAccessorySkillOne"
@@ -346,6 +359,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="7dp"
                         android:foregroundGravity="center_horizontal"
+                        android:textSize="12sp"
                         app:layout_constraintBottom_toBottomOf="@+id/ivAccessorySkillTwo"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toEndOf="@+id/ivAccessorySkillTwo"

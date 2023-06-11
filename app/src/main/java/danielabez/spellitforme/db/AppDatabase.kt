@@ -72,7 +72,7 @@ abstract class AppDatabase: RoomDatabase() {
             suspend fun initializeDatabase(registeredUserDao: RegisteredUserDao, characterSetDao: CharacterSetDao, skillDao: SkillDao, gearDao: GearDao, weaponDao: WeaponDao, accessoryDao: AccessoryDao){
                 registeredUserDao.addRegisteredUser(RegisteredUser("correo@gmail.com", "admin", "admin"))
 
-                skillDao.addSkill(Skill("Attack Up",
+                skillDao.addSkill(Skill("Atk Up",
                     "Attack",
                     "Increases the weapon's base physical attack damage",
                     listOf("Increases physical damage by 5%", "Increases physical damage by 10%", "Increases physical damage by 25%"),
@@ -84,19 +84,19 @@ abstract class AppDatabase: RoomDatabase() {
                     listOf("Increases physical attack by 10 points", "Increases physical attack by 20 points", "Increases physical attack by 40 points"),
                     listOf(10.0F, 20.0F, 40.0F),
                     3))
-                skillDao.addSkill(Skill("Fire Attack Up",
+                skillDao.addSkill(Skill("Fire Atk Up",
                     "FireAttack",
                     "Increases the weapon's fire attack damage",
                     listOf("Increases fire damage by 5%", "Increases fire damage by 15%", "Increases fire damage by 30%", "Increases fire damage by 50%", "Increases fire damage by 75%"),
                     listOf(5.0F, 15.0F, 30.0F, 50.0F, 75.0F),
                     5))
-                skillDao.addSkill(Skill("Ice Attack Up",
+                skillDao.addSkill(Skill("Ice Atk Up",
                     "IceAttack",
                     "Increases the weapon's ice attack damage",
                     listOf("Increases ice damage by 5%", "Increases ice damage by 15%", "Increases ice damage by 30%", "Increases ice damage by 50%", "Increases ice damage by 75%"),
                     listOf(5.0F, 15.0F, 30.0F, 50.0F, 75.0F),
                     5))
-                skillDao.addSkill(Skill("Thunder Attack Up",
+                skillDao.addSkill(Skill("Thunder Atk Up",
                     "ThunderAttack",
                     "Increases the weapon's thunder attack damage",
                     listOf("Increases thunder damage by 5%", "Increases thunder damage by 15%", "Increases thunder damage by 30%", "Increases thunder damage by 50%", "Increases thunder damage by 75%"),
@@ -108,25 +108,25 @@ abstract class AppDatabase: RoomDatabase() {
                     listOf("Increases critical chance by 2%", "Increases critical chance by 5%", "Increases critical chance by 10%", "Increases critical chance by 18%", "Increases critical chance by 30%"),
                     listOf(2.0F, 5.0F, 10.0F, 18.0F, 30.0F),
                     5))
-                skillDao.addSkill(Skill("Defense Up",
+                skillDao.addSkill(Skill("Physical Def Up",
                     "PhysDefense",
                     "Increases physical defense",
                     listOf("Increases physical defense by 10 points", "Increases physical defense by 20 points", "Increases physical defense by 35 points", "Increases physical defense by 60 points", "Increases physical defense by 100 points"),
                     listOf(10F, 20F, 35F, 60F, 100F),
                     5))
-                skillDao.addSkill(Skill("Fire Defense Up",
+                skillDao.addSkill(Skill("Fire Def Up",
                     "FireDefense",
                     "Increases resistance to fire damage",
                     listOf("Increases fire defense by 20 points", "Increases fire defense by 40 points", "Increases fire defense by 65 points", "Increases fire defense by 100 points", "Increases fire defense by 150 points"),
                     listOf(20F, 40F, 65F, 100F, 150F),
                     5))
-                skillDao.addSkill(Skill("Ice Defense Up",
+                skillDao.addSkill(Skill("Ice Def Up",
                     "IceDefense",
                     "Increases resistance to ice damage",
                     listOf("Increases ice defense by 20 points", "Increases ice defense by 40 points", "Increases ice defense by 65 points", "Increases ice defense by 100 points", "Increases ice defense by 150 points"),
                     listOf(20F, 40F, 65F, 100F, 150F),
                     5))
-                skillDao.addSkill(Skill("Thunder Defense Up",
+                skillDao.addSkill(Skill("Thunder Def Up",
                     "ThunderDefense",
                     "Increases resistance to thunder damage",
                     listOf("Increases thunder defense by 20 points", "Increases thunder defense by 40 points", "Increases thunder defense by 65 points", "Increases thunder defense by 100 points", "Increases thunder defense by 150 points"),

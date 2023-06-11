@@ -1,6 +1,7 @@
 package danielabez.spellitforme.db.dao
 
 import androidx.room.Dao
+import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
@@ -11,6 +12,9 @@ import danielabez.spellitforme.model.Accessory
 interface AccessoryDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun addAccessory(accessory: Accessory)
+
+    @Delete
+    fun deleteAccessory(accessory: Accessory)
 
     @Query("SELECT * FROM accessory WHERE registeredUserOwnerId IS NULL")
     fun getAllGeneralAccessories() : List<Accessory>

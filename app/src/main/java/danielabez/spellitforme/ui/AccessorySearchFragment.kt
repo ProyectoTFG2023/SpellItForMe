@@ -1,5 +1,7 @@
 package danielabez.spellitforme.ui
 
+import android.app.AlertDialog
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -49,6 +51,10 @@ class AccessorySearchFragment : Fragment() {
                 accessoryViewModel.updateChosenAccessory(accessory!!, argPositionToBeSetOn.positionToBeSetOn)
                 findNavController().popBackStack()
             }
+
+            override fun onAccessoryClickRemove(accessory: Accessory?) {
+                deleteWarningDialog(accessory)
+            }
         }
 
         accessoryViewModel.accessoryListLiveData.observe(viewLifecycleOwner, Observer<List<Accessory>>{ list ->
@@ -60,7 +66,7 @@ class AccessorySearchFragment : Fragment() {
             findNavController().navigate(action)
         }
 
-        registeredUserViewModel.getUserWithAllGeneralAndOwnedAccesories(accessoryViewModel.accessoryListLiveData)
+        registeredUserViewModel.getUserWithAllOwnedAccesories(accessoryViewModel.accessoryListLiveData)
     }
 
     override fun onDestroyView() {
@@ -75,5 +81,22 @@ class AccessorySearchFragment : Fragment() {
             layoutManager = LinearLayoutManager(activity)
             adapter = accessoryAdapter
         }
+    }
+
+    private fun deleteWarningDialog(accessory: Accessory?){
+        AlertDialog.Builder(activity as Context)
+            .setTitle(getString(R.string.deleteWarningDialogTitle))
+            .setMessage(getString(R.string.deleteWarningDialogMessage, accessory!!.accesoryGear.name))
+            .setPositiveButton(getString(R.string.deleteWarningDialogConfirm)) { v, _ ->
+                accessoryViewModel.deleteAccessory(accessory!!)
+                registeredUserViewModel.getUserWithAllOwnedAccesories(accessoryViewModel.accessoryListLiveData)
+                v.dismiss()
+            }
+            .setNegativeButton(getString(R.string.deleteWaringDialogCancel)) { v, _ ->
+                v.dismiss()
+            }
+            .setCancelable(false)
+            .create()
+            .show()
     }
 }

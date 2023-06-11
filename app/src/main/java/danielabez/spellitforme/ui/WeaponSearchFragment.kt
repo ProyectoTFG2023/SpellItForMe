@@ -1,7 +1,5 @@
 package danielabez.spellitforme.ui
 
-import android.graphics.Color
-import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -9,22 +7,15 @@ import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.SearchView
-import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
-import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import danielabez.spellitforme.R
-import danielabez.spellitforme.adapter.GearAdapter
 import danielabez.spellitforme.adapter.WeaponAdapter
-import danielabez.spellitforme.databinding.FragmentGearSearchBinding
-import danielabez.spellitforme.databinding.FragmentLoginBinding
 import danielabez.spellitforme.databinding.FragmentWeaponSearchBinding
-import danielabez.spellitforme.model.Gear
 import danielabez.spellitforme.model.Weapon
-import danielabez.spellitforme.viewModel.GearViewModel
 import danielabez.spellitforme.viewModel.WeaponViewModel
 
 class WeaponSearchFragment : Fragment() {
@@ -165,7 +156,7 @@ class WeaponSearchFragment : Fragment() {
     }
 
     private fun initializeRaritySpinner(){
-        ArrayAdapter.createFromResource(requireContext(), R.array.spSearchRarityFilter, android.R.layout.simple_spinner_item
+        ArrayAdapter.createFromResource(requireContext(), R.array.spGearSearchRarityFilter, android.R.layout.simple_spinner_item
         ).also { adapter ->
             adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
             binding.spWeaponSearchRarityFilter.adapter = adapter

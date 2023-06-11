@@ -40,8 +40,8 @@
 
         <ImageView
             android:id="@+id/ivWeaponOnSetRemove"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
             android:layout_marginTop="6dp"
             android:visibility="gone"
             app:layout_constraintEnd_toEndOf="@+id/ivWeaponOnSet"
@@ -299,6 +299,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginStart="7dp"
                             android:gravity="center_horizontal"
+                            android:textSize="12sp"
                             app:layout_constraintBottom_toBottomOf="@+id/ivWeaponOnSetSkillOne"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toEndOf="@+id/ivWeaponOnSetSkillOne"
@@ -344,6 +345,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginStart="7dp"
                             android:foregroundGravity="center_horizontal"
+                            android:textSize="12sp"
                             app:layout_constraintBottom_toBottomOf="@+id/ivWeaponOnSetSkillTwo"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toEndOf="@+id/ivWeaponOnSetSkillTwo"

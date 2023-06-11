@@ -21,6 +21,12 @@ class SkillViewModel(app: Application) : AndroidViewModel(app) {
     val chosenPosition : MutableLiveData<Int?> by lazy {
         MutableLiveData<Int?>()
     }
+    val firstSkillForAccessoryCreation : MutableLiveData<Skill?> by lazy {
+        MutableLiveData<Skill?>()
+    }
+    val secondSkillForAccessoryCreation : MutableLiveData<Skill?> by lazy {
+        MutableLiveData<Skill?>()
+    }
 
     init {
         SkillRepository(getApplication<Application>().applicationContext)
@@ -29,6 +35,11 @@ class SkillViewModel(app: Application) : AndroidViewModel(app) {
 
     fun addSkill(skill: Skill) = viewModelScope.launch (Dispatchers.IO){
         repository.addSkill(skill)
+    }
+
+    fun getSkillByName(pName: String, isFirst: Boolean) = viewModelScope.launch(Dispatchers.IO){
+        if(isFirst) firstSkillForAccessoryCreation.postValue(repository.getSkillByName(pName))
+        else secondSkillForAccessoryCreation.postValue(repository.getSkillByName(pName))
     }
 
     fun getAllSkills() {

@@ -19,7 +19,7 @@ object SkillRepository {
 
     fun addSkill(skill: Skill) = skillModel.addSkill(skill)
 
-
+    fun getSkillByName(pName: String) = skillModel.getSkillByName(pName)
 
     fun getAllSkills() = skillModel.getAllSkills()
 

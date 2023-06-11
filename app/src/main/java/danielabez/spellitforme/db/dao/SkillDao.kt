@@ -13,6 +13,9 @@ interface SkillDao {
     @Query("SELECT * FROM skill WHERE id = :pId")
     fun getSkillById(pId: Long) : Skill
 
+    @Query("SELECT * FROM skill WHERE name = :pName")
+    fun getSkillByName(pName: String) : Skill
+
     @Query("SELECT * FROM skill")
     fun getAllSkills() : List<Skill>
 

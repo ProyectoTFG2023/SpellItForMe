@@ -64,6 +64,7 @@ class HomeFragment : Fragment() {
             .setMessage("Intento de volver a login")
             .setPositiveButton(android.R.string.ok) { v, _ ->
                 registeredUserViewModel.emptyCheckRegisteredUser()
+                findNavController().popBackStack()
             }
             .setNegativeButton(android.R.string.cancel) { v, _ ->
                 v.dismiss()

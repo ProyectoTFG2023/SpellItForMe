@@ -35,6 +35,10 @@ class AccessoryViewModel(app: Application) : AndroidViewModel(app) {
         repository.addAccessory(accessory)
     }
 
+    fun deleteAccessory(accessory: Accessory) = viewModelScope.launch (Dispatchers.IO){
+        repository.deleteAccessory(accessory)
+    }
+
     fun updateChosenAccessory(accessory: Accessory, accessoryPosition: Int) {
         chosenAccessory.postValue(accessory)
         chosenPosition.postValue(accessoryPosition)
