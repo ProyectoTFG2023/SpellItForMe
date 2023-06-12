@@ -6,9 +6,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.AdapterView
-import android.widget.ArrayAdapter
-import android.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
@@ -17,10 +14,8 @@ import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import danielabez.spellitforme.R
 import danielabez.spellitforme.adapter.AccessoryAdapter
-import danielabez.spellitforme.adapter.WeaponAdapter
 import danielabez.spellitforme.databinding.FragmentAccessorySearchBinding
 import danielabez.spellitforme.model.Accessory
-import danielabez.spellitforme.model.Weapon
 import danielabez.spellitforme.viewModel.AccessoryViewModel
 import danielabez.spellitforme.viewModel.RegisteredUserViewModel
 
@@ -65,7 +60,7 @@ class AccessorySearchFragment : Fragment() {
             findNavController().navigate(action)
         }
 
-        registeredUserViewModel.getUserWithAllOwnedAccesories(accessoryViewModel.accessoryListLiveData)
+        registeredUserViewModel.getRegisteredUserWithAllOwnedAccesories(accessoryViewModel.accessoryListLiveData)
     }
 
     override fun onDestroyView() {
@@ -84,14 +79,14 @@ class AccessorySearchFragment : Fragment() {
 
     private fun deleteWarningDialog(accessory: Accessory?){
         AlertDialog.Builder(activity as Context)
-            .setTitle(getString(R.string.deleteWarningDialogTitle))
-            .setMessage(getString(R.string.deleteWarningDialogMessage, accessory!!.accesoryGear.name))
-            .setPositiveButton(getString(R.string.deleteWarningDialogConfirm)) { v, _ ->
-                accessoryViewModel.deleteAccessory(accessory!!)
-                registeredUserViewModel.getUserWithAllOwnedAccesories(accessoryViewModel.accessoryListLiveData)
+            .setTitle(getString(R.string.accessoryDeleteWarningDialogTitle))
+            .setMessage(getString(R.string.accessoryDeleteWarningDialogMessage, accessory!!.accesoryGear.name))
+            .setPositiveButton(getString(R.string.accessoryDeleteWarningDialogConfirm)) { v, _ ->
+                accessoryViewModel.deleteAccessory(accessory)
+                registeredUserViewModel.getRegisteredUserWithAllOwnedAccesories(accessoryViewModel.accessoryListLiveData)
                 v.dismiss()
             }
-            .setNegativeButton(getString(R.string.deleteWaringDialogCancel)) { v, _ ->
+            .setNegativeButton(getString(R.string.accessoryDeleteWarningDialogCancel)) { v, _ ->
                 v.dismiss()
             }
             .setCancelable(false)

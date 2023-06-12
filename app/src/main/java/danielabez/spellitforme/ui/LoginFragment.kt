@@ -9,11 +9,9 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.activityViewModels
-import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import danielabez.spellitforme.R
 import danielabez.spellitforme.databinding.FragmentLoginBinding
-import danielabez.spellitforme.model.RegisteredUser
 import danielabez.spellitforme.viewModel.RegisteredUserViewModel
 
 class LoginFragment : Fragment() {
@@ -31,16 +29,6 @@ class LoginFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        registeredUserViewModel.checkRegisteredUser.observe(viewLifecycleOwner, Observer<RegisteredUser>{ checkRegisteredUser ->
-            if(checkRegisteredUser != null){
-                val action = LoginFragmentDirections.actionLoginFragmentToHomeFragment()
-                findNavController().navigate(action)
-            }
-            else{
-                failedLoginWarning()
-            }
-        })
 
         binding.btLoginLog.setOnClickListener(){
             verifyLogin()
@@ -62,10 +50,18 @@ class LoginFragment : Fragment() {
     */
     private fun verifyLogin() {
         if (!binding.tietLoginUsername.text.isNullOrEmpty() && !binding.tietLoginPassword.text.isNullOrEmpty()) {
-            registeredUserViewModel.checkRegisteredUserByUsernameAndPassword(
+            val userFound = registeredUserViewModel.checkRegisteredUserByUsernameAndPassword(
                 binding.tietLoginUsername.text.toString(),
                 binding.tietLoginPassword.text.toString()
             )
+            Thread.sleep(100)
+            if(userFound != null){
+                val action = LoginFragmentDirections.actionLoginFragmentToHomeFragment()
+                findNavController().navigate(action)
+            }
+            else{
+                failedLoginWarning()
+            }
         } else {
             Toast.makeText(context, getString(R.string.emptyFieldsWarning), Toast.LENGTH_SHORT).show()
         }
@@ -74,7 +70,6 @@ class LoginFragment : Fragment() {
     /*
     * Método que muestra un mensaje en una ventana de diálogo cuando se produce un error al iniciar sesión.
     */
-    //TODO: Añadir comprobación de si el error es por contraseña inválida o porque el usuario introducido no existe
     private fun failedLoginWarning() {
         AlertDialog.Builder(activity as Context)
             .setTitle(R.string.failedLoginWarningTitle)

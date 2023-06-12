@@ -10,6 +10,7 @@ import kotlinx.parcelize.Parcelize
 class CharacterSet (
     @PrimaryKey(autoGenerate = true)
     var id: Long? = null,
+    var registeredUserOwnerId: Long,
     var name: String,
     var role: String,
     var stats: CharacterStats,
@@ -19,7 +20,7 @@ class CharacterSet (
     var slottedSkills : MutableList<Skill?> = mutableListOf()
 
 ): Parcelable {
-    constructor(name: String, role: String, stats: CharacterStats) : this(null, name, role, stats)
+    constructor(registeredUserOwnerId: Long, name: String, role: String, stats: CharacterStats) : this(null, registeredUserOwnerId, name, role, stats)
 
     override fun equals(objeto: Any?): Boolean {
         return (objeto is CharacterSet) && (this.id == objeto?.id)

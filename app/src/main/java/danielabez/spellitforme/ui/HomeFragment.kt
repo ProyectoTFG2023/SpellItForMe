@@ -8,27 +8,29 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
 import danielabez.spellitforme.R
+import danielabez.spellitforme.adapter.CharacterSetAdapter
 import danielabez.spellitforme.databinding.FragmentHomeBinding
-import danielabez.spellitforme.viewModel.GearViewModel
+import danielabez.spellitforme.model.CharacterSet
+import danielabez.spellitforme.viewModel.CharacterSetViewModel
 import danielabez.spellitforme.viewModel.RegisteredUserViewModel
-import danielabez.spellitforme.viewModel.SkillViewModel
 
 class HomeFragment : Fragment() {
     private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding!!
     private val registeredUserViewModel : RegisteredUserViewModel by activityViewModels()
-    //TODO: NO FUNCIONAL, PENDIENTE DE REVISIÓN
+    private val characterSetViewModel : CharacterSetViewModel by activityViewModels()
+    private lateinit var characterSetAdapter: CharacterSetAdapter
     //Con la siguiente variable, controlaremos el funcionamiento del botón de vuelta atrás de Android, y podremos decidir la función que realizará
     private val onBackPressedCallback : OnBackPressedCallback = object : OnBackPressedCallback(true){
         override fun handleOnBackPressed() {
             confirmSignOff()
-            Log.d("SpellItForMe_Debug", " -> " + registeredUserViewModel.checkRegisteredUser.value.toString())
         }
     }
 
@@ -49,8 +51,25 @@ class HomeFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         (activity as AppCompatActivity).supportActionBar?.title = getString(R.string.home_fragment_label, registeredUserViewModel.checkRegisteredUser.value?.username)
 
-         //inicializarRecycler
+        initializeRecyclerView()
         initializeFloatingActionButton()
+
+        characterSetAdapter.onCharacterSetClickListener = object : CharacterSetAdapter.OnCharacterSetClickListener {
+            override fun onCharacterSetClick(characterSet: CharacterSet?) {
+                val action = HomeFragmentDirections.actionHomeFragmentToEquipmentSetFragment(false, characterSet!!)
+                findNavController().navigate(action)
+            }
+
+            override fun onCharacterSetClickRemove(characterSet: CharacterSet?) {
+                deleteWarningDialog(characterSet)
+            }
+        }
+
+        characterSetViewModel.characterSetListLiveData.observe(viewLifecycleOwner, Observer<List<CharacterSet>>{ list ->
+            characterSetAdapter.updateList(list)
+        })
+
+        registeredUserViewModel.getRegisteredUserWithAllOwnedCharacterSets(characterSetViewModel.characterSetListLiveData)
     }
 
     override fun onDestroyView() {
@@ -58,24 +77,51 @@ class HomeFragment : Fragment() {
         _binding = null
     }
 
-    fun initializeFloatingActionButton(){
+    private fun initializeRecyclerView(){
+        characterSetAdapter = CharacterSetAdapter()
+
+        with(binding.rvHomeUserSets){
+            layoutManager = LinearLayoutManager(activity)
+            adapter = characterSetAdapter
+        }
+    }
+
+    private fun initializeFloatingActionButton(){
         binding.fabHomeCreateNewCharacter.setOnClickListener(){
             val action = HomeFragmentDirections.actionHomeFragmentToCharacterCreationFragment()
             findNavController().navigate(action)
         }
     }
 
-    //TODO: NO FUNCIONAL, PENDIENTE DE REVISIÓN
-    fun confirmSignOff() {
+    private fun deleteWarningDialog(characterSet: CharacterSet?){
         AlertDialog.Builder(activity as Context)
-            .setTitle("No Funcional")
-            .setMessage("Intento de volver a login")
-            .setPositiveButton(android.R.string.ok) { v, _ ->
+            .setTitle(getString(R.string.characterSetDeleteWarningDialogTitle))
+            .setMessage(getString(R.string.characterSetDeleteWarningDialogMessage, characterSet!!.name))
+            .setPositiveButton(getString(R.string.characterSetDeleteWarningDialogConfirm)) { v, _ ->
+                characterSetViewModel.deleteCharacterSet(characterSet)
+                Thread.sleep(100)
+                registeredUserViewModel.getRegisteredUserWithAllOwnedCharacterSets(characterSetViewModel.characterSetListLiveData)
+                v.dismiss()
+            }
+            .setNegativeButton(getString(R.string.characterSetDeleteWarningDialogCancel)) { v, _ ->
+                v.dismiss()
+            }
+            .setCancelable(false)
+            .create()
+            .show()
+    }
+
+    private fun confirmSignOff() {
+        AlertDialog.Builder(activity as Context)
+            .setTitle(getString(R.string.signOffConfirmDialogTitle))
+            .setMessage(getString(R.string.signOffConfirmDialogMessage))
+            .setPositiveButton(R.string.signOffConfirmDialogueConfirm) { v, _ ->
                 registeredUserViewModel.emptyCheckRegisteredUser()
+                Thread.sleep(100)
                 findNavController().popBackStack()
                 v.dismiss()
             }
-            .setNegativeButton(android.R.string.cancel) { v, _ ->
+            .setNegativeButton(R.string.signOffConfirmDialogueCancel) { v, _ ->
                 v.dismiss()
             }
             .create()

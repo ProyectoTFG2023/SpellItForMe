@@ -17,5 +17,5 @@ object CharacterSetRepository {
 
     fun addCharacterSet(characterSet: CharacterSet) = characterSetModel.addCharacterSet(characterSet)
 
-    fun getCharacterSetsByRegisteredUser() = characterSetModel.getCharacterSetsByRegisteredUser()
+    fun deleteCharacterSet(characterSet: CharacterSet) = characterSetModel.deleteCharacterSet(characterSet)
 }

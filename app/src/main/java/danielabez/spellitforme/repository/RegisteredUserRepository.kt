@@ -33,5 +33,7 @@ object RegisteredUserRepository {
 
     fun getRegisteredUserByUsernameAndPassword(pUsername: String, pPassword: String) = registeredUserModel.getRegisteredUserByUsernameAndPassword(pUsername, pPassword)
 
-    fun getUserWithAccessories(pUserId: Long) = registeredUserModel.getRegisteredUserWithAccesories(pUserId)
+    fun getRegisteredUserWithCharacterSets(pUserId: Long) = registeredUserModel.getRegisteredUserWithCharacterSets(pUserId)
+
+    fun getRegisteredUserWithAccessories(pUserId: Long) = registeredUserModel.getRegisteredUserWithAccesories(pUserId)
 }

@@ -28,16 +28,16 @@ class DataConverters {
     }
 
     @TypeConverter
-    fun weaponToString(value: Weapon) : String {
+    fun weaponToString(value: Weapon?) : String {
         val gson = Gson()
-        val type = object : TypeToken<Weapon>(){}.type
+        val type = object : TypeToken<Weapon?>(){}.type
         return gson.toJson(value, type)
     }
 
     @TypeConverter
-    fun stringToWeapon(value: String) : Weapon {
+    fun stringToWeapon(value: String) : Weapon? {
         val gson = Gson()
-        val type = object : TypeToken<Weapon>(){}.type
+        val type = object : TypeToken<Weapon?>(){}.type
         return gson.fromJson(value, type)
     }
 

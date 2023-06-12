@@ -28,6 +28,17 @@
     <!-- HomeFragment -->
     <string name="home_fragment_label">Greetings, %s</string>
     <string name="tvHomeUserSets">Your Sets</string>
+    <string name="characterSetDeleteWarningDialogTitle">Character Removal</string>
+    <string name="characterSetDeleteWarningDialogMessage">Are you sure about deleting the "%s" character? </string>
+    <string name="characterSetDeleteWarningDialogConfirm">Delete</string>
+    <string name="characterSetDeleteWarningDialogCancel">Cancel</string>
+    <string name="signOffConfirmDialogTitle">Signing Off</string>
+    <string name="signOffConfirmDialogMessage">Do you want to sign off your account and go back to the login screen?</string>
+    <string name="signOffConfirmDialogueConfirm">Sign Off</string>
+    <string name="signOffConfirmDialogueCancel">Cancel</string>
+
+    <!-- ItemCharacterSet -->
+    <string name="tvCharacterSetWeaponNone">No weapon</string>
 
     <!-- CharacterCreationFragment -->
     <string name="character_creation_fragment_label">New Character Creation</string>
@@ -46,9 +57,13 @@
     <string name="tietCharacterCreationCunningHint">Cunning</string>
     <string name="tietCharacterCreationAttunementHint">Attunement</string>
     <string name="toastEmptyFieldsWarning">One or more attribute fields are empty</string>
+    <string name="characterCreationExitWithoutSavingWarningDialogTitle">Leaving Without Proceeding</string>
+    <string name="characterCreationExitWithoutSavingWarningDialogMessage">If you leave now, the character data you\'ve introduced will be lost. Are you sure?</string>
+    <string name="characterCreationExitWithoutSavingWarningDialogConfirm">Leave</string>
+    <string name="characterCreationExitWithoutSavingWarningDialogCancel">Cancel</string>
 
     <!-- EquipmentSetFragment -->
-    <string name="equipment_set_fragment_label">Equipment Editor</string>
+    <string name="equipment_set_fragment_label">Editing Equipment</string>
     <string name="tvEquipmentEquipmentAttributesTitle">Attributes</string>
     <string name="tvEquipmentOffensiveStatsTitle">Attacking Stats</string>
     <string name="tvEquipmentDefensiveStatsTitle">Defenses</string>
@@ -58,6 +73,14 @@
     <string name="tvEquipmentSlots">Slots</string>
     <string name="tvActualSkills">Skills</string>
     <string name="skillInfoCloseAction">Close</string>
+    <string name="equipmentSetSaveAndExitDialogTitle">Saving Current Set</string>
+    <string name="equipmentSetSaveAndExitDialogMessage">Do you want to save the current set and go back to the Home screen?</string>
+    <string name="equipmentSetSaveAndExitDialogConfirm">Save &amp; Exit</string>
+    <string name="equipmentSetSaveAndExitDialogCancel">Cancel</string>
+    <string name="equipmentSetExitWithoutSavingWarningDialogTitle">Leaving Without Saving</string>
+    <string name="equipmentSetExitWithoutSavingWarningDialogMessage">If you leave now, changes won\'t be saved. Are you sure?</string>
+    <string name="equipmentSetExitWithoutSavingWarningDialogConfirm">Leave</string>
+    <string name="equipmentSetExitWithoutSavingWarningDialogCancel">Cancel</string>
 
     <!-- ItemGearOnSet -->
     <string name="tvGearOnSetNameDefault">No %s selected</string>
@@ -95,10 +118,11 @@
     <string name="svAccessoryNameFilterHint">Filter by an accessory\'s name…</string>
     <string name="tvAccessorySearchTypeFilterInfo">Type</string>
     <string name="tvAccessorySearchRarityFilterInfo">Rarity</string>
-    <string name="deleteWarningDialogTitle"> Accessory Removal</string>
-    <string name="deleteWarningDialogMessage">Are you sure about deleting %s?</string>
-    <string name="deleteWarningDialogConfirm">Delete</string>
-    <string name="deleteWaringDialogCancel">Cancel</string>
+    <string name="accessoryDeleteWarningDialogTitle">Accessory Removal</string>
+    <string name="accessoryDeleteWarningDialogMessage">Are you sure about deleting the "%s" accessory?</string>
+    <string name="accessoryDeleteWarningDialogConfirm">Delete</string>
+    <string name="accessoryDeleteWarningDialogCancel">Cancel</string>
+
 
     <!-- SkillSearchFragment -->
     <string name="skill_search_fragment_label">Searching Skills</string>
@@ -166,4 +190,8 @@
         <item>Geologist\'s Touch</item>
         <item>Herbalist\'s Wit</item>
     </string-array>
+    <string name="accessoryCreationExitWithoutSavingWarningDialogTitle">Leaving Without Saving</string>
+    <string name="accessoryCreationExitWithoutSavingWarningDialogMessage">If you leave now, the accessory data you\'ve introduced won\'t be saved. Are you sure?</string>
+    <string name="accessoryCreationExitWithoutSavingWarningDialogConfirm">Leave</string>
+    <string name="accessoryCreationExitWithoutSavingWarningDialogCancel">Cancel</string>
 </resources>

@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/cvCharacterSet"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:cardCornerRadius="16dp"
+    app:cardElevation="4dp"
+    app:cardUseCompatPadding="true">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/clytCharacterSet"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="26dp"
+        android:layout_marginTop="18dp"
+        android:layout_marginEnd="26dp"
+        android:layout_marginBottom="12dp">
+
+        <ImageView
+            android:id="@+id/ivCharacterSetRole"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@mipmap/ic_helmet_legendary_foreground" />
+
+        <TextView
+            android:id="@+id/tvCharacterSetName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/ivCharacterSetRole"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="Character's Name" />
+
+        <TextView
+            android:id="@+id/tvCharacterSetRole"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            app:layout_constraintEnd_toEndOf="@+id/tvCharacterSetName"
+            app:layout_constraintStart_toStartOf="@+id/tvCharacterSetName"
+            app:layout_constraintTop_toBottomOf="@+id/tvCharacterSetName"
+            tools:text="Character's Role" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/clytCharacterSetWeapon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            app:layout_constraintEnd_toEndOf="@+id/tvCharacterSetName"
+            app:layout_constraintStart_toStartOf="@+id/tvCharacterSetName"
+            app:layout_constraintTop_toBottomOf="@+id/tvCharacterSetRole">
+
+            <ImageView
+                android:id="@+id/ivCharacterSetWeapon"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@android:drawable/ic_menu_help" />
+
+            <TextView
+                android:id="@+id/tvCharacterSetWeapon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="6dp"
+                app:layout_constraintBottom_toBottomOf="@id/ivCharacterSetWeapon"
+                app:layout_constraintStart_toEndOf="@+id/ivCharacterSetWeapon"
+                app:layout_constraintTop_toTopOf="@+id/ivCharacterSetWeapon"
+                tools:text="Character's Weapon" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <ImageView
+            android:id="@+id/ivCharacterSetRemove"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginTop="6dp"
+            app:layout_constraintEnd_toEndOf="@+id/ivCharacterSetRole"
+            app:layout_constraintStart_toStartOf="@+id/ivCharacterSetRole"
+            app:layout_constraintTop_toBottomOf="@+id/ivCharacterSetRole"
+            app:srcCompat="@android:drawable/ic_menu_delete" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.cardview.widget.CardView>

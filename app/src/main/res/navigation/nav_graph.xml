@@ -71,6 +71,10 @@
         <action
             android:id="@+id/action_EquipmentSetFragment_to_AccessorySearchFragment"
             app:destination="@id/AccessorySearchFragment" />
+        <action
+            android:id="@+id/action_EquipmentSetFragment_to_HomeFragment"
+            app:destination="@id/HomeFragment"
+            app:popUpTo="@id/HomeFragment" />
     </fragment>
     <fragment
         android:id="@+id/CharacterCreationFragment"

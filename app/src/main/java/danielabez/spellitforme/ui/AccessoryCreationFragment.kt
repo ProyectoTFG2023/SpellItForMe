@@ -1,12 +1,15 @@
 
 package danielabez.spellitforme.ui
 
+import android.app.AlertDialog
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
+import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
@@ -22,9 +25,19 @@ import danielabez.spellitforme.viewModel.SkillViewModel
 class AccessoryCreationFragment : Fragment() {
     private var _binding: FragmentAccessoryCreationBinding? = null
     private val binding get() = _binding!!
+    private val onBackPressedCallback : OnBackPressedCallback = object : OnBackPressedCallback(true){
+        override fun handleOnBackPressed() {
+            showExitWithoutSavingWarningDialog()
+        }
+    }
     private val registeredUserViewModel : RegisteredUserViewModel by activityViewModels()
     private val skillViewModel : SkillViewModel by activityViewModels()
     private val accessoryViewModel : AccessoryViewModel by activityViewModels()
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        requireActivity().onBackPressedDispatcher.addCallback(this, onBackPressedCallback)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -202,6 +215,21 @@ class AccessoryCreationFragment : Fragment() {
             else -> "e_Legendary"
         }
         return result
+    }
+
+    private fun showExitWithoutSavingWarningDialog(){
+        AlertDialog.Builder(activity as Context)
+            .setTitle(getString(R.string.accessoryCreationExitWithoutSavingWarningDialogTitle))
+            .setMessage(getString(R.string.accessoryCreationExitWithoutSavingWarningDialogMessage))
+            .setPositiveButton(getString(R.string.accessoryCreationExitWithoutSavingWarningDialogConfirm)) { v, _ ->
+                findNavController().popBackStack()
+                v.dismiss()
+            }
+            .setNegativeButton(getString(R.string.accessoryCreationExitWithoutSavingWarningDialogCancel)){ v, _ ->
+                v.dismiss()
+            }
+            .create()
+            .show()
     }
 }
 

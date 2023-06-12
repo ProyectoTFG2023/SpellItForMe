@@ -3,10 +3,10 @@ package danielabez.spellitforme.ui
 import android.app.AlertDialog
 import android.content.Context
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.MutableLiveData
@@ -15,7 +15,6 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import danielabez.spellitforme.R
-import danielabez.spellitforme.adapter.AccessoryAdapter
 import danielabez.spellitforme.adapter.AccessoryOnSetAdapter
 import danielabez.spellitforme.adapter.GearOnSetAdapter
 import danielabez.spellitforme.adapter.SkillOnSetAdapter
@@ -24,29 +23,37 @@ import danielabez.spellitforme.adapter.WeaponOnSetAdapter
 import danielabez.spellitforme.databinding.FragmentEquipmentSetBinding
 import danielabez.spellitforme.model.Accessory
 import danielabez.spellitforme.model.CharacterSet
-import danielabez.spellitforme.model.CharacterStats
 import danielabez.spellitforme.model.Gear
 import danielabez.spellitforme.model.Skill
 import danielabez.spellitforme.model.SkillOnSet
 import danielabez.spellitforme.model.Weapon
 import danielabez.spellitforme.tools.IconHelper
 import danielabez.spellitforme.viewModel.AccessoryViewModel
+import danielabez.spellitforme.viewModel.CharacterSetViewModel
 import danielabez.spellitforme.viewModel.GearViewModel
+import danielabez.spellitforme.viewModel.RegisteredUserViewModel
 import danielabez.spellitforme.viewModel.SkillViewModel
 import danielabez.spellitforme.viewModel.WeaponViewModel
 
 class EquipmentSetFragment : Fragment() {
     private var _binding: FragmentEquipmentSetBinding? = null
     private val binding get() = _binding!!
+    private val onBackPressedCallback : OnBackPressedCallback = object : OnBackPressedCallback(true){
+        override fun handleOnBackPressed() {
+            showExitWithoutSavingWarningDialog()
+        }
+    }
+    private val registeredUserViewModel : RegisteredUserViewModel by activityViewModels()
+    private val characterSetViewModel : CharacterSetViewModel by activityViewModels()
     private val weaponViewModel : WeaponViewModel by activityViewModels()
     private val gearViewModel : GearViewModel by activityViewModels()
     private val accessoryViewModel : AccessoryViewModel by activityViewModels()
     private val skillViewModel : SkillViewModel by activityViewModels()
-    var weaponOnSetAdapter = WeaponOnSetAdapter()
-    var gearOnSetAdapter = GearOnSetAdapter()
-    var accessoryOnSetAdapter = AccessoryOnSetAdapter()
-    var slotOnSetAdapter = SlotOnSetAdapter()
-    var skillOnSetAdapter = SkillOnSetAdapter()
+    private var weaponOnSetAdapter = WeaponOnSetAdapter()
+    private var gearOnSetAdapter = GearOnSetAdapter()
+    private var accessoryOnSetAdapter = AccessoryOnSetAdapter()
+    private var slotOnSetAdapter = SlotOnSetAdapter()
+    private var skillOnSetAdapter = SkillOnSetAdapter()
 
     private val currentWeapon : MutableLiveData<Weapon?> by lazy {
         MutableLiveData<Weapon?>()
@@ -66,6 +73,7 @@ class EquipmentSetFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        requireActivity().onBackPressedDispatcher.addCallback(this, onBackPressedCallback)
     }
 
     override fun onCreateView(
@@ -78,16 +86,16 @@ class EquipmentSetFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        currentCharacterSet = equipmentSetFragmentArgs.characterSet
 
         weaponViewModel.chosenWeapon.postValue(null)
         gearViewModel.chosenGear.postValue(null)
         accessoryViewModel.chosenAccessory.postValue(null)
         skillViewModel.chosenSkill.postValue(null)
 
-        currentCharacterSet = equipmentSetFragmentArgs.characterSet
-
         //Inicialización de los RecyclerViews y el comportamiento de los eventos de clicks en los elementos de los mismos
         initializeRecyclerViews()
+        initializeFloatingActionButton()
 
         weaponOnSetAdapter.onWeaponOnSetClickListener = object : WeaponOnSetAdapter.OnWeaponOnSetClickListener {
             override fun onWeaponOnSetImageClick() {
@@ -98,7 +106,6 @@ class EquipmentSetFragment : Fragment() {
             override fun onWeaponOnSetRemoveClick(weaponPosition: Int) {
                 currentCharacterSet.equippedWeapon = null
                 currentWeapon.postValue(currentCharacterSet.equippedWeapon)
-                //Log.d("Test_Borrado_Arma", "Se ha borrado el arma, y la actualmente equipada es : ${currentWeapon.value}")
             }
         }
 
@@ -126,7 +133,6 @@ class EquipmentSetFragment : Fragment() {
                 currentCharacterSet.equipmentPieces[gearPosition] = null
                 currentGearList.postValue(currentCharacterSet.equipmentPieces)
                 obtainCurrentSlots()
-                //Log.d("Test_Borrado_Equipamiento", "Se ha borrado una pieza de equipamiento, el actual es: ${currentGearList.value.toString()}")
             }
         }
 
@@ -151,7 +157,6 @@ class EquipmentSetFragment : Fragment() {
             override fun onSlotOnSetRemoveClick(position: Int) {
                 currentCharacterSet.slottedSkills[position] = null
                 currentSlottedSkills.postValue(currentCharacterSet.slottedSkills)
-                //Log.d("Test_Borrado_Huecos", "Se ha borrado una habilidad de uno de los huecos, ahora mismo son de la siguiente manera: ${currentSlottedSkills.value.toString()}")
             }
         }
 
@@ -220,14 +225,13 @@ class EquipmentSetFragment : Fragment() {
 
         binding.tvEquipmentCharacterInfoName.text = currentCharacterSet.name
         binding.tvEquipmentCharacterInfoRole.text = currentCharacterSet.role
-        IconHelper.setRoleIcon(binding.ivEquipmentCharacterRole, currentCharacterSet.role) //TODO: Realizare sta movida
+        IconHelper.setRoleIcon(binding.ivEquipmentCharacterRole, currentCharacterSet.role)
 
-        //TODO: Control de pj nuevo o antiguo
-        //Mensajes enviados a los adaptadores para mostrar las listas vacías del equipamiento, dado que se usa un set de equipamiento nuevo
+        //Mensajes enviados a los adaptadores para mostrar los datos correspondientes
         weaponOnSetAdapter.updateWeaponList(listOf(currentCharacterSet.equippedWeapon))
         gearOnSetAdapter.updateList(currentCharacterSet.equipmentPieces)
         accessoryOnSetAdapter.updateList(currentCharacterSet.equippedAccessories)
-        slotOnSetAdapter.updateList(listOf())
+        slotOnSetAdapter.updateList(currentCharacterSet.slottedSkills)
         skillOnSetAdapter.updateList(listOf())
         calculateAttributes()
         calculateOffensiveStats()
@@ -267,6 +271,12 @@ class EquipmentSetFragment : Fragment() {
         }
     }
 
+    private fun initializeFloatingActionButton(){
+        binding.fabEquipmentSetSaveAndExit.setOnClickListener {
+            showSaveAndExitDialog(currentCharacterSet)
+        }
+    }
+
     private fun recalculateData()  {
         calculateAttributes()
         calculateOffensiveStats()
@@ -282,7 +292,6 @@ class EquipmentSetFragment : Fragment() {
         binding.tvEquipmentStrength.text = currentCharacterSet.stats.strength.toString()
         binding.tvEquipmentAttunement.text = currentCharacterSet.stats.attunement.toString()
         binding.tvEquipmentCunning.text = currentCharacterSet.stats.cunning.toString()
-        //Log.d("Testeo_Recalculo_Atributos", "Atributos recalculados")
     }
 
     private fun calculateOffensiveStats(){
@@ -313,7 +322,6 @@ class EquipmentSetFragment : Fragment() {
             binding.tvEquipmentElementalAttack.text = "None"
             binding.clytEquipmentElementalAttack.visibility = View.GONE
         }
-        //Log.d("Testeo_Recalculo_Ofensivo", "Stats ofensivas recalculadas")
     }
 
     private fun calculateDefensiveStats(){
@@ -325,17 +333,24 @@ class EquipmentSetFragment : Fragment() {
                 fireDef += currentCharacterSet.equipmentPieces[i]?.fireDefense!!
                 iceDef += currentCharacterSet.equipmentPieces[i]?.iceDefense!!
                 thunderDef += currentCharacterSet.equipmentPieces[i]?.thunderDefense!!
-                }
             }
+        }
+
+        for(j in 0 until currentCharacterSet.equippedAccessories.size){
+            if(currentCharacterSet.equippedAccessories[j] != null){
+                physDef += currentCharacterSet.equippedAccessories[j]?.accesoryGear?.physDefense!!
+                fireDef += currentCharacterSet.equippedAccessories[j]?.accesoryGear?.fireDefense!!
+                iceDef += currentCharacterSet.equippedAccessories[j]?.accesoryGear?.iceDefense!!
+                thunderDef += currentCharacterSet.equippedAccessories[j]?.accesoryGear?.thunderDefense!!
+            }
+        }
 
         binding.tvEquipmentPhysicalDefense.text = physDef.toString()
         binding.tvEquipmentFireDefense.text = fireDef.toString()
         binding.tvEquipmentIceDefense.text = iceDef.toString()
         binding.tvEquipmentThunderDefense.text = thunderDef.toString()
-        //Log.d("Testeo_Recalculo_Defensivo", "Stats defensivas recalculadas")
     }
 
-    //TODO: Falta obtener slots de accesorios y armas
     private fun obtainCurrentSlots(){
         var numberOfSlots = 0
         var newSlotList : MutableList<Skill?> = mutableListOf()
@@ -357,7 +372,7 @@ class EquipmentSetFragment : Fragment() {
         }
 
         if(numberOfSlots > 0){
-            var currentSlotsWithSkills = currentCharacterSet.slottedSkills
+            val currentSlotsWithSkills = currentCharacterSet.slottedSkills
             if(currentSlotsWithSkills != null){
                 if(currentSlotsWithSkills.size < numberOfSlots){
                     for(i in 0 until currentSlotsWithSkills.size){
@@ -371,7 +386,7 @@ class EquipmentSetFragment : Fragment() {
                         newSlotList.add(currentSlotsWithSkills[k])
                     }
                 } else {
-                    newSlotList = currentSlotsWithSkills as MutableList<Skill?>
+                    newSlotList = currentSlotsWithSkills
                 }
             } else {
                 for(l in 0 until numberOfSlots){
@@ -387,7 +402,6 @@ class EquipmentSetFragment : Fragment() {
         //Log.d("Testeo_Recalculo_Huecos", "Huecos recalculados, son los siguientes: ${slotOnSetAdapter.getList().toString()}")
     }
 
-    //TODO: Falta comprobar los huecos de arma y accesorios
     private fun obtainCurrentSkills(){
         val skillMap = mutableMapOf<Skill, Int>()
         val currentlyEquippedWeapon = currentCharacterSet.equippedWeapon
@@ -395,9 +409,9 @@ class EquipmentSetFragment : Fragment() {
         val currentlyEquippedAccessories = currentCharacterSet.equippedAccessories
         val currentSlotsWithSkills = slotOnSetAdapter.getList()
 
-        if(currentlyEquippedWeapon != null && currentlyEquippedWeapon!!.skills != null){
-            for(i in 0 until currentlyEquippedWeapon!!.skills.size){
-                skillMap.merge(currentlyEquippedWeapon!!.skills[i], 1, Int::plus)
+        if(currentlyEquippedWeapon != null && currentlyEquippedWeapon.skills != null){
+            for(i in 0 until currentlyEquippedWeapon.skills.size){
+                skillMap.merge(currentlyEquippedWeapon.skills[i], 1, Int::plus)
             }
         }
 
@@ -437,6 +451,7 @@ class EquipmentSetFragment : Fragment() {
         }
         //Log.d("Testeo_Recalculo_Habilidades", "Habilidades recalculadas, actualmente son las siguientes: ${skillOnSetAdapter.skillList.toString()}")
     }
+
     private fun applySkills(){
         var auxAtk = 0F
         var auxFireAtk = 0F
@@ -447,9 +462,9 @@ class EquipmentSetFragment : Fragment() {
         var auxFireDef = 0F
         var auxIceDef = 0F
         var auxThunderDef = 0F
-        var rankToApply = 0
+        var rankToApply: Int
 
-        var currentSkills = skillOnSetAdapter.skillList
+        val currentSkills = skillOnSetAdapter.skillList
         if(!currentSkills.isNullOrEmpty()){
             for(i in currentSkills){
                 rankToApply = if (i.currentRank > i.skill.maxRank) (i.skill.maxRank-1) else (i.currentRank-1)
@@ -537,12 +552,12 @@ class EquipmentSetFragment : Fragment() {
 
     private fun showSkillInfo(skillOnSet: SkillOnSet){
         var infoBody = ""
+        val maxSkillRankToCheck = if(skillOnSet.currentRank > skillOnSet.skill.maxRank) skillOnSet.skill.maxRank else skillOnSet.currentRank
         for(i in 0 until skillOnSet.skill.maxRank){
-            if((i+1) == skillOnSet.currentRank){
-                infoBody+= "Lvl. ${i+1}: [${skillOnSet.skill.specificDescription[i]}]"
-            }
-            else {
-                infoBody+= "Lvl. ${i+1}: ${skillOnSet.skill.specificDescription[i]}"
+            infoBody += if((i+1) == maxSkillRankToCheck){
+                "Lvl. ${i+1}: [${skillOnSet.skill.specificDescription[i]}]"
+            } else {
+                "Lvl. ${i+1}: ${skillOnSet.skill.specificDescription[i]}"
             }
 
             if(i+1 != skillOnSet.skill.maxRank){
@@ -555,6 +570,51 @@ class EquipmentSetFragment : Fragment() {
             .setMessage(infoBody)
             .setIcon(IconHelper.setSkillIconInfo(skillOnSet.skill.type))
             .setPositiveButton(getString(R.string.skillInfoCloseAction)) { v, _ ->
+                v.dismiss()
+            }
+            .create()
+            .show()
+    }
+
+    private fun showSaveAndExitDialog(characterSet: CharacterSet){
+        AlertDialog.Builder(activity as Context)
+            .setTitle(getString(R.string.equipmentSetSaveAndExitDialogTitle))
+            .setMessage(getString(R.string.equipmentSetSaveAndExitDialogMessage))
+            .setPositiveButton(getString(R.string.equipmentSetSaveAndExitDialogConfirm)){ v, _ ->
+                characterSetViewModel.addCharacterSet(characterSet)
+                registeredUserViewModel.getRegisteredUserWithAllOwnedCharacterSets(characterSetViewModel.characterSetListLiveData)
+                v.dismiss()
+                if(equipmentSetFragmentArgs.isANewSet){
+                    val action = EquipmentSetFragmentDirections.actionEquipmentSetFragmentToHomeFragment()
+                    findNavController().navigate(action)
+                }
+                else{
+                    findNavController().popBackStack()
+                }
+            }
+            .setNegativeButton(getString(R.string.equipmentSetSaveAndExitDialogCancel)){ v, _ ->
+                v.dismiss()
+            }
+            .setCancelable(false)
+            .create()
+            .show()
+    }
+
+    private fun showExitWithoutSavingWarningDialog(){
+        AlertDialog.Builder(activity as Context)
+            .setTitle(getString(R.string.equipmentSetExitWithoutSavingWarningDialogTitle))
+            .setMessage(getString(R.string.equipmentSetExitWithoutSavingWarningDialogMessage))
+            .setPositiveButton(getString(R.string.equipmentSetExitWithoutSavingWarningDialogConfirm)) { v, _ ->
+                if(equipmentSetFragmentArgs.isANewSet){
+                    val action = EquipmentSetFragmentDirections.actionEquipmentSetFragmentToHomeFragment()
+                    findNavController().navigate(action)
+                }
+                else{
+                    findNavController().popBackStack()
+                }
+                v.dismiss()
+            }
+            .setNegativeButton(getString(R.string.equipmentSetExitWithoutSavingWarningDialogCancel)){ v, _ ->
                 v.dismiss()
             }
             .create()

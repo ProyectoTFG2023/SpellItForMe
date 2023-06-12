@@ -8,6 +8,7 @@ import androidx.room.Transaction
 import danielabez.spellitforme.model.Accessory
 import danielabez.spellitforme.model.RegisteredUser
 import danielabez.spellitforme.model.relations.RegisteredUserWithAccessories
+import danielabez.spellitforme.model.relations.RegisteredUserWithCharacterSets
 
 @Dao
 interface RegisteredUserDao {
@@ -25,6 +26,10 @@ interface RegisteredUserDao {
 
     @Query("SELECT * FROM registered_user WHERE username = :pUsername AND password = :pPassword")
     fun getRegisteredUserByUsernameAndPassword(pUsername: String, pPassword: String) : RegisteredUser
+
+    @Transaction
+    @Query("SELECT * FROM registered_user WHERE id = :pUserId")
+    fun getRegisteredUserWithCharacterSets(pUserId: Long?) : List<RegisteredUserWithCharacterSets>
 
     @Transaction
     @Query("SELECT * FROM registered_user WHERE id = :pUserId")

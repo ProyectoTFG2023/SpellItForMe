@@ -1,12 +1,12 @@
 package danielabez.spellitforme.viewModel
 
 import android.app.Application
-import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import danielabez.spellitforme.model.Accessory
+import danielabez.spellitforme.model.CharacterSet
 import danielabez.spellitforme.model.RegisteredUser
 import danielabez.spellitforme.repository.RegisteredUserRepository
 import kotlinx.coroutines.Dispatchers
@@ -63,13 +63,19 @@ class RegisteredUserViewModel(app: Application) : AndroidViewModel(app) {
 
     fun emptyCheckRegisteredUser(){
         viewModelScope.launch (Dispatchers.IO) {
-            checkUsernameInUse.postValue(null)
+            checkRegisteredUser.postValue(null)
         }
     }
 
-    fun getUserWithAllOwnedAccesories(liveData: MutableLiveData<List<Accessory>>) {
+    fun getRegisteredUserWithAllOwnedCharacterSets(liveData: MutableLiveData<List<CharacterSet>>){
+        viewModelScope.launch(Dispatchers.IO){
+            liveData.postValue(repository.getRegisteredUserWithCharacterSets(checkRegisteredUser.value?.id!!).first().characterSets)
+        }
+    }
+
+    fun getRegisteredUserWithAllOwnedAccesories(liveData: MutableLiveData<List<Accessory>>) {
         viewModelScope.launch (Dispatchers.IO){
-            liveData.postValue(repository.getUserWithAccessories(checkRegisteredUser.value?.id!!).first().accesories)
+            liveData.postValue(repository.getRegisteredUserWithAccessories(checkRegisteredUser.value?.id!!).first().accesories)
         }
     }
 }

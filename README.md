@@ -36,4 +36,7 @@ para que incluya los accesorios en los cálculos de datos, huecos de encantamien
 
 (11/06/2023) [Commit #14] Realizada la pantalla de creación de personaje, en el que se especifican los valores de sus múltiples atributos, así como su rol y el nombre del mismo.
 Además se han realizado ciertos arreglos visuales en la pantalla de edición de equipamiento, como la apariencia distinta de las habilidades que se encuentren en un cierto momento
-para representar el exceso de puntos en la misma debido a tener demasiadas piezas con dicha habilidad. 
+para representar el exceso de puntos en la misma debido a tener demasiadas piezas con dicha habilidad
+
+(12/06/2023) [Commit #15] Realizada la pantalla que muestra todos los sets creados que están ligados al usuario con el que se ha iniciado sesión, así como todos los triggers
+de aviso al usuario por pérdida de datos en caso de que salga de alguna de las pantallas que se encargan de crear entidades y guardarlas en la base de datos

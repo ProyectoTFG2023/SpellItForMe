@@ -24,9 +24,7 @@ class CharacterSetViewModel(app: Application) : AndroidViewModel(app) {
         repository.addCharacterSet(characterSet)
     }
 
-    fun getCharacterSetsByRegisteredUser(){
-        viewModelScope.launch (Dispatchers.IO) {
-            characterSetListLiveData.postValue(repository.getCharacterSetsByRegisteredUser())
-        }
+    fun deleteCharacterSet(characterSet: CharacterSet) = viewModelScope.launch (Dispatchers.IO){
+        repository.deleteCharacterSet(characterSet)
     }
 }
