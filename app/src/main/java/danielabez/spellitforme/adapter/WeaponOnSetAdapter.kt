@@ -96,7 +96,7 @@ class WeaponOnSetAdapter : RecyclerView.Adapter<WeaponOnSetAdapter.WeaponOnSetVi
                     binding.llytWeaponOnSetBottomMarginDummy.visibility = View.GONE
                     binding.llytWeaponOnSetNoDataBottomMarginDummy.visibility = View.VISIBLE
                     binding.tvWeaponOnSetName.text = "No weapon selected"
-                    //TODO: Falta la imagen por defecto
+                    binding.ivWeaponOnSet.setImageResource(R.mipmap.ic_sword_none_foreground)
                 }
             }
         }

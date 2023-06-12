@@ -85,7 +85,7 @@
         app:layout_constraintEnd_toEndOf="@+id/tilytRegisterUsername"
         app:layout_constraintStart_toStartOf="@+id/tilytRegisterUsername"
         app:layout_constraintTop_toBottomOf="@+id/tilytRegisterUsername"
-        app:passwordToggleEnabled="false">
+        app:passwordToggleEnabled="true">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/tietRegisterPassword"
@@ -106,7 +106,7 @@
         app:layout_constraintEnd_toEndOf="@+id/tilytRegisterPassword"
         app:layout_constraintStart_toStartOf="@+id/tilytRegisterPassword"
         app:layout_constraintTop_toBottomOf="@+id/tilytRegisterPassword"
-        app:passwordToggleEnabled="false">
+        app:passwordToggleEnabled="true">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/tietRegisterRepeatPassword"

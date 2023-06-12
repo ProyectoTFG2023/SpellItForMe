@@ -67,15 +67,15 @@ class AccessoryOnSetAdapter : RecyclerView.Adapter<AccessoryOnSetAdapter.Accesso
                     }
 
                     //Mostraremos un icono según el tipo de equipamiento y la rareza que tenga
-                    IconHelper.setAccessoryIcon(binding.ivAccessoryOnSet, accesoryGear.type, accesoryGear.rarity)
+                    IconHelper.setAccessoryIcon(binding.ivAccessoryOnSet, accesoryType, accesoryGear.rarity)
                 }else{
                     binding.clytAccessoryOnSetSlots.visibility = View.GONE
                     binding.llytAccessoryOnSetAttributes.visibility = View.GONE
                     binding.ivAccessoryOnSetRemove.visibility = View.GONE
                     binding.llytAccessoryOnSetBottomMarginDummy.visibility = View.GONE
                     binding.llytAccessoryOnSetNoDataBottomMarginDummy.visibility = View.VISIBLE
-                    //TODO: FALTA EL CONTROL DE LA IMAGEN SOLO
                     binding.tvAccessoryOnSetName.text = "No accessory selected"
+                    binding.ivAccessoryOnSet.setImageResource(R.mipmap.ic_ring_none_foreground)
                 }
             }
         }

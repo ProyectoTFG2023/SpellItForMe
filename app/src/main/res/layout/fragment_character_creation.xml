@@ -95,10 +95,10 @@
             android:layout_width="35dp"
             android:layout_height="35dp"
             android:layout_marginTop="4dp"
-            android:src="@mipmap/ic_gem_slot_foreground"
+            android:src="@mipmap/ic_attribute_health_foreground"
             app:layout_constraintBottom_toBottomOf="@+id/tilytCharacterCreationHealth"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/tilytCharacterCreationHealth" />
+            app:layout_constraintTop_toTopOf="@+id/tilytCharacterCreationHealth"/>
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/tilytCharacterCreationHealth"
@@ -137,10 +137,10 @@
             android:layout_width="35dp"
             android:layout_height="35dp"
             android:layout_marginTop="4dp"
-            android:src="@mipmap/ic_gem_slot_foreground"
+            android:src="@mipmap/ic_attribute_spiritum_foreground"
             app:layout_constraintBottom_toBottomOf="@+id/tilytCharacterCreationSpiritum"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/tilytCharacterCreationSpiritum" />
+            app:layout_constraintTop_toTopOf="@+id/tilytCharacterCreationSpiritum"/>
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/tilytCharacterCreationSpiritum"
@@ -199,10 +199,10 @@
             android:layout_width="35dp"
             android:layout_height="35dp"
             android:layout_marginTop="4dp"
-            android:src="@mipmap/ic_gem_slot_foreground"
+            android:src="@mipmap/ic_attribute_strength_foreground"
             app:layout_constraintBottom_toBottomOf="@+id/tilytCharacterCreationStrength"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/tilytCharacterCreationStrength" />
+            app:layout_constraintTop_toTopOf="@+id/tilytCharacterCreationStrength"/>
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/tilytCharacterCreationStrength"
@@ -242,10 +242,10 @@
             android:layout_width="35dp"
             android:layout_height="35dp"
             android:layout_marginTop="4dp"
-            android:src="@mipmap/ic_gem_slot_foreground"
+            android:src="@mipmap/ic_attribute_cunning_foreground"
             app:layout_constraintBottom_toBottomOf="@+id/tilytCharacterCreationCunning"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/tilytCharacterCreationCunning" />
+            app:layout_constraintTop_toTopOf="@+id/tilytCharacterCreationCunning"/>
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/tilytCharacterCreationCunning"
@@ -284,10 +284,10 @@
             android:layout_width="35dp"
             android:layout_height="35dp"
             android:layout_marginTop="4dp"
-            android:src="@mipmap/ic_gem_slot_foreground"
+            android:src="@mipmap/ic_attribute_attunement_foreground"
             app:layout_constraintBottom_toBottomOf="@+id/tilytCharacterCreationAttunement"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/tilytCharacterCreationAttunement" />
+            app:layout_constraintTop_toTopOf="@+id/tilytCharacterCreationAttunement"/>
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/tilytCharacterCreationAttunement"

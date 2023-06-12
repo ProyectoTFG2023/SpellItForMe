@@ -52,8 +52,7 @@ class SlotOnSetAdapter : RecyclerView.Adapter<SlotOnSetAdapter.SlotOnSetViewHold
                     binding.tvSlotOnSetSkillName.visibility = View.GONE
                     binding.ivSlotOnSetRemove.visibility = View.GONE
                     binding.tvSlotOnSetNoSkill.visibility = View.VISIBLE
-                    binding.ivSlotOnSetIcon.setImageResource(R.mipmap.ic_gem_slot_foreground)
-                    //TODO: Cambiar icono de gema a vacía
+                    binding.ivSlotOnSetIcon.setImageResource(R.mipmap.ic_slot_gem_empty_foreground)
                 }
             }
         }

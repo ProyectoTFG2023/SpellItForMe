@@ -74,7 +74,7 @@ class GearAdapter : RecyclerView.Adapter<GearAdapter.GearViewHolder>() {
                 }
 
                 //Mostraremos un icono según el tipo de equipamiento y la rareza que tenga
-                IconHelper.setGearIcon(binding.ivGear, "Headgear", rarity)
+                IconHelper.setGearIcon(binding.ivGear, type, rarity)
             }
         }
     }

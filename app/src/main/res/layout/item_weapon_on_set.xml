@@ -40,14 +40,14 @@
 
         <ImageView
             android:id="@+id/ivWeaponOnSetRemove"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:layout_marginTop="6dp"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_marginTop="8dp"
             android:visibility="gone"
             app:layout_constraintEnd_toEndOf="@+id/ivWeaponOnSet"
             app:layout_constraintStart_toStartOf="@+id/ivWeaponOnSet"
             app:layout_constraintTop_toBottomOf="@+id/ivWeaponOnSet"
-            app:srcCompat="@android:drawable/ic_menu_delete" />
+            app:srcCompat="@mipmap/ic_bin_foreground" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/clytWeaponOnSetSlots"
@@ -230,7 +230,7 @@
                                 app:layout_constraintBottom_toBottomOf="parent"
                                 app:layout_constraintStart_toStartOf="parent"
                                 app:layout_constraintTop_toTopOf="parent"
-                                app:srcCompat="@mipmap/ic_phys_attack_skill_foreground" />
+                                app:srcCompat="@mipmap/ic_critical_up_skill_foreground" />
 
                             <TextView
                                 android:id="@+id/tvWeaponOnSetCritChance"

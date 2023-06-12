@@ -125,9 +125,9 @@
                                     android:id="@+id/ivEquipmentHealth"
                                     android:layout_width="30dp"
                                     android:layout_height="30dp"
-                                    android:src="@mipmap/ic_gem_slot_foreground"
+                                    android:src="@mipmap/ic_attribute_health_foreground"
                                     app:layout_constraintStart_toStartOf="parent"
-                                    app:layout_constraintTop_toTopOf="parent" />
+                                    app:layout_constraintTop_toTopOf="parent"/>
 
                                 <TextView
                                     android:id="@+id/tvEquipmentHealth"
@@ -161,7 +161,7 @@
                                     android:id="@+id/ivEquipmentSpiritum"
                                     android:layout_width="30dp"
                                     android:layout_height="30dp"
-                                    android:src="@mipmap/ic_gem_slot_foreground"
+                                    android:src="@mipmap/ic_attribute_spiritum_foreground"
                                     app:layout_constraintStart_toStartOf="parent"
                                     app:layout_constraintTop_toTopOf="parent" />
 
@@ -203,9 +203,9 @@
                                     android:id="@+id/ivEquipmentStrength"
                                     android:layout_width="30dp"
                                     android:layout_height="30dp"
-                                    android:src="@mipmap/ic_gem_slot_foreground"
+                                    android:src="@mipmap/ic_attribute_strength_foreground"
                                     app:layout_constraintStart_toStartOf="parent"
-                                    app:layout_constraintTop_toTopOf="parent" />
+                                    app:layout_constraintTop_toTopOf="parent"/>
 
                                 <TextView
                                     android:id="@+id/tvEquipmentStrength"
@@ -238,9 +238,9 @@
                                     android:id="@+id/ivEquipmentAttunement"
                                     android:layout_width="30dp"
                                     android:layout_height="30dp"
-                                    android:src="@mipmap/ic_gem_slot_foreground"
+                                    android:src="@mipmap/ic_attribute_attunement_foreground"
                                     app:layout_constraintStart_toStartOf="parent"
-                                    app:layout_constraintTop_toTopOf="parent" />
+                                    app:layout_constraintTop_toTopOf="parent"/>
 
                                 <TextView
                                     android:id="@+id/tvEquipmentAttunement"
@@ -273,9 +273,9 @@
                                     android:id="@+id/ivEquipmentCunning"
                                     android:layout_width="30dp"
                                     android:layout_height="30dp"
-                                    android:src="@mipmap/ic_gem_slot_foreground"
+                                    android:src="@mipmap/ic_attribute_cunning_foreground"
                                     app:layout_constraintStart_toStartOf="parent"
-                                    app:layout_constraintTop_toTopOf="parent" />
+                                    app:layout_constraintTop_toTopOf="parent"/>
 
                                 <TextView
                                     android:id="@+id/tvEquipmentCunning"
@@ -412,9 +412,9 @@
                                     android:id="@+id/ivEquipmentCriticalChance"
                                     android:layout_width="30dp"
                                     android:layout_height="30dp"
-                                    android:src="@mipmap/ic_phys_attack_skill_foreground"
+                                    android:src="@mipmap/ic_critical_up_skill_foreground"
                                     app:layout_constraintStart_toStartOf="parent"
-                                    app:layout_constraintTop_toTopOf="parent" />
+                                    app:layout_constraintTop_toTopOf="parent"/>
 
                                 <TextView
                                     android:id="@+id/tvEquipmentCriticalChance"

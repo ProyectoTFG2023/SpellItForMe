@@ -40,14 +40,14 @@
 
         <ImageView
             android:id="@+id/ivAccessoryOnSetRemove"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:layout_marginTop="6dp"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_marginTop="8dp"
             android:visibility="gone"
             app:layout_constraintEnd_toEndOf="@+id/ivAccessoryOnSet"
             app:layout_constraintStart_toStartOf="@+id/ivAccessoryOnSet"
             app:layout_constraintTop_toBottomOf="@+id/ivAccessoryOnSet"
-            app:srcCompat="@android:drawable/ic_menu_delete" />
+            app:srcCompat="@mipmap/ic_bin_foreground" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/clytAccessoryOnSetSlots"

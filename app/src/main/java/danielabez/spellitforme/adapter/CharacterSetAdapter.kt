@@ -44,7 +44,7 @@ class CharacterSetAdapter : RecyclerView.Adapter<CharacterSetAdapter.CharacterSe
                 }
                 else{
                     binding.tvCharacterSetWeapon.text = "No weapon"
-                    binding.ivCharacterSetWeapon.setImageResource(android.R.drawable.ic_menu_help)
+                    binding.ivCharacterSetWeapon.setImageResource(R.mipmap.ic_cross_foreground)
                 }
             }
         }

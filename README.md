@@ -40,3 +40,5 @@ para representar el exceso de puntos en la misma debido a tener demasiadas pieza
 
 (12/06/2023) [Commit #15] Realizada la pantalla que muestra todos los sets creados que están ligados al usuario con el que se ha iniciado sesión, así como todos los triggers
 de aviso al usuario por pérdida de datos en caso de que salga de alguna de las pantallas que se encargan de crear entidades y guardarlas en la base de datos
+
+(12/06/2023) [Commit #16] Añadidos todos los iconos excepto el logo principal y los representativos de las clases

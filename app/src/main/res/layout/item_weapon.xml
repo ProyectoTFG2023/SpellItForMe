@@ -173,7 +173,7 @@
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
-                        app:srcCompat="@mipmap/ic_phys_attack_skill_foreground" />
+                        app:srcCompat="@mipmap/ic_critical_up_skill_foreground" />
 
                     <TextView
                         android:id="@+id/tvCritrate"

@@ -81,6 +81,15 @@ class GearOnSetAdapter : RecyclerView.Adapter<GearOnSetAdapter.GearOnSetViewHold
                         else -> "footwear"
                     }
                     binding.tvGearOnSetName.text = "No $piece selected"
+                    binding.ivGearOnSet.setImageResource(
+                        when(position){
+                            0 -> R.mipmap.ic_helmet_none_foreground
+                            1 -> R.mipmap.ic_torso_none_foreground
+                            2 -> R.mipmap.ic_handwear_none_foreground
+                            3 -> R.mipmap.ic_belt_none_foreground
+                            else -> R.mipmap.ic_footwear_none_foreground
+                        }
+                    )
                 }
             }
         }

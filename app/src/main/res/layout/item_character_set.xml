@@ -58,11 +58,11 @@
 
             <ImageView
                 android:id="@+id/ivCharacterSetWeapon"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@android:drawable/ic_menu_help" />
+                app:srcCompat="@mipmap/ic_cross_foreground" />
 
             <TextView
                 android:id="@+id/tvCharacterSetWeapon"
@@ -77,12 +77,12 @@
 
         <ImageView
             android:id="@+id/ivCharacterSetRemove"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:layout_marginTop="6dp"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_marginTop="8dp"
             app:layout_constraintEnd_toEndOf="@+id/ivCharacterSetRole"
             app:layout_constraintStart_toStartOf="@+id/ivCharacterSetRole"
             app:layout_constraintTop_toBottomOf="@+id/ivCharacterSetRole"
-            app:srcCompat="@android:drawable/ic_menu_delete" />
+            app:srcCompat="@mipmap/ic_bin_foreground" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.cardview.widget.CardView>
