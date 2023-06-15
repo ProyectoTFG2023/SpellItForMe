@@ -8,6 +8,8 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.activity.OnBackPressedCallback
 import androidx.core.view.isVisible
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
@@ -26,6 +28,17 @@ class RegistrationFragment : Fragment() {
     private var isMailFree: Boolean = false
     private var isUsernameFree: Boolean = false
     private var doPasswordsMatch: Boolean = false
+    private val onBackPressedCallback : OnBackPressedCallback = object : OnBackPressedCallback(true){
+        override fun handleOnBackPressed() {
+            registeredUserViewModel.comingBack.postValue(true)
+            Thread.sleep(200)
+        }
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        requireActivity().onBackPressedDispatcher.addCallback(this, onBackPressedCallback)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -48,7 +61,12 @@ class RegistrationFragment : Fragment() {
             binding.tvRegisterUsernameInUseWarning.isVisible = !isUsernameFree
         })
 
-        //TODO: Falta comprobar que se usen @ y .
+        registeredUserViewModel.comingBack.observe(viewLifecycleOwner, Observer<Boolean> { readyToGoBack ->
+            if(readyToGoBack == true){
+                findNavController().popBackStack()
+            }
+        })
+
         binding.tietRegisterMail.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
             }
@@ -57,9 +75,7 @@ class RegistrationFragment : Fragment() {
             override fun afterTextChanged(p0: Editable?) {
                 if (!binding.tietRegisterMail.text.toString().isNullOrEmpty() &&
                     (binding.tietRegisterMail.text.toString().contains("@") && binding.tietRegisterMail.text.toString().contains("."))) {
-                    Log.d("SpellItForMe_Debug", "Valor escrito en el campo del correo -> " + binding.tietRegisterMail.text.toString())
                     registeredUserViewModel.isMailInUse(binding.tietRegisterMail.text.toString())
-                    Log.d("SpellItForMe_Debug", "Se encuentra libre el correo? -> " + isMailFree)
                 }
             }
         })
@@ -71,9 +87,7 @@ class RegistrationFragment : Fragment() {
             }
             override fun afterTextChanged(p0: Editable?) {
                 if (!binding.tietRegisterUsername.text.toString().isNullOrEmpty()) {
-                    Log.d("SpellItForMe_Debug", "Valor escrito en el campo del usuario -> " + binding.tietRegisterUsername.text.toString())
                     registeredUserViewModel.isUsernameInUse(binding.tietRegisterUsername.text.toString())
-                    Log.d("SpellItForMe_Debug", "Se encuentra libre el nombre de usuario? -> " + isUsernameFree)
                 }
             }
         })
@@ -110,12 +124,11 @@ class RegistrationFragment : Fragment() {
 
     private fun verifyPasswords() {
         if (!binding.tietRegisterPassword.text.toString().isNullOrEmpty() && !binding.tietRegisterRepeatPassword.text.toString().isNullOrEmpty()) {
-            Log.d("SpellItForMe_Debug", "Campos de contraseña llenados -> " + binding.tietRegisterPassword.text.toString() + " y " + binding.tietRegisterRepeatPassword.text.toString())
             doPasswordsMatch = binding.tietRegisterPassword.text.toString().equals(binding.tietRegisterRepeatPassword.text.toString())
             binding.tvRegisterNonMatchingPasswordsWarning.isVisible = !doPasswordsMatch
 
             if (doPasswordsMatch) {
-                Log.d("SpellItForMe_Debug", "Las contraseñas coinciden")
+                //Nothing
             }
         }
     }
@@ -128,8 +141,11 @@ class RegistrationFragment : Fragment() {
                     binding.tietRegisterUsername.text.toString(),
                     binding.tietRegisterPassword.text.toString()
                 ))
-                findNavController().popBackStack()
+                registeredUserViewModel.comingBack.postValue(true)
+                Thread.sleep(200)
             }
+        } else {
+            Toast.makeText(context, "One or more fields are wrong, try again", Toast.LENGTH_SHORT).show()
         }
     }
 

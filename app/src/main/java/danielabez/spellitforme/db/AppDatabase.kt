@@ -71,6 +71,8 @@ abstract class AppDatabase: RoomDatabase() {
             */
             suspend fun initializeDatabase(registeredUserDao: RegisteredUserDao, characterSetDao: CharacterSetDao, skillDao: SkillDao, gearDao: GearDao, weaponDao: WeaponDao, accessoryDao: AccessoryDao){
                 registeredUserDao.addRegisteredUser(RegisteredUser("correo@gmail.com", "admin", "admin"))
+                registeredUserDao.addRegisteredUser(RegisteredUser("Mikey_Snow_Player73@gmail.com", "Mike", "McMike"))
+                registeredUserDao.addRegisteredUser(RegisteredUser("Sunny_Winter2@gmail.com", "Sunny Smiles", "Cheyenne"))
 
                 skillDao.addSkill(Skill("Atk Up",
                     "Attack",
@@ -151,44 +153,136 @@ abstract class AppDatabase: RoomDatabase() {
                     listOf(),
                     3))
 
-                //TODO: TERMINAR DE REALIZAR LAS ENTRADAS NECESARIAS
                 weaponDao.addWeapon(Weapon("Rusted Sword", "a_Sword", "a_Common", 30L, 0))
+                weaponDao.addWeapon(Weapon("Refined Steel Sword", "a_Sword", "b_Uncommon", 55L, 10))
                 weaponDao.addWeapon(Weapon("Thunder's Cry", "a_Sword", "c_Rare", 70L, null, null, 100L, 10))
-                weaponDao.addWeapon(Weapon("Weep's Lament", "a_Sword", "e_Legendary", 150L, null, 150L, null, 25))
+                weaponDao.addWeapon(Weapon("Volcanic Edge", "a_Sword", "d_Mythical", 90L, 200L, 0L, 0L, 30))
+                weaponDao.addWeapon(Weapon("Weep's Lament", "a_Sword", "e_Legendary", 150L, null, 150L, null, 15,
+                    listOf(skillDao.getSkillByName("Ice Def Up")))
+                )
 
                 weaponDao.addWeapon(Weapon("Iron Spear", "b_Spear", "a_Common", 25L, 0))
                 weaponDao.addWeapon(Weapon("Fiery Pike", "b_Spear", "b_Uncommon", 35L, 65L, null, null, 5))
+                weaponDao.addWeapon(Weapon("Armorpiercer", "b_Spear", "c_Rare", 70L, 10, 1))
+                weaponDao.addWeapon(Weapon("Frozen Knight's Icicle", "b_Spear", "d_Mythical", 120L, null, 200L, null, 0))
+                weaponDao.addWeapon(Weapon("Keraunos", "b_Spear", "e_Legendary", 120L, null, null, 300L, 10,
+                    listOf(skillDao.getSkillByName("Peak Form"),
+                        skillDao.getSkillByName("Thunder Def Up")),
+                    1
+                ))
 
-                gearDao.addGear(Gear("Iron Helmet", "Headgear", "a_Common", 20L, 10L, 10L, 0L,listOf(skillDao.getSkillById(1))))
-                gearDao.addGear(Gear("Steel Helmet", "Headgear", "a_Common", 30L, 15L, 10L, 5L, listOf(skillDao.getSkillById(2)), 1))
-                gearDao.addGear(Gear("Reinforced Steel Helmet", "Headgear", "c_Rare", 45L, 30L, 20L, 10L, listOf(skillDao.getSkillById(2)), 2))
-                gearDao.addGear(Gear("Dragon's Circlet", "Headgear", "e_Legendary", 20L, 150L, 100L, 100L, listOf(skillDao.getSkillById(1))))
+                gearDao.addGear(Gear("Iron Helmet", "Headgear", "a_Common", 20L, 10L, 10L, 0L,
+                    listOf(skillDao.getSkillByName("Physical Def Up"))
+                ))
+                gearDao.addGear(Gear("Steel Helmet", "Headgear", "b_Uncommon", 30L, 15L, 10L, 5L,
+                    listOf(skillDao.getSkillByName("Physical Def Up")),
+                    1
+                ))
+                gearDao.addGear(Gear("Reinforced Steel Helmet", "Headgear", "c_Rare", 45L, 30L, 20L, 10L,
+                    listOf(skillDao.getSkillByName("Physical Def Up"),
+                    skillDao.getSkillByName("Stun Resistance")),
+                    2
+                ))
+                gearDao.addGear(Gear("Miner's Impeccable Goggles", "Headgear", "d_Mythical", 20L, 50L, 30L, 35L,
+                    listOf(skillDao.getSkillByName("Atk Up"),
+                    skillDao.getSkillByName("Geologist's Touch")),
+                    2
+                ))
+                gearDao.addGear(Gear("Dragon's Circlet", "Headgear", "e_Legendary", 20L, 150L, 100L, 100L,
+                    listOf(skillDao.getSkillByName("Fire Atk Up"), skillDao.getSkillByName("Fire Def Up")),
+                    2
+                ))
 
-                gearDao.addGear(Gear("Sack Vest", "Torso", "a_Common", 10L, 50L, 50L, 50L, listOf(skillDao.getSkillById(1))))
-                gearDao.addGear(Gear("Bone Armor", "Torso", "b_Uncommon", 70L, 40L, 0L, 10L, listOf(skillDao.getSkillById(2))))
-                gearDao.addGear(Gear("Cloth from the Ancients", "Torso", "e_Legendary", 25L, 150L, 150L, 150L, listOf(skillDao.getSkillById(1), skillDao.getSkillById(2))))
+                gearDao.addGear(Gear("Sack Vest", "Torso", "a_Common", 0L, 0L, 30L, 20L, 1))
+                gearDao.addGear(Gear("Bone Armor", "Torso", "b_Uncommon", 50L, 40L, 0L, 10L,
+                    listOf(skillDao.getSkillByName("Atk Up"))
+                ))
+                gearDao.addGear(Gear("Plated Armor", "Torso", "c_Rare", 100L, 60L, 50L, 50L,
+                    listOf(skillDao.getSkillByName("Critical Up"))
+                ))
+                gearDao.addGear(Gear("Aurora's Mantle", "Torso", "d_Mythical", 0L, 40L, 120L, 60L,
+                    listOf(skillDao.getSkillByName("Ice Atk Up"),
+                    skillDao.getSkillByName("Ice Def Up")),
+                    1
+                ))
+                gearDao.addGear(Gear("Cloth from the Old Ones", "Torso", "e_Legendary", 25L, 150L, 150L, 150L,
+                    listOf(skillDao.getSkillByName("Atk Up"),
+                        skillDao.getSkillByName("Peak Form"))
+                ))
 
                 gearDao.addGear(Gear("Plain Gloves", "Handwear", "a_Common", 0L, 0L, 40L, 20L, 1))
                 gearDao.addGear(Gear("Bronze Bracelet", "Handwear", "b_Uncommon", 0L, 60L, 60L, 60L))
+                gearDao.addGear(Gear("Pugilist's Gloves", "Handwear", "c_Rare", 20L, 10L, 40L, 10L,
+                    listOf(skillDao.getSkillByName("Atk Up"), skillDao.getSkillByName("Critical Up")),
+                    1
+                ))
+                gearDao.addGear(Gear("The Ancient's Handwraps", "Handwear", "d_Mythical", 10L, 80L, 80L, 80L,
+                    listOf(skillDao.getSkillByName("Peak Form")),
+                    2
+                ))
+                gearDao.addGear(Gear("Un'ael's Negotiators", "Handwear", "e_Legendary", 150L, 130L, 130L, 130L,
+                    listOf(skillDao.getSkillByName("Physical Def Up"), skillDao.getSkillByName("Fire Def Up"))
+                ))
 
-                gearDao.addGear(Gear("Tattered Rope", "Belt", "a_Common", 0L, 0L, 0L, 0L))
-                gearDao.addGear(Gear("Reinforced Leather Belt", "Belt", "b_Uncommon", 10L, 30L, 30L, 40L))
-                gearDao.addGear(Gear("Scholar`s Cry", "Belt", "d_Mythical", 20L, 100L, 150L, 130L))
+                gearDao.addGear(Gear("Tattered Rope", "Belt", "a_Common", 0L, 0L, 0L, 0L, 1))
+                gearDao.addGear(Gear("Reinforced Leather Belt", "Belt", "b_Uncommon", 10L, 30L, 30L, 40L,
+                    listOf(skillDao.getSkillByName("Stun Resistance"))
+                ))
+                gearDao.addGear(Gear("Gardener's Pride", "Belt", "c_Rare", 20L, 20L, 60L, 50L,
+                    listOf(skillDao.getSkillByName("Herbalist's Wit")),
+                    1
+                ))
+                gearDao.addGear(Gear("Prisoner's Chain", "Belt", "d_Mythical", 50L, 60L, 20L, 50L,
+                    listOf(skillDao.getSkillByName("Critical Up"), skillDao.getSkillByName("Stun Resistance")),
+                    2
+                ))
+                gearDao.addGear(Gear("Cosmic Chain", "Belt", "e_Legendary", 70L, 140L, 140L, 140L,
+                    listOf(skillDao.getSkillByName("Physical Def Up"), skillDao.getSkillByName("Geologist's Touch")),
+                    3
+                ))
 
                 gearDao.addGear(Gear("Simple Boots", "Footwear", "a_Common", 20L, 5L, 10L, 5L))
-                gearDao.addGear(Gear("Desert Sandals", "Footwear", "b_Uncommon", 15L, 40L, 0L, 20L))
-                gearDao.addGear(Gear("Lava-forged Boots", "Footwear", "d_Mythical", 70L, 120L, 20L, 75L))
-                gearDao.addGear(Gear("Un'ael's Skull Crushers", "Footwear", "e_Legendary", 125L, 100L, 100L, 110L))
-
-                accessoryDao.addAccessory(Accessory(
-                    1L,
-                    Gear("Bootleg Necklace", "Accessory", "a_Common", 0L, 0L, 0L, 0L, 2),
-                    "a_Necklace"
+                gearDao.addGear(Gear("Desert Sandals", "Footwear", "b_Uncommon", 15L, 40L, 0L, 20L,
+                    listOf(skillDao.getSkillByName("Fire Def Up"))
+                ))
+                gearDao.addGear(Gear("Royal Guard Boots", "Footwear", "c_Rare", 50L, 40L, 30L, 40L, 1))
+                gearDao.addGear(Gear("Lava-forged Boots", "Footwear", "c_Rare", 50L, 120L, 20L, 30L,
+                    listOf(skillDao.getSkillByName("Fire Atk Up"), skillDao.getSkillByName("Fire Def Up"))
+                ))
+                gearDao.addGear(Gear("Un'ael's Skull Crushers", "Footwear", "e_Legendary", 125L, 100L, 100L, 100L,
+                    listOf(skillDao.getSkillByName("Fire Def Up"), skillDao.getSkillByName("Fire Def Up")),
+                    1
                 ))
 
                 accessoryDao.addAccessory(Accessory(
-                    1L,
-                    Gear("Bootleg Ring", "Accessory", "b_Uncommon", 0L, 20L, 0L, 10L, listOf(skillDao.getSkillById(3L)), 3),
+                    2L,
+                    Gear("Steeled Necklace", "Accessory", "a_Common", 30L, 10L, 5L, 5L, 1),
+                    "a_Necklace"
+                ))
+                accessoryDao.addAccessory(Accessory(
+                    2L,
+                    Gear("Elemental Ring", "Accessory", "b_Uncommon", 0L, 40L, 40L, 40L,1),
+                    "b_Ring"
+                ))
+                accessoryDao.addAccessory(Accessory(
+                    2L,
+                    Gear("Storm's Ring", "Accessory", "d_Mythical", 0L, 30L, 15L, 150L,
+                        listOf(skillDao.getSkillByName("Thunder Atk Up"), skillDao.getSkillByName("Thunder Atk Up")),
+                        1),
+                    "b_Ring"
+                ))
+                accessoryDao.addAccessory(Accessory(
+                    3L,
+                    Gear("Accursed's Locket", "Accessory", "c_Rare", 50L, 30L, 15L, 20L,
+                        listOf(skillDao.getSkillByName("Stun Resistance")),
+                        1),
+                    "a_Necklace"
+                ))
+                accessoryDao.addAccessory(Accessory(
+                    3L,
+                    Gear("Un'ael's Trophy", "Accessory", "e_Legendary", 60L, 60L, 60L, 60L,
+                        listOf(skillDao.getSkillByName("Atk Up"), skillDao.getSkillByName("Critical Up")),
+                        3),
                     "b_Ring"
                 ))
             }

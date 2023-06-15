@@ -3,15 +3,19 @@ package danielabez.spellitforme.ui
 import android.app.AlertDialog
 import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import danielabez.spellitforme.R
 import danielabez.spellitforme.databinding.FragmentLoginBinding
+import danielabez.spellitforme.model.RegisteredUser
 import danielabez.spellitforme.viewModel.RegisteredUserViewModel
 
 class LoginFragment : Fragment() {
@@ -29,6 +33,7 @@ class LoginFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        registeredUserViewModel.comingBack.postValue(false)
 
         binding.btLoginLog.setOnClickListener(){
             verifyLogin()
@@ -38,6 +43,18 @@ class LoginFragment : Fragment() {
             val action = LoginFragmentDirections.actionLoginFragmentToRegistrationFragment()
             findNavController().navigate(action)
         }
+
+        registeredUserViewModel.checkRegisteredUser.observe(viewLifecycleOwner, Observer<RegisteredUser?> { registeredUser ->
+            if(registeredUser != null){
+                    val action = LoginFragmentDirections.actionLoginFragmentToHomeFragment()
+                    findNavController().navigate(action)
+                }
+                else if (registeredUserViewModel.comingBack.value != true){
+                    failedLoginWarning()
+                } else {
+                    registeredUserViewModel.comingBack.postValue(false)
+                }
+            })
     }
 
     override fun onDestroyView() {
@@ -50,18 +67,7 @@ class LoginFragment : Fragment() {
     */
     private fun verifyLogin() {
         if (!binding.tietLoginUsername.text.isNullOrEmpty() && !binding.tietLoginPassword.text.isNullOrEmpty()) {
-            val userFound = registeredUserViewModel.checkRegisteredUserByUsernameAndPassword(
-                binding.tietLoginUsername.text.toString(),
-                binding.tietLoginPassword.text.toString()
-            )
-            Thread.sleep(100)
-            if(userFound != null){
-                val action = LoginFragmentDirections.actionLoginFragmentToHomeFragment()
-                findNavController().navigate(action)
-            }
-            else{
-                failedLoginWarning()
-            }
+            registeredUserViewModel.checkRegisteredUserByUsernameAndPassword(binding.tietLoginUsername.text.toString(), binding.tietLoginPassword.text.toString())
         } else {
             Toast.makeText(context, getString(R.string.emptyFieldsWarning), Toast.LENGTH_SHORT).show()
         }

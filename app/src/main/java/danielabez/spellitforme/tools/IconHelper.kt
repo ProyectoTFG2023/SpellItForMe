@@ -6,13 +6,12 @@ import danielabez.spellitforme.R
 
 class IconHelper {
     companion object {
-        //TODO: Realizar los iconos correspondientes
         fun setRoleIcon(imageView: ImageView, role: String){
             imageView.setImageResource(
                 when(role){
-                    "Warrior" -> R.mipmap.ic_helmet_legendary_foreground
-                    "Rogue" -> R.mipmap.ic_helmet_uncommon_foreground
-                    else -> R.mipmap.ic_helmet_rare_foreground
+                    "Warrior" -> R.mipmap.ic_role_warrior_foreground
+                    "Rogue" -> R.mipmap.ic_role_rogue_foreground
+                    else -> R.mipmap.ic_role_mage_foreground
                 }
             )
         }

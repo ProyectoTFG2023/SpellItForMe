@@ -69,9 +69,13 @@ class WeaponOnSetAdapter : RecyclerView.Adapter<WeaponOnSetAdapter.WeaponOnSetVi
                     }
 
                     if(this?.slots!! > 0){
+                        binding.clytWeaponOnSetSlots.visibility = View.VISIBLE
                         binding.ivWeaponOnSetSlots.visibility = View.VISIBLE
                         binding.tvWeaponOnSetNumberOfSlots.visibility = View.VISIBLE
-                        binding.tvWeaponOnSetNumberOfSlots.text = "x$this?.slots"
+                        binding.tvWeaponOnSetNumberOfSlots.text = "x${this.slots}"
+                    }
+                    else {
+                        binding.clytWeaponOnSetSlots.visibility = View.GONE
                     }
 
                     if(skills?.isNotEmpty() == true){
@@ -85,6 +89,8 @@ class WeaponOnSetAdapter : RecyclerView.Adapter<WeaponOnSetAdapter.WeaponOnSetVi
                             binding.tvWeaponOnSetSkillTwo.text = skills[1].name
                             IconHelper.setSkillIcon(binding.ivWeaponOnSetSkillTwo, skills[1].type)
                         }
+                    } else {
+                        binding.llytWeaponOnSetSkills.visibility = View.GONE
                     }
 
                     //Mostraremos un icono según el tipo de equipamiento y la rareza que tenga

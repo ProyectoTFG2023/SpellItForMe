@@ -20,10 +20,10 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="15dp"
             android:layout_marginTop="20dp"
-            android:layout_marginEnd="10dp"
+            android:layout_marginEnd="5dp"
             android:textAlignment="center"
             android:textSize="17sp"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/clytWeaponOnSetSlots"
             app:layout_constraintStart_toEndOf="@+id/ivWeaponOnSet"
             app:layout_constraintTop_toTopOf="parent"
             tools:text="Item Name" />
@@ -53,11 +53,10 @@
             android:id="@+id/clytWeaponOnSetSlots"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="7dp"
+            android:layout_marginEnd="10dp"
             android:visibility="gone"
-            app:layout_constraintEnd_toEndOf="@+id/ivWeaponOnSet"
-            app:layout_constraintStart_toStartOf="@+id/ivWeaponOnSet"
-            app:layout_constraintTop_toBottomOf="@+id/ivWeaponOnSet">
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/tvWeaponOnSetName">
 
             <ImageView
                 android:id="@+id/ivWeaponOnSetSlots"
@@ -85,9 +84,10 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="7dp"
+            android:layout_marginEnd="10dp"
             android:orientation="horizontal"
             android:visibility="gone"
-            app:layout_constraintEnd_toEndOf="@+id/tvWeaponOnSetName"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@+id/tvWeaponOnSetName"
             app:layout_constraintTop_toBottomOf="@+id/tvWeaponOnSetName">
 

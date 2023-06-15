@@ -237,6 +237,7 @@ class EquipmentSetFragment : Fragment() {
         calculateOffensiveStats()
         calculateDefensiveStats()
         obtainCurrentSkills()
+        applySkills()
     }
 
     override fun onDestroyView() {
@@ -472,7 +473,7 @@ class EquipmentSetFragment : Fragment() {
                     "Attack" -> {
                         if(binding.tvEquipmentPhysicalAttack.text != "None"){
                             when(i.skill.name){
-                                "Attack Up" -> {
+                                "Atk Up" -> {
                                     auxAtk += (binding.tvEquipmentPhysicalAttack.text.toString().toFloat()) * (i.skill.rankValueModifiers[rankToApply]/100)
                                 }
                                 "Peak Form" -> {
@@ -516,7 +517,7 @@ class EquipmentSetFragment : Fragment() {
             }
         }
 
-        if(currentWeapon != null){
+        if(currentCharacterSet.equippedWeapon != null){
             if(binding.tvEquipmentPhysicalAttack.text != "None" && auxAtk > 0){
                 binding.tvEquipmentPhysicalAttack.text = (binding.tvEquipmentPhysicalAttack.text.toString().toFloat() + auxAtk).toString()
             }

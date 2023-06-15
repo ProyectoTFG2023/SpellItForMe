@@ -14,14 +14,17 @@ import kotlinx.coroutines.launch
 
 class RegisteredUserViewModel(app: Application) : AndroidViewModel(app) {
     private val repository: RegisteredUserRepository
-    val checkRegisteredUser : MutableLiveData<RegisteredUser> by lazy {
-        MutableLiveData<RegisteredUser>()
+    val checkRegisteredUser : MutableLiveData<RegisteredUser?> by lazy {
+        MutableLiveData<RegisteredUser?>()
     }
     val checkMailInUse : MutableLiveData<RegisteredUser> by lazy {
         MutableLiveData<RegisteredUser>()
     }
     val checkUsernameInUse : MutableLiveData<RegisteredUser> by lazy {
         MutableLiveData<RegisteredUser>()
+    }
+    val comingBack : MutableLiveData<Boolean> by lazy {
+        MutableLiveData<Boolean>()
     }
 
     init {
@@ -37,7 +40,7 @@ class RegisteredUserViewModel(app: Application) : AndroidViewModel(app) {
         repository.deleteRegisteredUser(registeredUser)
     }
 
-    fun checkRegisteredUserByUsernameAndPassword(pUsername: String, pPassword: String) : LiveData<RegisteredUser> {
+    fun checkRegisteredUserByUsernameAndPassword(pUsername: String, pPassword: String) : LiveData<RegisteredUser?> {
         viewModelScope.launch (Dispatchers.IO){
             val checkResult = repository.getRegisteredUserByUsernameAndPassword(pUsername, pPassword)
             checkRegisteredUser.postValue(checkResult)

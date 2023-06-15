@@ -18,6 +18,7 @@ import danielabez.spellitforme.R
 import danielabez.spellitforme.adapter.CharacterSetAdapter
 import danielabez.spellitforme.databinding.FragmentHomeBinding
 import danielabez.spellitforme.model.CharacterSet
+import danielabez.spellitforme.model.RegisteredUser
 import danielabez.spellitforme.viewModel.CharacterSetViewModel
 import danielabez.spellitforme.viewModel.RegisteredUserViewModel
 
@@ -69,7 +70,16 @@ class HomeFragment : Fragment() {
             characterSetAdapter.updateList(list)
         })
 
-        registeredUserViewModel.getRegisteredUserWithAllOwnedCharacterSets(characterSetViewModel.characterSetListLiveData)
+        registeredUserViewModel.checkRegisteredUser.observe(viewLifecycleOwner, Observer<RegisteredUser?> { registeredUser ->
+            if(registeredUserViewModel.comingBack.value == true){
+                findNavController().popBackStack()
+
+            }
+        })
+
+        if(registeredUserViewModel.checkRegisteredUser.value != null){
+            registeredUserViewModel.getRegisteredUserWithAllOwnedCharacterSets(characterSetViewModel.characterSetListLiveData)
+        }
     }
 
     override fun onDestroyView() {
@@ -117,8 +127,8 @@ class HomeFragment : Fragment() {
             .setMessage(getString(R.string.signOffConfirmDialogMessage))
             .setPositiveButton(R.string.signOffConfirmDialogueConfirm) { v, _ ->
                 registeredUserViewModel.emptyCheckRegisteredUser()
-                Thread.sleep(100)
-                findNavController().popBackStack()
+                registeredUserViewModel.comingBack.postValue(true)
+                Thread.sleep(200)
                 v.dismiss()
             }
             .setNegativeButton(R.string.signOffConfirmDialogueCancel) { v, _ ->

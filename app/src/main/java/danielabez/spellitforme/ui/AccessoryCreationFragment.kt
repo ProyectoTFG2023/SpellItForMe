@@ -209,7 +209,7 @@ class AccessoryCreationFragment : Fragment() {
     private fun obtainRarityFilter(pRarity : String) : String {
         val result = when(pRarity) {
             "Common" -> "a_Common"
-            "Uncommon" -> "b_Common"
+            "Uncommon" -> "b_Uncommon"
             "Rare" -> "c_Rare"
             "Mythical" -> "d_Mythical"
             else -> "e_Legendary"

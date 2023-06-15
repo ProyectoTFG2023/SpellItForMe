@@ -35,6 +35,9 @@ class SkillOnSetAdapter : RecyclerView.Adapter<SkillOnSetAdapter.SkillOnSetViewH
         with(holder){
             with(skillList!![position]){
                 var listOfSquares = listOf(binding.ivSkillOnSetLevelOne, binding.ivSkillOnSetLevelTwo, binding.ivSkillOnSetLevelThree, binding.ivSkillOnSetLevelFour, binding.ivSkillOnSetLevelFive)
+                for(it in listOfSquares){
+                    it.visibility = View.INVISIBLE
+                }
                 val isCurrentRankHigherThanMax = (currentRank > skill.maxRank)
                 binding.tvSkillOnSetName.text = skill.name
                 binding.tvSkillOnSetCurrentRank.text = "Lvl. $currentRank/${skill.maxRank}"

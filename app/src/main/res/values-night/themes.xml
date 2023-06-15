@@ -2,15 +2,16 @@
     <!-- Base application theme. -->
     <style name="Theme.SpellItForMe" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/purple_200</item>
-        <item name="colorPrimaryVariant">@color/purple_700</item>
+        <item name="colorPrimary">@color/red_primary</item>
+        <item name="colorPrimaryVariant">@color/red_primary_variant</item>
         <item name="colorOnPrimary">@color/black</item>
         <!-- Secondary brand color. -->
-        <item name="colorSecondary">@color/teal_200</item>
-        <item name="colorSecondaryVariant">@color/teal_200</item>
+        <item name="colorSecondary">@color/violet_secondary</item>
+        <item name="colorSecondaryVariant">@color/violet_secondary</item>
         <item name="colorOnSecondary">@color/black</item>
+        <item name="colorAccent">@color/violet_secondary</item>
         <!-- Status bar color. -->
-        <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
+        <item name="android:statusBarColor">?attr/colorPrimary</item>
         <!-- Customize your theme here. -->
     </style>
 
@@ -21,5 +22,5 @@
 
     <style name="Theme.SpellItForMe.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
-    <style name="Theme.SpellItForMe.PopupOverlay" parent="ThemeOverlay.AppCompat.Dark" />
+    <style name="Theme.SpellItForMe.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 </resources>

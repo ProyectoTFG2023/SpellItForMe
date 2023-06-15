@@ -31,7 +31,7 @@ class SkillAdapter : RecyclerView.Adapter<SkillAdapter.SkillViewHolder>() {
             with(skillList!![position]){
                 binding.tvSkillName.text = name
                 binding.tvSkillBriefDescription.text = description
-                binding.tvSkillMaxLevel.text = "Up to rank $maxRank"
+                binding.tvSkillMaxLevel.text = "Up to Rank $maxRank"
                 IconHelper.setSkillIcon(binding.ivSkillIcon, type)
             }
         }

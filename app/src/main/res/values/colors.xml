@@ -8,7 +8,12 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
 
+    <color name="red_primary">#8C0808</color>
+    <color name="red_primary_variant">#CE3030</color>
+    <color name="violet_secondary">#7F4DCF</color>
+
     <!-- LoginFragment -->
+
     <color name="loginLinkRegistration">#4A70CC</color>
 
     <!-- RegisterFragment -->

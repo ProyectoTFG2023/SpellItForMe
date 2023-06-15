@@ -51,6 +51,9 @@ class GearOnSetAdapter : RecyclerView.Adapter<GearOnSetAdapter.GearOnSetViewHold
                         binding.clytGearOnSetSlots.visibility = View.VISIBLE
                         binding.tvGearOnSetNumberOfSlots.text = "x$slots"
                     }
+                    else {
+                        binding.clytGearOnSetSlots.visibility = View.GONE
+                    }
 
                     if(skills.isNotEmpty()){
                         binding.llytGearOnSetSkills.visibility = View.VISIBLE
@@ -62,6 +65,8 @@ class GearOnSetAdapter : RecyclerView.Adapter<GearOnSetAdapter.GearOnSetViewHold
                             binding.tvGearOnSetSkillTwo.text = skills[1].name
                             IconHelper.setSkillIcon(binding.ivGearOnSetSkillTwo, skills[1].type)
                         }
+                    } else {
+                        binding.llytGearOnSetSkills.visibility = View.GONE
                     }
 
                     //Mostraremos un icono según el tipo de equipamiento y la rareza que tenga
